@@ -59,12 +59,6 @@ const getLiveOrdersSite = (request, response) => {
 
 const getLiveOrders = () => {
   return pool.query('SELECT * FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC');
-  // , (error, results)=>{
-  //   if(error){
-  //     throw error;
-  //   }
-  //   return results.rows;
-  // });
 }
 
 const checkId = (request, response) => {
@@ -259,6 +253,7 @@ const submitOrder = (request, response) => {
 const transitionOrder = (request, response) => {
   const {status} = parseInt(request.params.status);
   const {order_id} = parseInt(request.params.order_id);
+  console.log(status, order_id);
   pool.query('UPDATE orders SET status_id = $1 WHERE orders.id = $2', [status, order_id], (error, results) => {
     if(error){
       console.log(error);
@@ -267,8 +262,6 @@ const transitionOrder = (request, response) => {
     response.status(200).send({"status": true});
   })
 }
-
-
 
 const getPaylahUrl = (request, response) => {
   const {payment_value} = parseFloat(request.params.cost);
