@@ -20,7 +20,7 @@ app.get('/checkId/:id', db.checkId);
 app.get('/getLocations', db.getLocations);
 app.get('/getStalls/:location', db.getStalls);
 app.get('/getStallMenu/:location/:id', db.getStallMenu);
-app.get('/update_order/:order_id/:status/', db.transitionOrder);
+app.get('/update_order/:order_id/:order_status/', db.transitionOrder);
 app.get('/getPaylah/:cost', db.getPaylahUrl);
 app.post('/submitOrder', db.submitOrder);
 
