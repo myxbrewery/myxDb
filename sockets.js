@@ -68,7 +68,6 @@ module.exports = {
       available_customers.forEach((customer)=>{
         io.to(customer).emit('orders',customer_orders[customer]);
         console.log("Customer emitted", customer);
-        console.log(customer_orders[customer]);
       });
     }, 1000);
   }
