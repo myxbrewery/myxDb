@@ -33,7 +33,7 @@ app.listen(port, () => {
 });
 
 // <----- SOCKET SERVER LOGIC ------>
-// Pub/Subbing on port 8080
+// Pub/Subbing on port 11236
 
 var sockets = require('./sockets');
 var socket_app = require('http').createServer(handler);

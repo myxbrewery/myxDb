@@ -1,31 +1,43 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>Socket.IO testing</title>
   </head>
   <body>
-    <form onsubmit="modSocket();return false;">
-      Which stall are you? <input type="text" id="room"><br>
+    <form onsubmit="modSocketStall();return false;">
+      Which stall are you? <input type="text" id="stall"><br>
+      Submit: <input type="submit" value="Submit">
+    </form>
+    <form onsubmit="modSocketCustomer();return false;">
+      Which customer are you? <input type="text" id="customer"><br>
       Submit: <input type="submit" value="Submit">
     </form>
   </body>
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-<!-- <script src="/socket.io/socket.io.js"></script> -->
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
-  var currentRoom = 1;
-  var socket = io('http://18.138.9.151:11236');
-  socket.emit('join', currentRoom);
+  var stallRoom = 0;
+  var customerRoom = 0;
+  var socket = io('http://localhost:11236');
+  socket.emit('join', stallRoom);
+  socket.emit('join', customerRoom);
   socket.on('orders', (message)=>{
     console.log(message);
   })
-  function modSocket(){
-    console.log("Changing Room");
-    var room = document.getElementById("room").value;
-    console.log(room);
-    socket.emit('leave', currentRoom);
-    currentRoom = room;
-    socket.emit('join', currentRoom);1
+  function modSocketStall(){
+    console.log("Stall Changing Room");
+    var newStallRoom = document.getElementById("stall").value;
+    console.log(newStallRoom);
+    socket.emit('leave', stallRoom);
+    stallRoom = newStallRoom;
+    socket.emit('join', stallRoom);
+  }
+  function modSocketCustomer(){
+    console.log("Customer Changing Room");
+    var newCustomerRoom = document.getElementById("customer").value;
+    socket.emit('leave', customerRoom);
+    customerRoom = newCustomerRoom;
+    socket.emit('join', customerRoom);
   }
 </script>
