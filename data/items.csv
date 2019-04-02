@@ -1,12 +1,12 @@
 location_id,stall_id,id,name,in_stock,school_price,public_price,category,kcal,compulsory_option_1,compulsory_option_2,modifier_1,modifier_1_cost,modifier_2,modifier_2_cost,upsize_1_cost,upsize_2_cost,tags,image_url
-1,1,1,Boiled Chicken Rice,TRUE,3.5,4,1,,,,,,,,,,"{Rice,Chicken}",-
-1,1,2,Roasted Chicken Rice,,3.5,4,1,,,,,,,,,,"{Rice,Chicken}",
-1,1,3,Char Siew Rice,,3.5,4,1,,,,,,,,,,"{Rice,Pork}",
-1,1,4,Roasted Pork Rice,,3.5,4,1,,,,,,,,,,"{Rice,Pork}",
-1,1,5,Char Siew Wanton Soup,,3.8,4.3,1,,"{Noodle,Kuay Teow}",,,,,,,,"{Pork,Soup}",
-1,1,6,Char Siew Wanton Dry,,4,4.5,1,,"{Noodle,Kuay Teow}",,,,,,,,,
-1,1,7,Boiled/Roasted Chicken Soup,,4,4.5,1,,"{Noodle,Kuay Teow}","{Boiled,Roasted}",,,,,,,,
-1,1,8,Boiled/Roasted Chicken Dry,,4,4.5,1,,"{Noodle,Kuay Teow}","{Boiled,Roasted}",,,,,,,,
+1,1,1,Boiled Chicken Rice,TRUE,3.5,4,1,,,,,,,,,,"{Rice,Chicken}","https://mtc1-dydfxmh.netdna-ssl.com/wp-content/uploads/2016/08/22168498135_84560366eb_k-1300x866.jpg"
+1,1,2,Roasted Chicken Rice,,3.5,4,1,,,,,,,,,,"{Rice,Chicken}","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNsiwCrGaI3Awng2PICuZnqTYR3nMG8QcCPI5KTy-kLp3pceQz1w"
+1,1,3,Char Siew Rice,,3.5,4,1,,,,,,,,,,"{Rice,Pork}","https://farm5.staticflickr.com/4704/38967855565_39737316a5_h.jpg"
+1,1,4,Roasted Pork Rice,,3.5,4,1,,,,,,,,,,"{Rice,Pork}","https://kopitiam.gofoodpng.biz/wp-content/uploads/2017/08/Roast-Pork-Rice.jpg"
+1,1,5,Char Siew Wanton Soup,,3.8,4.3,1,,"{Noodle,Kuay Teow}",,,,,,,,"{Pork,Soup}","https://i1.wp.com/angsarap.net/wp-content/uploads/2012/10/wonton-and-char-siu-pork-noodle-soup.jpg"
+1,1,6,Char Siew Wanton Dry,,4,4.5,1,,"{Noodle,Kuay Teow}",,,,,,,,,"https://3.bp.blogspot.com/-8wbV23ri8jQ/VzrE6PWimFI/AAAAAAADJwg/x1KJALoK03Qiv58j3BG1RgdLy0GUWBeOgCLcB/s1600/DSC_0091jk.JPG"
+1,1,7,Boiled/Roasted Chicken Soup,,4,4.5,1,,"{Noodle,Kuay Teow}","{Boiled,Roasted}",,,,,,,,"https://omnivorescookbook.com/wp-content/uploads/2016/03/1603_Cantonese-Wonton-Noodle-Soup_004.jpg"
+1,1,8,Boiled/Roasted Chicken Dry,,4,4.5,1,,"{Noodle,Kuay Teow}","{Boiled,Roasted}",,,,,,,,"http://lh4.ggpht.com/7hw2ajsBycXskMFf0Q9zjpO-z6bfFxQfiKtTTBR2FNllj8SonE2Q2wo98wMdtDFPyYdAColN3wrRVBz__CD8-qff=s800"
 1,1,9,Roasted Duck Soup/Dry,,4.5,5,1,,"{Soup,Dry}","{Noodle,Kuay Teow}",,,,,,,,
 1,1,10,Roasted Duck Rice,,4,4.5,1,,,,,,,,,,,
 1,1,11,Assorted Mushroom Spinach Noodle Dry,,4,4.5,1,,,,,,,,,,,
