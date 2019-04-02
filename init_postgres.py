@@ -40,11 +40,11 @@ def execute_pg_query(query, args):
         return False
 
 # Execute these within postgres
-# \copy locations(name, image_id) FROM '/home/tze/capstone/myxDb/data/locations.csv' DELIMITER ',' CSV HEADER;
-# \copy stalls(id, name, open, halal, qr_link, opening_time, closing_time, image_id) FROM '/home/tze/capstone/myxDb/data/stalls.csv' DELIMITER ',' CSV HEADER;
-# \copy category(id, name) FROM '/home/tze/capstone/myxDb/data/category.csv' DELIMITER ',' CSV HEADER;
-# \copy status(id, name) FROM '/home/tze/capstone/myxDb/data/status.csv' DELIMITER ',' CSV HEADER;
-# \copy items(location, stall_id,id,name,in_stock,school_price,public_price,category,kcal,compulsory_option_1,compulsory_option_2,modifier_1,modifier_1_cost,modifier_2,modifier_2_cost,upsize_1_cost,upsize_2_cost,tags,image_url) FROM '/home/tze/capstone/myxDb/data/items.csv' DELIMITER ',' CSV HEADER;
+\copy locations(id, name, image_id, aggregation) FROM '/home/ubuntu/myxDb/data/locations.csv' DELIMITER ',' CSV HEADER;
+\copy stalls(id, location, name, open, halal, qr_link, opening_time, closing_time, image_id) FROM '/home/ubuntu/myxDb/data/stalls.csv' DELIMITER ',' CSV HEADER;
+\copy category(id, name) FROM '/home/ubuntu/myxDb/data/category.csv' DELIMITER ',' CSV HEADER;
+\copy status(id, name) FROM '/home/ubuntu/myxDb/data/status.csv' DELIMITER ',' CSV HEADER;
+\copy items(location_id, stall_id,id,name,in_stock,school_price,public_price,category,kcal,compulsory_option_1,compulsory_option_2,modifier_1,modifier_1_cost,modifier_2,modifier_2_cost,upsize_1_cost,upsize_2_cost,tags,image_url) FROM '/home/ubuntu/myxDb/data/items.csv' DELIMITER ',' CSV HEADER;
 
 a = execute_pg_query("SELECT * FROM customers", ())
 print(a)

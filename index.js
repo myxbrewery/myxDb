@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const port = 11235;
 const db = require('./pg_queries');
 
 app.use(bodyParser.json())
@@ -50,4 +50,4 @@ function handler (req, res) {
 }
 
 sockets.startSocketServer(socket_app);
-socket_app.listen(8080);
+socket_app.listen(12236);
