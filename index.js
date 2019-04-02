@@ -1,11 +1,14 @@
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
 const port = 11235;
+
 const db = require('./pg_queries');
 
 app.use(bodyParser.json())
+app.use(cors())
 
 app.use(
   bodyParser.urlencoded({
@@ -20,7 +23,7 @@ app.get('/checkId/:id', db.checkId);
 app.get('/getLocations', db.getLocations);
 app.get('/getStalls/:location', db.getStalls);
 app.get('/getStallMenu/:location/:id', db.getStallMenu);
-app.get('/update_order/:order_id/:order_status/', db.transitionOrder);
+app.get('/updateOrder/:order_id/:order_status/', db.transitionOrder);
 app.get('/getPaylah/:cost', db.getPaylahUrl);
 app.post('/submitOrder', db.submitOrder);
 
