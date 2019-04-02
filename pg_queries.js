@@ -18,8 +18,8 @@ var menu = {};
 // Hmmm.....
 pool.query('SELECT * FROM items', (error, results)=>{
   if(error){
-    response.statusMessage = "Invalid items table";
-    response.status(400).end();
+    console.log(error);
+    throw(error);
     // throw error;
   }
   // Convert array of dict entries into dictionary of index for O(1) access time for n items in the menu
