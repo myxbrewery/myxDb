@@ -115,7 +115,7 @@ const getLocations = (request, response) => {
 const getStallMenu = (request, response) => {
   const stallLoc = parseInt(request.params.location);
   const stallId = parseInt(request.params.id);
-  pool.query('SELECT * FROM items WHERE stall_id = $1 AND location = $2 ORDER BY id ASC', [stallId, stallLoc], (error, results)=>{
+  pool.query('SELECT * FROM items WHERE stall_id = $1 AND location_id = $2 ORDER BY id ASC', [stallId, stallLoc], (error, results)=>{
     if(error){
       throw error;
     }

@@ -15,7 +15,7 @@
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
   var currentRoom = 1;
-  var socket = io('http://127.0.0.1:8080');
+  var socket = io('http://18.138.9.151:11236');
   socket.emit('join', currentRoom);
   socket.on('orders', (message)=>{
     console.log(message);

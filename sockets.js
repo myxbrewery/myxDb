@@ -15,11 +15,12 @@ const parseStallStatuses = (all_orders) =>{
   return stall_dict;
 };
 
+// Update stall_orders table
 var interval = setInterval(()=>{
   db.getLiveOrders().then((res)=>{
     stall_orders = parseStallStatuses(res.rows);
   });
-}, 3000);
+}, 1000);
 
 module.exports = {
   startSocketServer: (app)=>{
@@ -41,8 +42,8 @@ module.exports = {
       available_stalls = Object.keys(stall_orders);
       available_stalls.forEach((stall)=>{
         io.to(stall).emit('orders',stall_orders[stall]);
-        console.log("Emitted to", stall);
       });
-    }, 3000);
+      console.log("Emitted");
+    }, 1000);
   }
 }
