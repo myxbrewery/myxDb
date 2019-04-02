@@ -1,0 +1,1 @@
+INSERT INTO receipts(customer_id, paid, start_date, total_payment) VALUES (1, false, '2018-03-20 01:01:01', 15.30);

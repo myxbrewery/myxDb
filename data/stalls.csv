@@ -1,0 +1,10 @@
+id,location,name,open,halal,qr_link,opening_time,closing_time,image_id
+1,1,Chicken Rice,TRUE,FALSE,-,08:00:00 AM,07:00:00 PM,-
+2,1,Indian,FALSE,FALSE,-,08:00:00 AM,07:00:00 PM,-
+3,1,Western,TRUE,TRUE,-,08:00:00 AM,07:00:00 PM,-
+4,1,Health Soup,TRUE,FALSE,-,08:00:00 AM,07:00:00 PM,-
+5,1,Korean,TRUE,FALSE,-,08:00:00 AM,07:00:00 PM,-
+6,1,Mixed Rice,TRUE,FALSE,-,08:00:00 AM,07:00:00 PM,-
+7,1,Drinks,TRUE,TRUE,-,08:00:00 AM,07:00:00 PM,-
+8,1,Creamy Duck,TRUE,FALSE,-,08:00:00 AM,07:00:00 PM,-
+9,1,Malay,FALSE,TRUE,-,08:00:00 AM,07:00:00 PM,-

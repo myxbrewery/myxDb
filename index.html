@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+  </head>
+  <body>
+    <form onsubmit="modSocket();return false;">
+      Which stall are you? <input type="text" id="room"><br>
+      Submit: <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<!-- <script src="/socket.io/socket.io.js"></script> -->
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+  var currentRoom = 1;
+  var socket = io('http://127.0.0.1:8080');
+  socket.emit('join', currentRoom);
+  socket.on('orders', (message)=>{
+    console.log(message);
+  })
+  function modSocket(){
+    console.log("Changing Room");
+    var room = document.getElementById("room").value;
+    console.log(room);
+    socket.emit('leave', currentRoom);
+    currentRoom = room;
+    socket.emit('join', currentRoom);1
+  }
+</script>
