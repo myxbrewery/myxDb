@@ -44,6 +44,7 @@ def execute_pg_query(query, args):
 \copy stalls(id, location, name, open, halal, qr_link, opening_time, closing_time, image_id) FROM '/home/ubuntu/myxDb/data/stalls.csv' DELIMITER ',' CSV HEADER;
 \copy category(id, name) FROM '/home/ubuntu/myxDb/data/category.csv' DELIMITER ',' CSV HEADER;
 \copy status(id, name) FROM '/home/ubuntu/myxDb/data/status.csv' DELIMITER ',' CSV HEADER;
+\copy paylah_url(value, url) FROM '/home/ubuntu/myxDb/data/paylahQR.csv' DELIMITER ',' CSV HEADER;
 \copy items(location_id, stall_id,id,name,in_stock,school_price,public_price,category,kcal,compulsory_option_1,compulsory_option_2,modifier_1,modifier_1_cost,modifier_2,modifier_2_cost,upsize_1_cost,upsize_2_cost,tags,image_url) FROM '/home/ubuntu/myxDb/data/items.csv' DELIMITER ',' CSV HEADER;
 
 a = execute_pg_query("SELECT * FROM customers", ())

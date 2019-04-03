@@ -49,7 +49,7 @@ const getCustomers = (request, response) => {
 }
 
 const getLiveOrdersSite = (request, response) => {
-  pool.query('SELECT orders.id, orders.status_id, name, orders.start_datetime, stall_id, receipt_id, customer_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC', (error, results)=>{
+  pool.query('SELECT orders.id, orders.status_id, name, orders.start_datetime, orders.stall_id, receipt_id, customer_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC', (error, results)=>{
     if(error){
       throw error;
     }
@@ -58,7 +58,7 @@ const getLiveOrdersSite = (request, response) => {
 }
 
 const getLiveOrders = () => {
-  return pool.query('SELECT orders.id, orders.status_id, name, orders.start_datetime, stall_id, receipt_id, customer_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC');
+  return pool.query('SELECT orders.id, orders.status_id, name, orders.start_datetime, orders.stall_id, receipt_id, customer_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC');
 }
 
 const checkId = (request, response) => {
@@ -67,12 +67,16 @@ const checkId = (request, response) => {
     if(error){
       throw error;
     }
-    if(results.rows.length != 0){
-      response.statusMessage = "Username already exists, try again";
-      response.status(400).end();
+    else{
+      if(results.rows.length != 0){
+        // response.statusMessage = "Username already exists, try again";
+        response.status(400).send({"message": "Username is taken!"});
+      }
+      else{
+        response.statusMessage = "Username does not exist yet";
+        response.status(200).send({"message": "Username is free!"});
+      }
     }
-    response.statusMessage = "Username does not exist yet";
-    response.status(200).json({"message": "Username is free!"});
   });
 }
 
@@ -251,8 +255,11 @@ const submitOrder = (request, response) => {
 }
 
 const transitionOrder = (request, response) => {
-  const order_status = parseInt(request.params.order_status);
-  const order_id = parseInt(request.params.order_id);
+  // const order_status = parseInt(request.params.order_status);
+  // const order_id = parseInt(request.params.order_id);
+  var order_info = request.body;
+  let order_status = order_info.order_status;
+  let order_id = order_info.order_id;
   console.log(order_status, order_id);
   pool.query('UPDATE orders SET status_id = $1 WHERE orders.id = $2', [order_status, order_id], (error, results) => {
     if(error){
@@ -263,14 +270,31 @@ const transitionOrder = (request, response) => {
   })
 }
 
+const receiptPaid = (request, response) => {
+  // const receipt = parseInt(request.params.receipt_id);
+  const order_details = request.body;
+  console.log(order_details);
+  pool.query('UPDATE orders SET status_id = $1 WHERE orders.receipt_id = $2', [1, order_details.receipt_id], (error, results) => {
+    if(error){
+      console.log(error);
+      response.status(400).send({"Error": error.detail});
+    }
+    else{
+      response.status(200).send({"status": true});
+    }
+  })
+}
+
 const getPaylahUrl = (request, response) => {
   const {payment_value} = parseFloat(request.params.cost);
   console.log(payment_value);
   pool.query('SELECT * FROM paylah_url WHERE paylah_url.value = $1', [payment_value], (error, results) => {
     if(error){
-      throw error;
+      response.status(400).send({"Error": error.detail});
     }
-    response.status(200).json(results.rows);
+    else{
+      response.status(200).send({"status": true});
+    }
   })
 }
 
@@ -285,5 +309,6 @@ module.exports = {
   checkId,
   getCustomers,
   submitOrder,
-  transitionOrder
+  transitionOrder,
+  receiptPaid
 }

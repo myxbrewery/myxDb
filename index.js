@@ -14,15 +14,18 @@ app.use(
 );
 
 app.get('/orders', db.getLiveOrdersSite);
-app.post('/createCustomer', db.createCustomer);
-app.get('/getCustomers', db.getCustomers);
+app.get('/customers', db.getCustomers);
 app.get('/checkId/:id', db.checkId);
-app.get('/getLocations', db.getLocations);
-app.get('/getStalls/:location', db.getStalls);
-app.get('/getStallMenu/:location/:id', db.getStallMenu);
-app.get('/update_order/:order_id/:order_status/', db.transitionOrder);
-app.get('/getPaylah/:cost', db.getPaylahUrl);
-app.post('/submitOrder', db.submitOrder);
+app.get('/locations', db.getLocations);
+app.get('/stalls/:location', db.getStalls);
+app.get('/stallMenu/:location/:id', db.getStallMenu);
+app.get('/paylah/:cost', db.getPaylahUrl);
+
+app.post('/customer', db.createCustomer);
+app.post('/order', db.submitOrder);
+
+app.put('/order', db.transitionOrder);
+app.put('/receiptPaid', db.receiptPaid);
 
 app.get('/', (request, response) =>{
   response.sendFile(__dirname + '/index.html');
