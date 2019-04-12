@@ -129,8 +129,7 @@ const createCustomer = (request, response) => {
       console.log(error);
       throw error;
     }
-    console.log(results);
-    response.status(201).send(`User added with ID: ${results.insertId}`)
+    response.status(201).send(`User added`)
   });
 }
 
@@ -261,7 +260,7 @@ const submitOrder = (request, response, next) => {
       });
   }
   else{
-    response.status(400).send({"Error": "Payment Mismatch or compulsory field not list"});
+    response.status(400).send({"Error": "Payment Mismatch?"});
   }
   semaphore = false;
   next();

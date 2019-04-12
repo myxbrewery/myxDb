@@ -45,7 +45,7 @@ app.get('/stalls/:location', db.getStalls);
 app.get('/stallMenu/:location/:id', db.getStallMenu);
 app.get('/paylah/:cost', db.getPaylahUrl);
 
-var dbPoll = (req, res) =>{
+var dbPoll = (req, res, next) =>{
   setTimeout(()=>{
     sockets.stall_update(io);
     sockets.customer_update(io);
