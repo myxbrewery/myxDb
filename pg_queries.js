@@ -196,7 +196,7 @@ const verifyOrderValue = (order_package) => {
 
 var semaphore = false;
 
-const submitOrder = (request, response) => {
+const submitOrder = (request, response, next) => {
   // Order price parsing is not done from customer end, for security purposes.
   // Customer sends a batched order, a list of items with specific settings.
   // He sees price locally (computed on front-end) but we DO NOT REFER TO THIS VALUE as the proper price. It is primarily for customer's reference only.
@@ -214,7 +214,6 @@ const submitOrder = (request, response) => {
       .then((res) =>{
         pool.query('SELECT id FROM receipts WHERE customer_id = $1 ORDER BY id DESC LIMIT 1', [order_package.metadata.customer_id])
         .then((results)=>{
-          console.log(results);
           console.log(receipt_id);
           var receipt_id = results.rows[0].id;
           order_package.orders.forEach((order)=>{
@@ -222,21 +221,18 @@ const submitOrder = (request, response) => {
               if(error){
                 console.log(error);
                 semaphore = false;
-                response.status(400).send({"Error": error.detail});
                 throw error;
               }
-              console.log("Order added: ");
-              console.log(order);
             });
           });
           pool.query('SELECT * FROM paylah_url WHERE value = $1', [order_package.metadata.total_payment], (error, results) =>{
             if(error){
               console.log(error);
-              response.status(400).send({"Paylah URL Error": error.detail});
+              throw error;
             }
             else if(results.rows.length == 0){
-              console.log("No Paylah Url for " + order_package.metadata.total_payment);
-              response.status(400).send({"Missing Paylah URL": order_package.metadata.total_payment});
+              console.log("Missing Paylah URL:", order_package.metadata.total_payment);
+              throw error;
             }
             else response.status(200).send({
               "paylah_url":results.rows[0],
@@ -250,6 +246,7 @@ const submitOrder = (request, response) => {
         response.status(400).send({"Error": error.detail});
         throw error;
       });
+      next();
   }
   semaphore = false;
 }

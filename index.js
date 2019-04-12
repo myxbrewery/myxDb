@@ -16,28 +16,6 @@ app.use(
   })
 );
 
-app.get('/orders', db.getLiveOrdersSite);
-app.get('/customers', db.getCustomers);
-app.get('/checkId/:id', db.checkId);
-app.get('/locations', db.getLocations);
-app.get('/stalls/:location', db.getStalls);
-app.get('/stallMenu/:location/:id', db.getStallMenu);
-app.get('/paylah/:cost', db.getPaylahUrl);
-
-app.post('/customer', db.createCustomer);
-app.post('/order', db.submitOrder);
-
-app.put('/order', db.transitionOrder);
-app.put('/receiptPaid', db.receiptPaid);
-
-app.get('/', (request, response) =>{
-  response.sendFile(__dirname + '/index.html');
-});
-
-app.listen(port, () => {
-  console.log(`App running on port ${port}.`)
-});
-
 // <----- SOCKET SERVER LOGIC ------>
 // Pub/Subbing on port 11236
 
@@ -55,5 +33,33 @@ function handler (req, res) {
   });
 }
 
-sockets.startSocketServer(socket_app);
+var io = sockets.startSocketServer(socket_app);
 socket_app.listen(11236);
+
+// <----- ROUTES ----->
+app.get('/orders', db.getLiveOrdersSite);
+app.get('/customers', db.getCustomers);
+app.get('/checkId/:id', db.checkId);
+app.get('/locations', db.getLocations);
+app.get('/stalls/:location', db.getStalls);
+app.get('/stallMenu/:location/:id', db.getStallMenu);
+app.get('/paylah/:cost', db.getPaylahUrl);
+
+var dbPoll = () =>{
+  sockets.stall_update(io);
+  sockets.customer_update(io);
+}
+
+app.post('/customer', [db.createCustomer, dbPoll]);
+app.post('/order', [db.submitOrder, dbPoll]);
+
+app.put('/order', [db.transitionOrder, dbPoll]);
+app.put('/receiptPaid', [db.receiptPaid, dbPoll]);
+
+app.get('/', (request, response) =>{
+  response.sendFile(__dirname + '/index.html');
+});
+
+app.listen(port, () => {
+  console.log(`App running on port ${port}.`)
+});

@@ -2,9 +2,6 @@ const db = require('./pg_queries')
 var socketio = require('socket.io'),
   io, clients = {};
 
-var stall_orders = {};
-var customer_orders = {};
-
 const parseStallStatuses = (all_orders) =>{
   stall_dict = {};
   all_orders.forEach((order)=>{
@@ -27,49 +24,81 @@ const parseCustomerStatuses = (all_orders) =>{
   return customer_dict;
 };
 
-// Update stall_orders table
-var stall_interval = setInterval(()=>{
-  db.getLiveOrders().then((res)=>{
-    stall_orders = parseStallStatuses(res.rows);
+var fetchDb = () =>{
+  return new Promise((resolve, reject) =>{
+    db.getLiveOrders().then((res)=>{
+      stall_orders = parseStallStatuses(res.rows);
+      customer_orders = parseCustomerStatuses(res.rows);
+      resolve({
+        stall_orders: stall_orders,
+        customer_orders: customer_orders
+      });
+    }, (err) =>{
+      console.log(err);
+      reject("Problem encountered");
+    });
   });
-}, 1000);
-
-var customer_interval = setInterval(()=>{
-  db.getLiveOrders().then((res)=>{
-    customer_orders = parseCustomerStatuses(res.rows);
-  });
-}, 1000);
+}
 
 module.exports = {
   startSocketServer: (app)=>{
     io = socketio.listen(app);
     io.on('connection', (socket)=>{
-      socket.on('join', (room)=>{
-        console.log('User joining', room)
+      socket.on('stall_join', (room)=>{
         socket.join(room);
+        fetchDb().then((result)=>{
+          Object.keys(result.stall_orders).forEach((stall)=>{
+            io.to(stall).emit('orders',result.stall_orders[stall]);
+          });
+        },(err)=>{
+          console.log(err);
+        })
       });
-      socket.on('leave', (room)=>{
-        console.log('User leaving', room)
+      socket.on('stall_leave', (room)=>{
+        console.log('Stall leaving', room)
         socket.leave(room);
       });
-      socket.on('disconnect', function(){
-        console.log('User disconnected');
+      socket.on('customer_join', (room)=>{
+        socket.join(room);
+        fetchDb().then((result)=>{
+          Object.keys(result.customer_orders).forEach((customer)=>{
+            console.log(customer);
+            io.to(customer).emit('orders',result.customer_orders[customer]);
+          });
+        },(err)=>{
+          console.log(err);
+        })
+      });
+      socket.on('customer_leave', (room)=>{
+        console.log('Customer leaving', room)
+        socket.leave(room);
       });
     });
-    var stallEmits = setInterval(()=>{
-      available_stalls = Object.keys(stall_orders);
-      available_stalls.forEach((stall)=>{
-        io.to(stall).emit('orders',stall_orders[stall]);
+    return io;
+  },
+  stall_update: (io) =>{
+    var pull_database = fetchDb();
+    pull_database.then((result)=>{
+      Object.keys(result.stall_orders).forEach((stall)=>{
+        console.log(`Socket emitting to room ${stall} content ${result.stall_orders[stall]}`)
+        io.to(stall).emit('orders',result.stall_orders[stall]);
         console.log("Stall emitted", stall);
         console.log(stall_orders[stall]);
       });
-    }, 1000);
-    var customerEmits = setInterval(()=>{
-      available_customers = Object.keys(customer_orders);
-      available_customers.forEach((customer)=>{
-        io.to(customer).emit('orders',customer_orders[customer]);
-        console.log("Customer emitted", customer);
+    },(err)=>{
+      console.log(err);
+    })
+  },
+  customer_update: (io) =>{
+    var pull_database = fetchDb();
+    pull_database.then((result)=>{
+      Object.keys(result.customer_orders).forEach((customer)=>{
+        console.log(`Socket emitting to room ${customer} content ${result.customer_orders[customer]}`)
+        io.to(customer).emit('orders',result.customer_orders[customer]);
+        console.log("Stall emitted", customer);
       });
-    }, 1000);
-  }
+    },(err)=>{
+      console.log(err);
+    })
+  },
 }
