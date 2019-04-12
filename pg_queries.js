@@ -58,7 +58,7 @@ const getLiveOrdersSite = (request, response) => {
 }
 
 const getLiveOrders = () => {
-  return pool.query('SELECT * FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC');
+  return pool.query('SELECT orders.stall_id, orders.item_id, orders.customer_id, orders.total_price, orders.compulsory_option_1, orders.compulsory_option_2, orders.modifier_1, orders.modifier_2, orders.status_id, orders.start_datetime, orders.receipt_id, items.name, items.image_url, items.location_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC');
 }
 
 const checkId = (request, response) => {
