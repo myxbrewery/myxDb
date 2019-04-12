@@ -45,14 +45,16 @@ app.get('/stalls/:location', db.getStalls);
 app.get('/stallMenu/:location/:id', db.getStallMenu);
 app.get('/paylah/:cost', db.getPaylahUrl);
 
-var dbPoll = () =>{
-  sockets.stall_update(io);
-  sockets.customer_update(io);
+var dbPoll = (req, res) =>{
+  setTimeout(()=>{
+    sockets.stall_update(io);
+    sockets.customer_update(io);
+  }, 200);
 }
 
 app.post('/customer', [db.createCustomer, dbPoll]);
 app.post('/order', [db.submitOrder, dbPoll]);
-app.post('/resetOrder', db.orderReset);
+app.post('/resetOrder', [db.createCustomer, dbPoll]); // DEV
 
 app.put('/order', [db.transitionOrder, dbPoll]);
 app.put('/receiptPaid', [db.receiptPaid, dbPoll]);

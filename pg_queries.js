@@ -259,12 +259,12 @@ const submitOrder = (request, response, next) => {
         response.status(400).send({"Error": error.detail});
         throw error;
       });
-      next();
   }
   else{
     response.status(400).send({"Error": "Payment Mismatch or compulsory field not list"});
   }
   semaphore = false;
+  next();
 }
 
 const transitionOrder = (request, response) => {
