@@ -58,7 +58,7 @@ const getLiveOrdersSite = (request, response) => {
 }
 
 const getLiveOrders = () => {
-  return pool.query('SELECT orders.id, orders.status_id, name, orders.start_datetime, orders.stall_id, receipt_id, customer_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC');
+  return pool.query('SELECT orders.id, orders.status_id, name, orders.start_datetime, orders.stall_id, receipt_id, customer_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 AND orders.status_id <= 3 ORDER BY items.id DESC');
 }
 
 const checkId = (request, response) => {
@@ -258,9 +258,8 @@ const transitionOrder = (request, response) => {
   // const order_status = parseInt(request.params.order_status);
   // const order_id = parseInt(request.params.order_id);
   var order_info = request.body;
-  let order_status = order_info.order_status;
-  let order_id = order_info.order_id;
-  console.log(order_status, order_id);
+  let order_status = order_info.status_id;
+  let order_id = order_info.id;
   pool.query('UPDATE orders SET status_id = $1 WHERE orders.id = $2', [order_status, order_id], (error, results) => {
     if(error){
       console.log(error);

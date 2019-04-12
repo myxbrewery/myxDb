@@ -61,6 +61,7 @@ module.exports = {
       available_stalls.forEach((stall)=>{
         io.to(stall).emit('orders',stall_orders[stall]);
         console.log("Stall emitted", stall);
+        console.log(stall_orders[stall]);
       });
     }, 1000);
     var customerEmits = setInterval(()=>{
