@@ -49,7 +49,7 @@ const getCustomers = (request, response) => {
 }
 
 const getLiveOrdersSite = (request, response) => {
-  pool.query('SELECT orders.id, orders.status_id, name, orders.start_datetime, orders.stall_id, receipt_id, customer_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC', (error, results)=>{
+  pool.query('SELECT * FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC', (error, results)=>{
     if(error){
       throw error;
     }
@@ -58,7 +58,7 @@ const getLiveOrdersSite = (request, response) => {
 }
 
 const getLiveOrders = () => {
-  return pool.query('SELECT orders.id, orders.status_id, name, orders.start_datetime, orders.stall_id, receipt_id, customer_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC');
+  return pool.query('SELECT * FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC');
 }
 
 const checkId = (request, response) => {
