@@ -255,9 +255,8 @@ const transitionOrder = (request, response) => {
   // const order_status = parseInt(request.params.order_status);
   // const order_id = parseInt(request.params.order_id);
   var order_info = request.body;
-  let order_status = order_info.order_status;
-  let order_id = order_info.order_id;
-  console.log(order_status, order_id);
+  let order_status = order_info.status_id;
+  let order_id = order_info.id;
   pool.query('UPDATE orders SET status_id = $1 WHERE orders.id = $2', [order_status, order_id], (error, results) => {
     if(error){
       console.log(error);

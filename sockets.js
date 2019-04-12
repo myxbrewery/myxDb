@@ -83,6 +83,7 @@ module.exports = {
         console.log(`Socket emitting to room ${stall} content ${result.stall_orders[stall]}`)
         io.to(stall).emit('orders',result.stall_orders[stall]);
         console.log("Stall emitted", stall);
+        console.log(stall_orders[stall]);
       });
     },(err)=>{
       console.log(err);
