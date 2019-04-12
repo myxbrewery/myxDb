@@ -52,6 +52,7 @@ var dbPoll = () =>{
 
 app.post('/customer', [db.createCustomer, dbPoll]);
 app.post('/order', [db.submitOrder, dbPoll]);
+app.post('/resetOrder', db.orderReset);
 
 app.put('/order', [db.transitionOrder, dbPoll]);
 app.put('/receiptPaid', [db.receiptPaid, dbPoll]);

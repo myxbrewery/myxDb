@@ -134,6 +134,18 @@ const createCustomer = (request, response) => {
   });
 }
 
+// Dev fn
+const orderReset = (request, response) => {
+  pool.query('UPDATE orders SET status_id=1', [], (error, results) => {
+    if(error){
+      console.log(error);
+      throw error;
+    }
+    console.log(results);
+    response.status(201).send(`Orders Reset`);
+  });
+}
+
 const verifyOrderValue = (order_package) => {
   let metadata = order_package.metadata;
   let items = order_package.orders;
@@ -167,7 +179,7 @@ const verifyOrderValue = (order_package) => {
       cost_field = mod + "_cost";
       if(menu[location_id][stall_id][item_id][mod] != null){
         if(menu[location_id][stall_id][item_id][mod] != 0){
-          if(menu[location_id][stall_id][item_id][mod].includes(item.mod)){
+          if(menu[location_id][staUPDATEll_id][item_id][mod].includes(item.mod)){
             total_payment += parseFloat(menu[location_id][stall_id][item_id][cost_field]);
           }
         }
@@ -217,7 +229,8 @@ const submitOrder = (request, response, next) => {
           console.log(receipt_id);
           var receipt_id = results.rows[0].id;
           order_package.orders.forEach((order)=>{
-            pool.query('INSERT INTO orders(stall_id, item_id, customer_id, base_price, total_price, compulsory_option_1, compulsory_option_2, modifier_1, modifier_2, status_id, start_datetime, receipt_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', [order.stall_id, order.item_id, order_package.metadata.customer_id, order.base_price, order.total_price, order.compulsory_option_1, order.compulsory_option_2, order.modifier_1, order.modifier_2, 0, timestamp, receipt_id], (error, res) => {
+            // TODO: Status_id should start at 0; using 1 as placeholder while working with paylah api
+            pool.query('INSERT INTO orders(stall_id, item_id, customer_id, base_price, total_price, compulsory_option_1, compulsory_option_2, modifier_1, modifier_2, status_id, start_datetime, receipt_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', [order.stall_id, order.item_id, order_package.metadata.customer_id, order.base_price, order.total_price, order.compulsory_option_1, order.compulsory_option_2, order.modifier_1, order.modifier_2, 1, timestamp, receipt_id], (error, res) => {
               if(error){
                 console.log(error);
                 semaphore = false;
@@ -247,6 +260,9 @@ const submitOrder = (request, response, next) => {
         throw error;
       });
       next();
+  }
+  else{
+    response.status(400).send({"Error": "Payment Mismatch or compulsory field not list"});
   }
   semaphore = false;
 }
@@ -306,5 +322,6 @@ module.exports = {
   getCustomers,
   submitOrder,
   transitionOrder,
-  receiptPaid
+  receiptPaid,
+  orderReset
 }
