@@ -155,8 +155,8 @@ const verifyOrderValue = (order_package) => {
         if(menu[location_id][stall_id][item_id][field].length != 0){
           // Item's specified field must be inside possible list of options, and it must have nonzero length
           if(item[field].length == 0 || !menu[location_id][stall_id][item_id][field].includes(item[field])){
-            response.statusMessage =  "Required field: " + menu[location_id][stall_id][item_id][field].join(' or ');
-            response.status(400).end();
+            console.log("Required field: " + menu[location_id][stall_id][item_id][field].join(' or '));
+            return false
           }
           if(item[field] == "Medium") total_payment += parseFloat(menu[location_id][stall_id][item_id].upsize_1_cost);
           else if(item[field] == "Large") total_payment += parseFloat(menu[location_id][stall_id][item_id].upsize_2_cost);
