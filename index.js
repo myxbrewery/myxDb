@@ -45,7 +45,7 @@ app.get('/stalls/:location', db.getStalls);
 app.get('/stallMenu/:location/:id', db.getStallMenu);
 app.get('/paylah/:cost', db.getPaylahUrl);
 
-var dbPoll = (req, res, next) =>{
+var dbPoll = (req, res) =>{
   setTimeout(()=>{
     sockets.stall_update(io);
     sockets.customer_update(io);
@@ -54,7 +54,6 @@ var dbPoll = (req, res, next) =>{
 
 app.post('/customer', [db.createCustomer, dbPoll]);
 app.post('/order', [db.submitOrder, dbPoll]);
-app.post('/resetOrder', [db.createCustomer, dbPoll]); // DEV
 
 app.put('/order', [db.transitionOrder, dbPoll]);
 app.put('/receiptPaid', [db.receiptPaid, dbPoll]);
@@ -62,6 +61,21 @@ app.put('/receiptPaid', [db.receiptPaid, dbPoll]);
 app.get('/', (request, response) =>{
   response.sendFile(__dirname + '/index.html');
 });
+
+// dev functions
+app.get('/scripts/dev_view.js', (request, response)=>{
+  console.log("dev_view requested")
+  response.sendFile(__dirname + '/scripts/dev_view.js');
+});
+app.get('/allPendingOrders', db.getAllOrderDetails);
+app.post('/resetOrder', [db.resetOrder, dbPoll]); // DEV
+
+// Temporary for images, before s3
+// Is this security risk? can people put ../../ in image_url to fetch code? hmm
+app.get('/images/:url', (request, response) => {
+  var image_url = request.params.url;
+  response.sendFile(__dirname + '/images/' + image_url);
+})
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)

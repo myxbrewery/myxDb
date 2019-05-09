@@ -1,44 +1,27 @@
 <!doctype html>
-<html>
+<html style="height: 95%">
   <head>
-    <title>Socket.IO testing</title>
+    <title>Myx Developer System Overview</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </head>
-  <body>
-    <form onsubmit="modSocketStall();return false;">
-      Which stall are you? <input type="text" id="stall"><br>
-      Submit: <input type="submit" value="Submit">
-    </form>
-    <form onsubmit="modSocketCustomer();return false;">
-      Which customer are you? <input type="text" id="customer"><br>
-      Submit: <input type="submit" value="Submit">
-    </form>
+  <style>
+    .table-responsive {
+      display: inline-table;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+    .half{
+      height:50%;
+    }
+  </style>
+  <body style="height: 100%;">
+    <div class="row half" id="Stall_perspective"></div>
+    <div class="row half" id="Customer_perspective"></div>
   </body>
-</html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script>
-  var stallRoom = 0;
-  var customerRoom = 0;
-  var socket = io('ws://localhost:11236', {transports: ['websocket']});
-  socket.emit('stall_join', stallRoom);
-  socket.emit('customer_join', customerRoom);
-  // socket.emit('join', 1);
-  socket.on('orders', (message)=>{
-    console.log("Message Received");
-    console.log(message);
-  })
-  function modSocketStall(){
-    var newStallRoom = document.getElementById("stall").value;
-    console.log(`Stall Changing Room from to ${stallRoom} to ${newStallRoom}`);
-    socket.emit('stall_leave', stallRoom);
-    stallRoom = newStallRoom;
-    socket.emit('stall_join', stallRoom);
-  }
-  function modSocketCustomer(){
-    var newCustomerRoom = document.getElementById("customer").value;
-    console.log(`Customer Changing Room from to ${customerRoom} to ${newCustomerRoom}`);
-    socket.emit('customer_leave', customerRoom);
-    customerRoom = newCustomerRoom;
-    socket.emit('customer_join', customerRoom);
-  }
-</script>
+<script src="/scripts/dev_view.js"></script>
+</html>
