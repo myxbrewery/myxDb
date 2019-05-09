@@ -41,7 +41,7 @@ def execute_pg_query(query, args):
 
 # Execute these within postgres
 \copy locations(id, name, image_id, aggregation) FROM '/home/ubuntu/myxDb/data/locations.csv' DELIMITER ',' CSV HEADER;
-\copy stalls(id, location, name, open, halal, qr_link, opening_time, closing_time, image_id) FROM '/home/ubuntu/myxDb/data/stalls.csv' DELIMITER ',' CSV HEADER;
+\copy stalls(id, location, name, open, halal, qr_link, opening_time, closing_time, image_url, icon_url) FROM '/home/ubuntu/myxDb/data/stalls.csv' DELIMITER ',' CSV HEADER;
 \copy category(id, name) FROM '/home/ubuntu/myxDb/data/category.csv' DELIMITER ',' CSV HEADER;
 \copy status(id, name) FROM '/home/ubuntu/myxDb/data/status.csv' DELIMITER ',' CSV HEADER;
 \copy paylah_url(value, url) FROM '/home/ubuntu/myxDb/data/paylahQR.csv' DELIMITER ',' CSV HEADER;
