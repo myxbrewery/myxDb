@@ -44,7 +44,7 @@ function generateCard(elem_id, colour, type){
     mainbody.appendChild(header_row);
   }
 }
-
+ var socket = io('ws://18.138.9.151:11236', {transports: ['websocket']})
 function populateCards(demographic){
   if(demographic === "Customer"){
     demo_dict = customer_dict;
