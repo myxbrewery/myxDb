@@ -48,8 +48,9 @@ const getCustomers = (request, response) => {
   })
 }
 
-const getLiveOrdersSite = (request, response) => {
-  pool.query('SELECT * FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC', (error, results)=>{
+const getStallOrders = (request, response) => {
+  let id = request.params.id;
+  pool.query('SELECT start_datetime, items.name, orders.total_price, orders.compulsory_options, orders.optional_options, orders.status_id, orders.receipt_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.stall_id=$1 ORDER BY start_datetime DESC', [id], (error, results)=>{
     if(error){
       throw error;
     }
@@ -58,7 +59,7 @@ const getLiveOrdersSite = (request, response) => {
 }
 
 const getLiveOrders = () => {
-  return pool.query('SELECT orders.id, orders.stall_id, orders.item_id, orders.customer_id, orders.total_price, orders.compulsory_options, orders.optional_options, orders.status_id, orders.start_datetime, orders.receipt_id, items.name, items.image_url, items.location_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 ORDER BY items.id DESC');
+  return pool.query("SELECT orders.id, orders.stall_id, orders.item_id, orders.customer_id, orders.total_price, orders.compulsory_options, orders.optional_options, orders.status_id, orders.start_datetime, orders.receipt_id, items.name, items.image_url, items.location_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id > 1 ORDER BY orders.start_datetime AND orders.start_datetime >= now()::date + interval '1h' DESC");
 }
 
 const checkId = (request, response) => {
@@ -114,7 +115,7 @@ const getLocations = (request, response) => {
 const getStallMenu = (request, response) => {
   const stallLoc = parseInt(request.params.location);
   const stallId = parseInt(request.params.id);
-  pool.query('SELECT * FROM items WHERE stall_id = $1 AND location_id = $2 ORDER BY id ASC', [stallId, stallLoc], (error, results)=>{
+  pool.query('SELECT id as item_id, location_id, stall_id, name, in_stock, school_price, public_price, category, kcal, compulsory_options, optional_options, tags, image_url FROM items WHERE stall_id = $1 AND location_id = $2 ORDER BY id ASC', [stallId, stallLoc], (error, results)=>{
     if(error){
       throw error;
     }
@@ -122,28 +123,34 @@ const getStallMenu = (request, response) => {
   });
 }
 
-const createCustomer = (request, response) => {
+const createCustomer = (request, response, next) => {
   const user_details = request.body;
-  console.log(user_details);
   pool.query('INSERT INTO customers (id, email, age, name, image, diet) VALUES ($1, $2, $3, $4, $5, $6)', [user_details.id, user_details.email, user_details.age, user_details.name, user_details.image, user_details.diet], (error, results) => {
     if(error){
       console.log(error);
+      response.status(400).json({"message":error});
       throw error;
     }
-    response.status(201).send(`User added`)
+    request.user_response = {
+      "message":"Customer added successfully",
+    };
+    next();
   });
 }
 
 // Dev fn
-const resetOrder = (request, response) => {
+const resetOrder = (request, response, next) => {
   pool.query('UPDATE orders SET status_id=1', [], (error, results) => {
     if(error){
       console.log(error);
       throw error;
     }
     console.log(results);
-    response.status(201).send(`Orders Reset`);
   });
+  request.user_response = {
+    "message":"All orders reset;",
+  };
+  next();
 }
 
 const verifyOrderValue = (order_package) => {
@@ -181,8 +188,6 @@ const verifyOrderValue = (order_package) => {
           }
           else{
             console.log("User-provided compulsory option is not in possible compulsory option choice");
-            console.log(option);
-            console.log(menu_item["compulsory_options"]);
           }
         });
       }
@@ -212,6 +217,8 @@ const verifyOrderValue = (order_package) => {
     });
 
     if(metadata.client_type == "school"){
+      console.log(menu[location_id][stall_id])
+      console.log("Adding " + menu[location_id][stall_id][item_id].school_price);
       total_payment += parseFloat(menu[location_id][stall_id][item_id].school_price);
     }
     else if (metadata.client_type == "public"){
@@ -228,7 +235,7 @@ const verifyOrderValue = (order_package) => {
     return false;
   }
   else{
-    console.log("PAYMENT VERIFIED");
+    console.log("Payment Correct!")
     return true;
   }
 }
@@ -236,6 +243,12 @@ const verifyOrderValue = (order_package) => {
 var semaphore = false;
 
 const submitOrder = (request, response, next) => {
+  // for(var i=1;i<1000;i++){
+  //   let pl_value = parseFloat(i)/10.0;
+  //   let url="$"+pl_value;
+  //   console.log("Adding " + pl_value + " to db");
+  //   pool.query('INSERT INTO paylah_url(value, url) VALUES ($1, $2)', [pl_value, url], (error, results)=>{});
+  // }
   // Order price parsing is not done from customer end, for security purposes.
   // Customer sends a batched order, a list of items with specific settings.
   // He sees price locally (computed on front-end) but we DO NOT REFER TO THIS VALUE as the proper price. It is primarily for customer's reference only.
@@ -255,14 +268,13 @@ const submitOrder = (request, response, next) => {
       .then((res) =>{
         pool.query('SELECT id FROM receipts WHERE customer_id = $1 ORDER BY id DESC LIMIT 1', [order_package.metadata.customer_id])
         .then((results)=>{
-          console.log(receipt_id);
+          semaphore = false;
           var receipt_id = results.rows[0].id;
           order_package.orders.forEach((order)=>{
             // TODO: Status_id should start at 0; using 1 as placeholder while working with paylah api
-            pool.query('INSERT INTO orders(stall_id, item_id, customer_id, base_price, total_price, compulsory_options, optional_options, status_id, start_datetime, receipt_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [order.stall_id, order.item_id, order_package.metadata.customer_id, order.base_price, order.total_price, order.compulsory_options, order.optional_options, 1, timestamp, receipt_id], (error, res) => {
+            pool.query('INSERT INTO orders(stall_id, item_id, customer_id, base_price, total_price, compulsory_options, optional_options, status_id, start_datetime, receipt_id, note) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', [order.stall_id, order.item_id, order_package.metadata.customer_id, order.base_price, order.total_price, order.compulsory_options, order.optional_options, 2, timestamp, receipt_id, order.note], (error, res) => {
               if(error){
                 console.log(error);
-                semaphore = false;
                 throw error;
               }
             });
@@ -273,32 +285,30 @@ const submitOrder = (request, response, next) => {
               throw error;
             }
             else if(results.rows.length == 0){
-              console.log("Missing Paylah URL:", order_package.metadata.total_payment);
-              throw error;
+              request.user_response = {"Error": "Missing Paylah URL: " + order_package.metadata.total_payment};
+              next();
             }
-            else response.status(200).send({
-              "paylah_url":results.rows[0],
-              "receipt_id":receipt_id
-            });
+            else {
+              request.user_response = {
+                "paylah_url":results.rows[0],
+                "receipt_id":receipt_id
+              };
+              next();
+            }
           });
         })
       })
       .catch((error)=>{
         console.log(error);
         response.status(400).send({"Error": error.detail});
-        throw error;
       });
   }
   else{
     response.status(400).send({"Error": "Payment Mismatch?"});
   }
-  semaphore = false;
-  next();
 }
 
-const transitionOrder = (request, response) => {
-  // const order_status = parseInt(request.params.order_status);
-  // const order_id = parseInt(request.params.order_id);
+const transitionOrder = (request, response, next) => {
   var order_info = request.body;
   let order_status = order_info.status_id;
   let order_id = order_info.id;
@@ -307,21 +317,29 @@ const transitionOrder = (request, response) => {
       console.log(error);
       response.status(400).send({"Error": error.detail});
     }
-    response.status(200).send({"status": true});
+    request.user_response = {
+      "message":"Orders transitioned",
+      "order": order_id,
+      "new_status": order_status
+    };
+    next();
   })
 }
 
-const receiptPaid = (request, response) => {
+const receiptPaid = (request, response, next) => {
   // const receipt = parseInt(request.params.receipt_id);
   const order_details = request.body;
-  console.log(order_details);
   pool.query('UPDATE orders SET status_id = $1 WHERE orders.receipt_id = $2', [1, order_details.receipt_id], (error, results) => {
     if(error){
       console.log(error);
       response.status(400).send({"Error": error.detail});
     }
     else{
-      response.status(200).send({"status": true});
+      request.user_response = {
+        "message":"Receipt paid",
+        "receipt": order_details.receipt_id,
+      };
+      next();
     }
   })
 }
@@ -354,7 +372,7 @@ module.exports = {
   getStallMenu,
   getPaylahUrl,
   getLiveOrders,
-  getLiveOrdersSite,
+  getStallOrders,
   createCustomer,
   checkId,
   getCustomers,

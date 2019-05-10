@@ -21,7 +21,7 @@ cur.execute("CREATE TABLE receipts(id SERIAL PRIMARY KEY, customer_id INTEGER RE
 cur.execute("CREATE TABLE category(id INTEGER PRIMARY KEY, name VARCHAR(255))")
 cur.execute("CREATE TABLE status(id INTEGER PRIMARY KEY, name VARCHAR(255))")
 cur.execute("CREATE TABLE items(location_id INTEGER REFERENCES locations(id), stall_id INTEGER REFERENCES stalls(id), id INTEGER NOT NULL, name VARCHAR(255) NOT NULL, in_stock BOOL, school_price NUMERIC(10,6), public_price NUMERIC(10,6), category INTEGER REFERENCES category(id), kcal INTEGER, compulsory_options JSON,  optional_options JSON, tags TEXT[], image_url TEXT);")
-cur.execute("CREATE TABLE orders(id SERIAL PRIMARY KEY, stall_id INTEGER REFERENCES stalls(id), item_id INTEGER, customer_id INTEGER REFERENCES customers(id), base_price numeric(10, 6) NOT NULL, total_price numeric(10, 6) NOT NULL, compulsory_options JSON, optional_options JSON, status_id INTEGER REFERENCES status(id), start_datetime TIMESTAMP, end_datetime TIMESTAMP, receipt_id INTEGER REFERENCES receipts(id))")
+cur.execute("CREATE TABLE orders(id SERIAL PRIMARY KEY, stall_id INTEGER REFERENCES stalls(id), item_id INTEGER, customer_id INTEGER REFERENCES customers(id), base_price numeric(10, 6) NOT NULL, total_price numeric(10, 6) NOT NULL, compulsory_options JSON, optional_options JSON, status_id INTEGER REFERENCES status(id), start_datetime TIMESTAMP, end_datetime TIMESTAMP, receipt_id INTEGER REFERENCES receipts(id), note TEXT)")
 cur.execute("CREATE TABLE paylah_url(id SERIAL PRIMARY KEY, value NUMERIC(10,6), url TEXT)")
 conn.commit()
 conn.close()

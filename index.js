@@ -37,7 +37,7 @@ var io = sockets.startSocketServer(socket_app);
 socket_app.listen(11236);
 
 // <----- ROUTES ----->
-app.get('/orders', db.getLiveOrdersSite);
+app.get('/orders/:location/:id', db.getStallOrders);
 app.get('/customers', db.getCustomers);
 app.get('/checkId/:id', db.checkId);
 app.get('/locations', db.getLocations);
@@ -45,11 +45,13 @@ app.get('/stalls/:location', db.getStalls);
 app.get('/stallMenu/:location/:id', db.getStallMenu);
 app.get('/paylah/:cost', db.getPaylahUrl);
 
-var dbPoll = (req, res) =>{
+var dbPoll = (request, response) =>{
   setTimeout(()=>{
     sockets.stall_update(io);
     sockets.customer_update(io);
-  }, 200);
+  }, 100);
+  console.log(request.user_response);
+  response.status(200).send(request.user_response);
 }
 
 app.post('/customer', [db.createCustomer, dbPoll]);
@@ -79,4 +81,17 @@ app.get('/images/:url', (request, response) => {
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
+});
+
+var admin_port = 11234;
+var admin_app = express();
+
+admin_app.get('/', (request, response) =>{
+  response.sendFile(__dirname + '/admin.html');
+});
+
+var admin_server = require('http').createServer(admin_app);
+admin_server.listen(admin_port);
+admin_app.get('/scripts/dev_hax.js', (request, response)=>{
+  response.sendFile(__dirname + '/scripts/dev_hax.js');
 });

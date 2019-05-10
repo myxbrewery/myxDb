@@ -6,15 +6,15 @@ var stall_color_dict = {}
 function generateCard(elem_id, colour, type){
   elem_check = document.getElementById(type + "_" + elem_id);
   if(!elem_check){
-    console.log("Generating " + type + " " + elem_id)
     let parentElem = document.createElement("div");
     parentElem.id = type + "_" + elem_id;
-    parentElem.className = "col s6 m6 l4";
-    parentElem.style="height:100%";
+    parentElem.className = "col s6";
+    parentElem.style="min-height:100%";
     let parentCard = document.createElement("div");
     parentCard.className = "card " + colour;
     let title = document.createElement("div");
     title.className = "card-title center-align";
+    title.style="padding-top:1rem";
     title.innerHTML = type + " " + elem_id;
     let interface = document.createElement("table");
     interface.className="table-responsive centered highlight";
@@ -22,11 +22,11 @@ function generateCard(elem_id, colour, type){
     mainbody.id = type + "_table_" + elem_id;
     if(type==="Customer"){
       var header_categories = ["Time", "Stall", "Receipt", "Order", "Cost", "Status"];
-      parentCard.style = "height: 50%";
+      parentCard.style = "min-height: 100%; margin:0";
     }
     else{
       var header_categories = ["Time", "Customer", "Receipt", "Order", "Cost", "Status"];
-      parentCard.style = "height: 100%";
+      parentCard.style = "min-height: 100%; margin:0";
     }
     header_row = document.createElement("tr");
     header_categories.forEach((header)=>{
@@ -44,7 +44,7 @@ function generateCard(elem_id, colour, type){
     mainbody.appendChild(header_row);
   }
 }
- var socket = io('ws://18.138.9.151:11236', {transports: ['websocket']})
+
 function populateCards(demographic){
   if(demographic === "Customer"){
     demo_dict = customer_dict;
@@ -66,6 +66,20 @@ function populateCards(demographic){
             time_object = new Date(demo_dict[demo][order][elem]);
             tblElem.innerHTML = time_object.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
           }
+          else if(elem == "status"){
+            tblElemBtn = document.getElementById("data_"+demo+"_"+order+"_"+elem+"_btn");
+            tblElemBtn.innerHTML = demo_dict[demo][order][elem];
+            if(demographic=="Customer"){
+              tblElemBtn.onclick = (()=>{
+                advanceOrderStatus(customer_dict[demo][order]);
+              });
+            }
+            else{
+              tblElemBtn.onclick = (()=>{
+                advanceOrderStatus(stall_dict[demo][order]);
+              });
+            }
+          }
           else{
             tblElem.innerHTML = demo_dict[demo][order][elem];
           }
@@ -76,20 +90,51 @@ function populateCards(demographic){
         order_row.id = demographic+"_row_"+order
         order_elements.forEach((elem)=>{
           tblElem = document.createElement("td");
-          tblElem.id = "data_"+demo+"_"+order+"_"+elem;
           if(elem=="time"){
             time_object = new Date(demo_dict[demo][order][elem]);
             tblElem.innerHTML = time_object.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
           }
+          else if (elem == "status"){
+            tblElemBtn = document.createElement("a");
+            tblElemBtn.className = "btn-small waves-effect red"
+            tblElemBtn.id = "data_"+demo+"_"+order+"_"+elem+"_btn";
+            tblElemBtn.innerHTML = demo_dict[demo][order][elem];
+            if(demographic=="Customer"){
+              tblElemBtn.onclick = (()=>{
+                advanceOrderStatus(customer_dict[demo][order]);
+              });
+            }
+            else{
+              tblElemBtn.onclick = (()=>{
+                advanceOrderStatus(stall_dict[demo][order]);
+              });
+            }
+            tblElem.appendChild(tblElemBtn);
+          }
           else{
             tblElem.innerHTML = demo_dict[demo][order][elem];
           }
+          tblElem.id = "data_"+demo+"_"+order+"_"+elem;
           order_row.appendChild(tblElem);
         })
         demo_card_table = document.getElementById(demographic+"_table_"+demo);
         demo_card_table.appendChild(order_row);
       }
     });
+  });
+}
+
+function advanceOrderStatus(order){
+  fetch("http://localhost:11235/order/", {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'status_id': order.status + 1,
+      'id': order.id
+    })
   });
 }
 
@@ -110,7 +155,6 @@ function dataUpdate(all_orders){
     if(!(order.stall_id in stall_dict)){
       stall_dict[order.stall_id] = {};
       stall_color_dict[order.stall_id] = randElem(stall_colors) + " " + randElem(style_options) + "-" + randElem(depth_options);
-      console.log(randElem(stall_colors) + " " + randElem(style_options) + "-" + randElem(depth_options))
     }
     customer_dict[order.customer_id][order.id] = order;
     stall_dict[order.stall_id][order.id] = order;
@@ -133,7 +177,7 @@ setInterval(()=>{
       return res.json();
     })
     .then(res=>main(res));
-}, 2000)
+}, 800)
 
 // setInterval(populateCards("Customer"), 1000);
 // setInterval(populateCards("Stall"), 1000);

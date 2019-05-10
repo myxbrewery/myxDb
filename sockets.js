@@ -44,11 +44,16 @@ module.exports = {
   startSocketServer: (app)=>{
     io = socketio.listen(app);
     io.on('connection', (socket)=>{
+      let valid_stalls = new Set([1,2,3,4,5,6,7,8,9])
       socket.on('stall_join', (room)=>{
         socket.join(room);
         fetchDb().then((result)=>{
           Object.keys(result.stall_orders).forEach((stall)=>{
             io.to(stall).emit('orders',result.stall_orders[stall]);
+            valid_stalls.delete(parseInt(stall));
+          });
+          valid_stalls.forEach((val)=>{
+            io.to(val).emit('orders',[]);
           });
         },(err)=>{
           console.log(err);
@@ -77,13 +82,15 @@ module.exports = {
     return io;
   },
   stall_update: (io) =>{
+    let valid_stalls = new Set([1,2,3,4,5,6,7,8,9])
     var pull_database = fetchDb();
     pull_database.then((result)=>{
       Object.keys(result.stall_orders).forEach((stall)=>{
-        console.log(`Socket emitting to room ${stall} content ${result.stall_orders[stall]}`)
+        valid_stalls.delete(parseInt(stall));
         io.to(stall).emit('orders',result.stall_orders[stall]);
-        console.log("Stall emitted", stall);
-        console.log(stall_orders[stall]);
+      });
+      valid_stalls.forEach((val)=>{
+        io.to(val).emit('orders',[]);
       });
     },(err)=>{
       console.log(err);
@@ -93,9 +100,7 @@ module.exports = {
     var pull_database = fetchDb();
     pull_database.then((result)=>{
       Object.keys(result.customer_orders).forEach((customer)=>{
-        console.log(`Socket emitting to room ${customer} content ${result.customer_orders[customer]}`)
         io.to(customer).emit('orders',result.customer_orders[customer]);
-        console.log("Stall emitted", customer);
       });
     },(err)=>{
       console.log(err);
