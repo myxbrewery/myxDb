@@ -41,15 +41,15 @@ var fetchDb = () =>{
 }
 
 stall_mapping = {
-  1:"ch1ck3n",
-  2:"indi@n",
-  3:"w3stern",
-  4:"he4lths0up",
-  5:"korean",
-  6:"m1xedr1ce",
-  7:"dr1nks",
-  8:"cre@myduck",
-  9:"mus1im",
+  '1':"ch1ck3n",
+  '2':"indi@n",
+  '3':"w3stern",
+  '4':"he4lths0up",
+  '5':"korean",
+  '6':"m1xedr1ce",
+  '7':"dr1nks",
+  '8':"cre@myduck",
+  '9':"mus1im",
 }
 
 module.exports = {
@@ -94,10 +94,13 @@ module.exports = {
     return io;
   },
   stall_update: (io) =>{
+    console.log("Stall Updating...")
     let valid_stalls = new Set([1,2,3,4,5,6,7,8,9])
     var pull_database = fetchDb();
     pull_database.then((result)=>{
+      console.log(result.stall_orders);
       Object.keys(result.stall_orders).forEach((stall)=>{
+        console.log("Emitting to room " + stall_mapping[stall]);
         valid_stalls.delete(parseInt(stall));
         io.to(stall_mapping[stall]).emit('orders',result.stall_orders[stall]);
       });
