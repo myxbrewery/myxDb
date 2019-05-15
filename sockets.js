@@ -8,7 +8,9 @@ const parseStallStatuses = (all_orders) =>{
     if(!(order.stall_id in stall_dict)){
       stall_dict[order.stall_id] = [];
     }
-    stall_dict[order.stall_id].push(order);
+    if(order.status_id > 1){
+      stall_dict[order.stall_id].push(order);
+    }
   });
   return stall_dict;
 };
@@ -79,7 +81,6 @@ module.exports = {
         socket.join(room);
         fetchDb().then((result)=>{
           Object.keys(result.customer_orders).forEach((customer)=>{
-            console.log(customer);
             io.to(customer).emit('orders',result.customer_orders[customer]);
           });
         },(err)=>{
@@ -94,13 +95,10 @@ module.exports = {
     return io;
   },
   stall_update: (io) =>{
-    console.log("Stall Updating...")
     let valid_stalls = new Set([1,2,3,4,5,6,7,8,9])
     var pull_database = fetchDb();
     pull_database.then((result)=>{
-      console.log(result.stall_orders);
       Object.keys(result.stall_orders).forEach((stall)=>{
-        console.log("Emitting to room " + stall_mapping[stall]);
         valid_stalls.delete(parseInt(stall));
         io.to(stall_mapping[stall]).emit('orders',result.stall_orders[stall]);
       });

@@ -59,7 +59,7 @@ const getStallOrders = (request, response) => {
 }
 
 const getLiveOrders = () => {
-  return pool.query("SELECT orders.id, orders.stall_id, orders.item_id, orders.customer_id, orders.total_price, orders.compulsory_options, orders.optional_options, orders.status_id, orders.start_datetime, orders.receipt_id, items.name, items.image_url, items.location_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id > 1 AND orders.start_datetime >= now()::date + interval '1h' ORDER BY orders.start_datetime DESC");
+  return pool.query("SELECT orders.id, orders.stall_id, orders.item_id, orders.customer_id, orders.total_price, orders.compulsory_options, orders.optional_options, orders.status_id, orders.start_datetime, orders.receipt_id, items.name, items.image_url, items.location_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id >= 1 AND orders.start_datetime >= now()::date + interval '1h' ORDER BY orders.start_datetime DESC");
 }
 
 const checkId = (request, response) => {
