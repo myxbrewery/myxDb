@@ -133,7 +133,7 @@ function populateCards(demographic){
 }
 
 function advanceOrderStatus(order){
-  fetch("http://10.12.254.221:11235/order/", {
+  fetch("http://18.138.9.151:11235/order/", {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',

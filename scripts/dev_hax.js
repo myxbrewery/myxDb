@@ -1,5 +1,5 @@
 function resetOrder(){
-  fetch("http://10.12.254.221:11235/resetOrder",{
+  fetch("http://18.138.9.151:11235/resetOrder",{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -15,19 +15,19 @@ function randElem(js_arr){
 }
 
 function randomOrder(){
-  fetch("http://10.12.254.221:11235/locations")
+  fetch("http://18.138.9.151:11235/locations")
     .then((res)=>{return res.json()})
     .then((res)=>{
       // let rand_location = randElem(res).id;
       rand_location = 1;
-      fetch("http://10.12.254.221:11235/stalls/" + rand_location)
+      fetch("http://18.138.9.151:11235/stalls/" + rand_location)
         .then((resp)=>{return resp.json()})
         .then((resp)=>{
           rand_stall = randElem(resp).id;
           while(rand_stall == 6 || rand_stall == 2 || rand_stall == 4) {
             rand_stall = randElem(resp).id;
           }
-          fetch("http://10.12.254.221:11235/stallMenu/" + rand_location + "/" + rand_stall)
+          fetch("http://18.138.9.151:11235/stallMenu/" + rand_location + "/" + rand_stall)
             .then((respo)=>{return respo.json()})
             .then((respo)=>{
               // Between 1 to 5 items ordered
@@ -103,7 +103,7 @@ function randomOrder(){
 
               console.log(order_payload);
 
-              fetch("http://10.12.254.221:11235/order/", {
+              fetch("http://18.138.9.151:11235/order/", {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',
