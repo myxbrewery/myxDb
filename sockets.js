@@ -40,6 +40,18 @@ var fetchDb = () =>{
   });
 }
 
+stall_mapping = {
+  1:"ch1ck3n",
+  2:"indi@n",
+  3:"w3stern",
+  4:"he4lths0up",
+  5:"korean",
+  6:"m1xedr1ce",
+  7:"dr1nks",
+  8:"cre@myduck",
+  9:"mus1im",
+}
+
 module.exports = {
   startSocketServer: (app)=>{
     io = socketio.listen(app);
@@ -49,11 +61,11 @@ module.exports = {
         socket.join(room);
         fetchDb().then((result)=>{
           Object.keys(result.stall_orders).forEach((stall)=>{
-            io.to(stall).emit('orders',result.stall_orders[stall]);
+            io.to(stall_mapping[stall]).emit('orders',result.stall_orders[stall]);
             valid_stalls.delete(parseInt(stall));
           });
           valid_stalls.forEach((val)=>{
-            io.to(val).emit('orders',[]);
+            io.to(stall_mapping[val]).emit('orders',[]);
           });
         },(err)=>{
           console.log(err);
@@ -87,10 +99,10 @@ module.exports = {
     pull_database.then((result)=>{
       Object.keys(result.stall_orders).forEach((stall)=>{
         valid_stalls.delete(parseInt(stall));
-        io.to(stall).emit('orders',result.stall_orders[stall]);
+        io.to(stall_mapping[stall]).emit('orders',result.stall_orders[stall]);
       });
       valid_stalls.forEach((val)=>{
-        io.to(val).emit('orders',[]);
+        io.to(stall_mapping[val]).emit('orders',[]);
       });
     },(err)=>{
       console.log(err);

@@ -217,7 +217,6 @@ const verifyOrderValue = (order_package) => {
     });
 
     if(metadata.client_type == "school"){
-
       total_payment += parseFloat(menu[location_id][stall_id][item_id].school_price);
     }
     else if (metadata.client_type == "public"){
@@ -265,20 +264,11 @@ const submitOrder = (request, response, next) => {
     timestamp = timestamp.toISOString();
     pool.query('INSERT INTO receipts (customer_id, paid, start_date, total_payment) VALUES ($1, $2, $3, $4)', [order_package.metadata.customer_id, false, timestamp, order_package.metadata.total_payment])
       .then((res) =>{
+        console.log("Receipt Added")
         pool.query('SELECT id FROM receipts WHERE customer_id = $1 ORDER BY id DESC LIMIT 1', [order_package.metadata.customer_id])
         .then((results)=>{
           semaphore = false;
           var receipt_id = results.rows[0].id;
-          order_package.orders.forEach((order)=>{
-            // TODO: Status_id should start at 0; using 1 as placeholder while working with paylah api
-            pool.query('INSERT INTO orders(stall_id, item_id, customer_id, base_price, total_price, compulsory_options, optional_options, status_id, start_datetime, receipt_id, note) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', [order.stall_id, order.item_id, order_package.metadata.customer_id, order.base_price, order.total_price, order.compulsory_options, order.optional_options, 2, timestamp, receipt_id, order.note], (error, res) => {
-              if(error){
-                console.log(error);
-                request.user_response = {"Error": "Missing parameters"};
-                next();
-              }
-            });
-          });
           pool.query('SELECT * FROM paylah_url WHERE value = $1', [order_package.metadata.total_payment], (error, results) =>{
             if(error){
               request.user_response = {"Error": "Missing parameters"};
@@ -289,10 +279,21 @@ const submitOrder = (request, response, next) => {
               next();
             }
             else {
+              console.log("Paylah URL retrieved");
               request.user_response = {
                 "paylah_url":results.rows[0],
                 "receipt_id":receipt_id
               };
+              order_package.orders.forEach((order)=>{
+                // TODO: Status_id should start at 0; using 1 as placeholder while working with paylah api
+                pool.query('INSERT INTO orders(stall_id, item_id, customer_id, base_price, total_price, compulsory_options, optional_options, status_id, start_datetime, receipt_id, note) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', [order.stall_id, order.item_id, order_package.metadata.customer_id, order.base_price, order.total_price, order.compulsory_options, order.optional_options, 1, timestamp, receipt_id, order.note], (error, res) => {
+                  if(error){
+                    console.log(error);
+                    request.user_response = {"Error": "Missing parameters"};
+                    next();
+                  }
+                });
+              });
               next();
             }
           });
