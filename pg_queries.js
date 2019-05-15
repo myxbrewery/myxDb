@@ -59,7 +59,7 @@ const getStallOrders = (request, response) => {
 }
 
 const getLiveOrders = () => {
-  return pool.query("SELECT orders.id, orders.stall_id, orders.item_id, orders.customer_id, orders.total_price, orders.compulsory_options, orders.optional_options, orders.status_id, orders.start_datetime, orders.receipt_id, items.name, items.image_url, items.location_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id > 1 ORDER BY orders.start_datetime AND orders.start_datetime >= now()::date + interval '1h' DESC");
+  return pool.query("SELECT orders.id, orders.stall_id, orders.item_id, orders.customer_id, orders.total_price, orders.compulsory_options, orders.optional_options, orders.status_id, orders.start_datetime, orders.receipt_id, items.name, items.image_url, items.location_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.status_id > 1 AND orders.start_datetime >= now()::date + interval '1h' ORDER BY orders.start_datetime DESC");
 }
 
 const checkId = (request, response) => {
@@ -117,7 +117,9 @@ const getStallMenu = (request, response) => {
   const stallId = parseInt(request.params.id);
   pool.query('SELECT id as item_id, location_id, stall_id, name, in_stock, school_price, public_price, category, kcal, compulsory_options, optional_options, tags, image_url FROM items WHERE stall_id = $1 AND location_id = $2 ORDER BY id ASC', [stallId, stallLoc], (error, results)=>{
     if(error){
-      throw error;
+      console.log(error);
+      response.status(400).json({"message": error});
+      // throw error;
     }
     response.status(200).json(results.rows);
   });
@@ -129,7 +131,6 @@ const createCustomer = (request, response, next) => {
     if(error){
       console.log(error);
       response.status(400).json({"message":error});
-      throw error;
     }
     request.user_response = {
       "message":"Customer added successfully",
@@ -207,7 +208,6 @@ const verifyOrderValue = (order_package) => {
           }
           else{
             console.log("User-provided optional option is not in possible optional option choice");
-            console.log(option);
           }
         });
       }
@@ -217,8 +217,7 @@ const verifyOrderValue = (order_package) => {
     });
 
     if(metadata.client_type == "school"){
-      console.log(menu[location_id][stall_id])
-      console.log("Adding " + menu[location_id][stall_id][item_id].school_price);
+
       total_payment += parseFloat(menu[location_id][stall_id][item_id].school_price);
     }
     else if (metadata.client_type == "public"){
@@ -228,6 +227,7 @@ const verifyOrderValue = (order_package) => {
       return "Invalid client type"
     }
   });
+  total_payment = parseFloat(total_payment.toPrecision(7))
   console.log(`Server computed total cost: ${total_payment}`)
   console.log(`Client computed total cost: ${metadata.total_payment}`)
   if(total_payment != metadata.total_payment){
@@ -246,7 +246,6 @@ const submitOrder = (request, response, next) => {
   // for(var i=1;i<1000;i++){
   //   let pl_value = parseFloat(i)/10.0;
   //   let url="$"+pl_value;
-  //   console.log("Adding " + pl_value + " to db");
   //   pool.query('INSERT INTO paylah_url(value, url) VALUES ($1, $2)', [pl_value, url], (error, results)=>{});
   // }
   // Order price parsing is not done from customer end, for security purposes.
@@ -275,14 +274,15 @@ const submitOrder = (request, response, next) => {
             pool.query('INSERT INTO orders(stall_id, item_id, customer_id, base_price, total_price, compulsory_options, optional_options, status_id, start_datetime, receipt_id, note) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', [order.stall_id, order.item_id, order_package.metadata.customer_id, order.base_price, order.total_price, order.compulsory_options, order.optional_options, 2, timestamp, receipt_id, order.note], (error, res) => {
               if(error){
                 console.log(error);
-                throw error;
+                request.user_response = {"Error": "Missing parameters"};
+                next();
               }
             });
           });
           pool.query('SELECT * FROM paylah_url WHERE value = $1', [order_package.metadata.total_payment], (error, results) =>{
             if(error){
-              console.log(error);
-              throw error;
+              request.user_response = {"Error": "Missing parameters"};
+              next();
             }
             else if(results.rows.length == 0){
               request.user_response = {"Error": "Missing Paylah URL: " + order_package.metadata.total_payment};
@@ -346,7 +346,6 @@ const receiptPaid = (request, response, next) => {
 
 const getPaylahUrl = (request, response) => {
   const {payment_value} = parseFloat(request.params.cost);
-  console.log(payment_value);
   pool.query('SELECT * FROM paylah_url WHERE paylah_url.value = $1', [payment_value], (error, results) => {
     if(error){
       response.status(400).send({"Error": error.detail});

@@ -64,6 +64,19 @@ app.get('/', (request, response) =>{
   response.sendFile(__dirname + '/index.html');
 });
 
+app.get('/assets/images/:image_path', (request, response)=>{
+  console.log("dev_view requested")
+  let image_url = request.params.image_path;
+  console.log(image_url);
+  response.sendFile(__dirname + '/assets/images/' + image_url);
+});
+
+app.get('/assets/icons/:icon_path', (request, response)=>{
+  console.log("dev_view requested")
+  let icon_url = request.params.icon_path;
+  console.log(icon_url);
+  response.sendFile(__dirname + '/assets/icons/' + icon_url);
+});
 // dev functions
 app.get('/scripts/dev_view.js', (request, response)=>{
   console.log("dev_view requested")
