@@ -32,7 +32,7 @@ function randomOrder(){
             .then((respo)=>{
               // Between 1 to 5 items ordered
               num_to_order = Math.floor(Math.random()*5)+1;
-              customer_id = randElem([100, 101, 102, 103, 104, 105, 123, 123912321, 123912323]);
+              customer_id = randElem([100, 101, 102, 103, 104, 105]);
               order_payload = {
                 "metadata":{
                   "location_id": rand_location,

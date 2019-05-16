@@ -269,7 +269,7 @@ const submitOrder = (request, response, next) => {
         .then((results)=>{
           semaphore = false;
           var receipt_id = results.rows[0].id;
-          pool.query('SELECT * FROM paylah_url WHERE value = $1', [order_package.metadata.total_payment], (error, results) =>{
+          pool.query('SELECT * FROM paylah_url WHERE value = $1', [parseFloat((order_package.metadata.total_payment-0.2).toPrecision(7))], (error, results) =>{
             if(error){
               request.user_response = {"Error": "Missing parameters"};
               next();
@@ -347,7 +347,7 @@ const receiptPaid = (request, response, next) => {
 
 const getPaylahUrl = (request, response) => {
   const {payment_value} = parseFloat(request.params.cost);
-  pool.query('SELECT * FROM paylah_url WHERE paylah_url.value = $1', [payment_value], (error, results) => {
+  pool.query('SELECT * FROM paylah_url WHERE paylah_url.value = $1', [payment_value-0.2], (error, results) => {
     if(error){
       response.status(400).send({"Error": error.detail});
     }
