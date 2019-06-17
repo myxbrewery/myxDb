@@ -48,6 +48,17 @@ const getCustomers = (request, response) => {
   })
 }
 
+const getCustomerOrders = (request, response) => {
+  let id = request.params.customer_id;
+  console.log("Requesting Customer Orders for customer ", id);
+  pool.query('SELECT start_datetime, items.name, orders.total_price, orders.compulsory_options, orders.optional_options, orders.status_id, orders.receipt_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.customer_id=$1 ORDER BY start_datetime DESC', [id], (error, results)=>{
+    if(error){
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  })
+}
+
 const getStallOrders = (request, response) => {
   let id = request.params.id;
   pool.query('SELECT start_datetime, items.name, orders.total_price, orders.compulsory_options, orders.optional_options, orders.status_id, orders.receipt_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.stall_id=$1 ORDER BY start_datetime DESC', [id], (error, results)=>{
@@ -373,6 +384,7 @@ module.exports = {
   getPaylahUrl,
   getLiveOrders,
   getStallOrders,
+  getCustomerOrders,
   createCustomer,
   checkId,
   getCustomers,

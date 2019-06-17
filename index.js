@@ -38,6 +38,7 @@ socket_app.listen(11236);
 
 // <----- ROUTES ----->
 app.get('/orders/:location/:id', db.getStallOrders);
+app.get('/orders/:customer_id', db.getCustomerOrders);
 app.get('/customers', db.getCustomers);
 app.get('/checkId/:id', db.checkId);
 app.get('/locations', db.getLocations);
