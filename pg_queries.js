@@ -52,22 +52,25 @@ async function getLiveOrders(){
     return res;
 }
 
-const getCustomerOrders = (request, response) => {
-    let id = request.params.customer_id;
-    console.log("Requesting Customer Orders for customer ", id);
-    pool.query('SELECT start_datetime, items.name, orders.total_price, orders.compulsory_options, orders.optional_options, orders.status_id, orders.receipt_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.customer_id=$1 ORDER BY start_datetime DESC', [id], (error, results)=>{
-      if(error){
-        throw error;
-      }
-      response.status(200).json(results.rows);
+
+async function getCustomerOrders(request, response){
+    let customer_id = request.params.customer_id;
+    console.log("Requesting Customer Orders for customer", customer_id);
+    let all_orders = await getAllOrders();
+    let stalls = Object.keys(all_orders)
+    res = {}
+    stalls.forEach(stall=>{
+        let stall_orders = all_orders[stall]
+        stall_orders.forEach(stall_order=>{
+            if(stall_order.customer_id == customer_id){
+                if(!(stall in res)) res[stall] = []
+                res[stall].push(stall_order)
+            }
+        })
     })
-  }
-  
-const getStallOrders = (request, response) => {
-let id = request.params.id;
-pool.query('SELECT start_datetime, items.name, orders.total_price, orders.compulsory_options, orders.optional_options, orders.status_id, orders.receipt_id FROM orders INNER JOIN items ON items.id = orders.item_id AND items.stall_id = orders.stall_id WHERE orders.stall_id=$1 ORDER BY start_datetime DESC', [id], (error, results)=>{
-    if(error){
-    throw error;
+    response.status(200).send(res)
+}
+
 
 async function getAllOrders(){
     var stalls = await pool.query("SELECT * FROM stalls", [])
@@ -78,7 +81,6 @@ async function getAllOrders(){
             throw error;
         })
     var res = {}
-    // 'SELECT orders.id, orders.customer_id, orders.stall_id, start_datetime as time, receipt_id as receipt, items.name, total_price as price, status_id as status FROM orders INNER JOIN items ON orders.item_id = items.id AND orders.stall_id = items.stall_id'
     for (i in stalls){
         let row = stalls[i];
         let stall_uid = row.uid;
@@ -251,7 +253,7 @@ const getStallOrders = (request, response) => {
     let uid = request.params.uid;
     let pw_hash = request.params.pw_hash;
     let orders_table = uid+"_orders";
-    pool.query('SELECT * FROM $1', [orders_table], (error, results) =>{
+    pool.query(format('SELECT * FROM %I', orders_table), [], (error, results) =>{
         if(error) throw error;
         response.status(200).json(results.rows)
     });
@@ -1026,15 +1028,6 @@ const getPaylahUrl = (request, response) => {
     }
   })
 }
-
-// const getAllOrderDetails = (request, response) => {
-//   pool.query('SELECT orders.id, orders.customer_id, orders.stall_id, start_datetime as time, receipt_id as receipt, items.name, total_price as price, status_id as status FROM orders INNER JOIN items ON orders.item_id = items.id AND orders.stall_id = items.stall_id', [], (error, results)=>{
-//     if(error){
-//       throw error;
-//     }
-//     response.status(200).json(results.rows);
-//   });
-// }
 
 async function getAllOrderDetails(request, response){
     let res = await getAllOrders();
