@@ -42,7 +42,7 @@ app.get('/orders/customer/:customer_id', db.getCustomerOrders);
 app.get('/customers', db.getCustomers);
 app.get('/checkId/:id', db.checkId);
 app.get('/locations', db.getLocations);
-app.get('/stalls/:location', db.getStalls);
+app.get('/stalls', db.getStalls);
 app.get('/menu/:uid', db.getStallMenu);
 app.get('/paylah/:cost', db.getPaylahUrl);
 
@@ -56,8 +56,7 @@ var dbPoll = (request, response) =>{
 }
 
 app.post('/customer', [db.createCustomer, dbPoll]);
-app.post('/order', [db.submitOrder, dbPoll]);
-app.post('/new_order', [db.post_order, dbPoll]);
+app.post('/order', [db.post_order, dbPoll]);
 app.post('/menu', [db.upsertMenu]);
 
 app.put('/order', [db.transitionOrder, dbPoll]);
