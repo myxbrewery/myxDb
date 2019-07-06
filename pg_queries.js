@@ -124,12 +124,16 @@ const checkId = (request, response) => {
 // Get all stalls
 const getStalls = (request, response) => {
     let location = request.params.location;
-    var pg_res = "";
-    pool.query('SELECT * FROM stalls')
-    .then((error, results) => {
-        if(error) response.status(400).json({"message":error})
-        response.status(200).json(results.rows);
-    })
+    let res = pool.query('SELECT uid FROM stalls')
+        .catch(error=>{
+            console.log(error);
+            response.status(400).send({"message":"invalid db request"})
+        })
+        .then(res=>{
+            console.log(res.rows);
+            response.status(200).send(res.rows)
+        })
+    
 }
 
 const getLocations = (request, response) => {

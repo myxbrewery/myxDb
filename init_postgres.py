@@ -69,8 +69,8 @@ def execute_pg_query(query, args):
 # cur.copy_from(f, 'users', sep=',')
 # conn.commit()
 # Execute these within postgres
-# \copy locations(id, name, image_id, lat, long, aggregation) FROM '/home/tze/capstone/myxDb/data/locations.csv' DELIMITER ';' CSV HEADER;
-# \copy status(id, name) FROM '/home/tze/capstone/myxDb/data/status.csv' DELIMITER ';' CSV HEADER;
-# \copy stalls(location, name, open, halal, qr_link, opening_time, closing_time, image_url, icon_url, uid, card_settings, latest_menu_version, menu_history) FROM '/home/tze/capstone/myxDb/data/stalls.csv' DELIMITER ';' CSV HEADER;
+\copy locations(id, name, image_id, lat, long, aggregation) FROM '/home/tze/capstone/myxDb/data/locations.csv' DELIMITER ';' CSV HEADER;
+\copy status(id, name) FROM '/home/ubuntu/myxDb/data/status.csv' DELIMITER ';' CSV HEADER;
+\copy stalls(location, name, open, halal, qr_link, opening_time, closing_time, image_url, icon_url, uid, hashed_pw, card_settings, latest_menu_version, menu_history) FROM '/home/ubuntu/myxDb/data/stalls.csv' DELIMITER ';' CSV HEADER;
 
 # a = execute_pg_query("SELECT * FROM customers", ())
