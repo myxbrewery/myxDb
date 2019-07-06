@@ -133,6 +133,7 @@ function populateCards(demographic){
 }
 
 function advanceOrderStatus(order){
+  console.log(order)
   fetch("http://10.12.254.221:11235/order/", {
     method: 'PUT',
     headers: {
@@ -141,7 +142,8 @@ function advanceOrderStatus(order){
     },
     body: JSON.stringify({
       'status_id': order.status + 1,
-      'id': order.id
+      'id': order.id,
+      'uid': order.stall_id
     })
   });
 }
@@ -268,7 +270,7 @@ setInterval(()=>{
       return res.json();
     })
     .then(res=>main(res));
-}, 800)
+}, 500)
 
 // setInterval(populateCards("Customer"), 1000);
 // setInterval(populateCards("Stall"), 1000);

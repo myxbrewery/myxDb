@@ -1,6 +1,6 @@
-id,name,image_id,aggregation
-1,SUTD Canteen,,true
-2,Gom Gom,,false
-3,Montcalzone,,false
-4,Crooked Cooks,,false
-5,Gong Cha,,false
+id;name;image_id;lat;long;aggregation
+1;SUTD Canteen;;;;true
+2;Gom Gom;;;;false
+3;Montcalzone;;;;false
+4;Crooked Cooks;;;;false
+5;Gong Cha;;;;false

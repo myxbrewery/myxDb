@@ -1,282 +1,258 @@
-location_id|stall_id|id|name|in_stock|school_price|public_price|category|kcal|compulsory_options|optional_options|tags|image_url
-1|1|1|Boiled Chicken Rice|TRUE|3.5|4|1||{}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||https://mtc1-dydfxmh.netdna-ssl.com/wp-content/uploads/2016/08/22168498135_84560366eb_k-1300x866.jpg
-1|1|2|Roasted Chicken Rice|TRUE|3.5|4|1||{}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNsiwCrGaI3Awng2PICuZnqTYR3nMG8QcCPI5KTy-kLp3pceQz1w
-1|1|3|Char Siew Rice|TRUE|3.5|4|1||{}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||https://farm5.staticflickr.com/4704/38967855565_39737316a5_h.jpg
-1|1|4|Roasted Pork Rice|TRUE|3.5|4|1||{}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||https://kopitiam.gofoodpng.biz/wp-content/uploads/2017/08/Roast-Pork-Rice.jpg
-1|1|5|Char Siew Wanton Soup|TRUE|3.8|4.3|1||{"Choice of Noodles":{"Noodle":{"cost":0.0},"Kuay Teow":{"cost":0.0}}}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||https://i1.wp.com/angsarap.net/wp-content/uploads/2012/10/wonton-and-char-siu-pork-noodle-soup.jpg
-1|1|6|Char Siew Wanton Dry|TRUE|4|4.5|1||{"Choice of Noodles":{"Noodle":{"cost":0.0},"Kuay Teow":{"cost":0.0}}}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||https://3.bp.blogspot.com/-8wbV23ri8jQ/VzrE6PWimFI/AAAAAAADJwg/x1KJALoK03Qiv58j3BG1RgdLy0GUWBeOgCLcB/s1600/DSC_0091jk.JPG
-1|1|7|Boiled/Roasted Chicken Soup|TRUE|4|4.5|1||{"Choice of Noodles":{"Noodle":{"cost":0.0},"Kuay Teow":{"cost":0.0}}}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||https://omnivorescookbook.com/wp-content/uploads/2016/03/1603_Cantonese-Wonton-Noodle-Soup_004.jpg
-1|1|8|Boiled/Roasted Chicken Dry|TRUE|4|4.5|1||{"Choice of Noodles":{"Noodle":{"cost":0.0},"Kuay Teow":{"cost":0.0}}}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||http://lh4.ggpht.com/7hw2ajsBycXskMFf0Q9zjpO-z6bfFxQfiKtTTBR2FNllj8SonE2Q2wo98wMdtDFPyYdAColN3wrRVBz__CD8-qff=s800
-1|1|9|Roasted Duck Soup/Dry|TRUE|4.5|5|1||{"Options":{"Soup":{"cost":0.0},"Dry":{"cost":0.0}}}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|10|Roasted Duck Rice|TRUE|4|4.5|1||{}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|11|Assorted Mushroom Spinach Noodle Dry|TRUE|4|4.5|1||{}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|12|Roasted Pork Soup/Dry|TRUE|4|4.5|1||{"Options":{"Soup":{"cost":0.0},"Dry":{"cost":0.0}}}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|13|Macaroni Soup with Shredded Chicken|TRUE|3.8|4.3|1||{}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|14|Char Siew|TRUE|3|3.5|2||{"Size":{"Small":{"cost":0.0},"Medium":{"cost":0.5}}}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|15|Roast Pork|TRUE|3|3.5|2||{"Size":{"Small":{"cost":0.0},"Medium":{"cost":0.5}}}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|16|Boiled/Roasted Chicken|TRUE|3|3.5|2||{"Type of Chicken":{"Boiled":{"cost":0.0},"Roasted":{"cost":0.0}}}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|17|Boiled/Roasted Drumlet|TRUE|3.8|4.2|2||{"Type of Chicken":{"Boiled":{"cost":0.0},"Roasted":{"cost":0.0}}}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|18|Wanton Soup|TRUE|3|3.5|2||{}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|19|Deep Fried Wanton|TRUE|3|3.5|2||{}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|20|Bean Sprout with Sesame Sauce|TRUE|1.5|2|2||{}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|21|Chye Sim with Sesame|TRUE|1.5|2|2||{}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|22|Braised Egg|TRUE|0.6|0.8|2||{}|{}||
-1|1|23|Plain Noodles/Kuay Teow Soup|TRUE|1.5|2|2||{"Choice of Noodles":{"Noodle":{"cost":0.0},"Kuay Teow":{"cost":0.0}}}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|24|Plain Noodles/Kuay Teow Dry|TRUE|1.5|2|2||{"Choice of Noodles":{"Noodle":{"cost":0.0},"Kuay Teow":{"cost":0.0}}}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|25|Char Siew Noodle|TRUE|2.5|3|1||{}|{"Add Ons":{"rice":{"cost":0.5},"chicken":{"cost":0.5},"egg":{"cost":0.4}}}||
-1|1|26|Wanton Soup with Rice|TRUE|2.5|3|1||{}|{}||
-1|3|1|Ribeye Steak|TRUE|7|8|1||{"Tenderness":{"Rare":{"cost":0.0},"Medium-rare":{"cost":0.0},"Medium":{"cost":0.0},"Medium-well":{"cost":0.0},"Well Done":{"cost":0.0}}}|{}||
-1|3|2|Mixed Grilled|TRUE|7|8|1||{}|{}||
-1|3|3|Grilled Salmon|TRUE|7|8|1||{}|{}||
-1|3|4|Chicken Chop|TRUE|4.8|5.5|1||{}|{}||
-1|3|5|Chicken Teriyaki|TRUE|4.8|5.5|1||{}|{}||
-1|3|6|Chicken Cutlet|TRUE|4.8|5.5|1||{}|{}||
-1|3|7|Mexican Chicken Chop|TRUE|5|5.5|1||{}|{}||
-1|3|8|Fish & Chips|TRUE|5|5.5|1||{}|{}||
-1|3|9|Grilled Dory Fish|TRUE|5|5.5|1||{}|{}||
-1|3|10|Sausage Combo|TRUE|5|5.5|1||{}|{}||
-1|3|11|Spaghetti Chicken Bolognese|TRUE|4.5|5|1||{}|{}||
-1|3|12|Spaghetti Ham & Mushroom|TRUE|4.5|5|1||{}|{}||
-1|3|13|Spaghetti Grilled Dory Fish|TRUE|5|6|1||{}|{}||
-1|3|14|Spaghetti Breaded Fish|TRUE|5|6|1||{}|{}||
-1|3|15|Spaghetti Sausage|TRUE|5|6|1||{}|{}||
-1|3|16|Spaghetti Breaded Prawn|TRUE|5|6|1||{}|{}||
-1|3|17|Spaghetti Chicken Chop|TRUE|5|6|1||{}|{}||
-1|3|18|Spaghetti Chicken Cutlet|TRUE|5|6|1||{}|{}||
-1|3|19|Western Fried Rice Chicken Chop w/ Sunshine Egg|TRUE|4.5|5|1||{}|{}||
-1|3|20|Western Fried Rice Chicken Cutlet w/ Sunshine Egg|TRUE|4.5|5|1||{}|{}||
-1|3|21|Western Fried Rice Breaded Prawn w/ Sunshine Egg|TRUE|4.5|5|1||{}|{}||
-1|3|22|Western Fried Rice Grilled Dory Fish w/ Sunshine Egg|TRUE|4.5|5|1||{}|{}||
-1|3|23|Western Fried Rice Sausage w/ Sunshine Egg|TRUE|4.5|5|1||{}|{}||
-1|3|24|Western Fried Rice Breaded Fish w/ Sunshine Egg|TRUE|4.5|5|1||{}|{}||
-1|3|25|Western Fried Rice Chicken Wing w/ Sunshine Egg|TRUE|4.5|5|1||{}|{}||
-1|3|26|Crispy Chicken Rice w/ Coleslaw & Chicken Cube|TRUE|2.5|3.5|1||{}|{}||
-1|3|27|Grilled Chicken Rice|TRUE|5.5|6|1||{}|{}||
-1|3|28|Aglio Olio Chicken Chop|TRUE|5.5|6|1||{}|{}||
-1|3|29|Aglio Olio Chicken Cutlet|TRUE|5.5|6|1||{}|{}||
-1|3|30|Aglio Olio Ham & Mushroom|TRUE|4.5|5|1||{}|{}||
-1|3|31|Aglio Olio Grilled Doryfish|TRUE|5.5|6|1||{}|{}||
-1|3|32|Aglio Olio Breaded Fish|TRUE|5.5|6|1||{}|{}||
-1|3|33|Aglio Olio Sausage|TRUE|5.5|6|1||{}|{}||
-1|3|34|Tomato Seafood (Marinara Pasta)|TRUE|6|7|1||{}|{}||
-1|3|35|Aglio Olio (Seafood Pasta)|TRUE|6.5|7|1||{}|{}||
-1|3|36|Singapore Pasta (Prawn & Beancurd in Laksa Pasta)|TRUE|6.5|7|1||{}|{}||
-1|3|37|Roma Pasta|TRUE|6|6.5|1||{}|{}||
-1|3|38|Bangkok Pasta|TRUE|6.5|7|1||{}|{}||
-1|3|39|Breaded Prawn|TRUE|3.5|4|2||{}|{}||
-1|3|40|Crispy Chicken Rice w/ Coleslaw & Chicken Cube|TRUE|3|3.5|2||{}|{}||
-1|3|41|Half Spring Chicken w/ French Fries|TRUE|4.9|5.5|1||{}|{}||
-1|3|42|Chicken Wing|TRUE|1.3|1.3|2||{}|{}||
-1|3|43|Chicken/Fish Burger|TRUE|2.5|3|1||{}|{}||
-1|3|44|Breakfast Set (Ham},{ 2 Hot Dogs},{ 2 Buns},{ Egg},{ Red Bean & Coleslaw)|TRUE|5|5.5|1||{}|{}||
-1|3|45|Fried Rice|TRUE|1.5|1.5|3||{}|{}||
-1|3|46|Plain Rice|TRUE|0.6|0.6|3||{}|{}||
-1|3|47|Mash Potato|TRUE|2|2.5|3||{}|{}||
-1|3|48|Coleslaw|TRUE|2|2.5|3||{}|{}||
-1|3|49|French Fries|TRUE|2|2.5|3||{}|{}||
-1|3|50|Cheese Fries|TRUE|3|3.5|3||{}|{}||
-1|3|51|Mushroom Soup|TRUE|2.5|2.8|3||{}|{}||
-1|3|52|Egg|TRUE|0.6|0.6|3||{}|{}||
-1|3|53|Sausage Combo|TRUE|3|3|3||{}|{}||
-1|3|54|Onion Rings (10)|TRUE|3|3.5|3||{}|{}||
-1|3|55|Nuggets (6)|TRUE|3|3.5|3||{}|{}||
-1|3|56|Spaghetti Breaded Fish|TRUE|1.5|1.5|3||{}|{}||
-1|5|1|Hotplate Saba Fish Set|TRUE|4.9|5.5|1||{}|{}||
-1|5|2|Hotplate Chicken Set|TRUE|4.9|5.5|1||{}|{}||
-1|5|3|Hotplate Beef Set|TRUE|4.9|5.5|1||{}|{}||
-1|5|4|Hotplate Saba Fish + Chicken Set|TRUE|4.9|5.5|1||{}|{}||
-1|5|5|Bibimbap|TRUE|4.9|5.5|1||{}|{}||
-1|5|6|Beef Ramen|TRUE|4.5|5.5|1||{}|{}||
-1|5|7|Kimchi Rmaen|TRUE|4.5|5|1||{}|{}||
-1|5|8|Dumpling Ramen|TRUE|4.5|5|1||{}|{}||
-1|5|9|Kimchi Soup|TRUE|4.9|5.5|1||{}|{}||
-1|5|10|Fish Fillet Ramen|TRUE|4.5|5|1||{}|{}||
-1|5|11|Fried Rice|TRUE|4.5|5|1||{}|{}||
-1|5|12|Fry Ebi + Chicken Katsu Bento|TRUE|4.9|5.5|1||{}|{}||
-1|5|13|Chicken Katsu + Scallop Bento|TRUE|4.9|5.5|1||{}|{}||
-1|5|14|Fish Fillet + Chicken Katsu Bento|TRUE|4.9|5.5|1||{}|{}||
-1|5|15|Saba Fish + Chicken Katsu Bento|TRUE|4.9|5.5|1||{}|{}||
-1|5|16|Salmon Fish + Chicken Katsu Bento|TRUE|4.9|5.5|1||{}|{}||
-1|5|17|Salmon Fish + Prawn Ball Bento|TRUE|4.9|5.5|1||{}|{}||
-1|5|18|Fish Fillet + Fry Ebi Bento|TRUE|4.9|5.5|1||{}|{}||
-1|5|19|Chicken Katsu Set|TRUE|4.5|5|1||{}|{}||
-1|5|20|Chicken Katsu Japanese Curry Rice|TRUE|4.9|5.5|1||{}|{}||
-1|5|21|Chicken Katsu + Prawn Ball Bento|TRUE|4.9|5.5|1||{}|{}||
-1|5|22|Fish Fillet Rice|TRUE|2.5|999|1||{}|{}||
-1|5|23|Vegetable Ramen|TRUE|2.5|999|1||{}|{}||
-1|7|1|Watermelon|TRUE|0.8|0.9|6|50|{}|{}||
-1|7|2|Papaya|TRUE|0.8|0.9|6|50|{}|{}||
-1|7|3|Pineapple|TRUE|0.8|0.9|6|50|{}|{}||
-1|7|4|Honeydew|TRUE|0.8|0.9|6|75|{}|{}||
-1|7|5|Rockmelon|TRUE|1|1.1|6|75|{}|{}||
-1|7|6|Orange (Peeled)|TRUE|0.9|1|6|50|{}|{}||
-1|7|7|Apple (Sliced)|TRUE|9|1|6|25|{}|{}||
-1|7|8|Apple (Whole)|TRUE|1|1.1|6|75|{}|{}||
-1|7|9|Banana|TRUE|0.7|0.8|6|100|{}|{}||
-1|7|10|Banana (Large)|TRUE|0.9|1|6|150|{}|{}||
-1|7|11|Guava|TRUE|1|1.1|6|50|{}|{}||
-1|7|12|Pear|TRUE|0.9|1|6|100|{}|{}||
-1|7|13|Kiwi|TRUE|1.2|1.3|6|50|{}|{}||
-1|7|14|Dragonfruit (White)|TRUE|1|1.1|6|50|{}|{}||
-1|7|15|Dragonfruit (Red)|TRUE|1|1.1|6|50|{}|{}||
-1|7|16|Agar Agar|TRUE|0.9|1|5|100|{}|{}||
-1|7|17|Mixed Fruit Cup|TRUE|1.8|2|6|100|{}|{}||
-1|7|18|ABC Fruit Juice|TRUE|2|2.2|4|48|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|19|Watermelon Juice|TRUE|1.6|1.8|4|55|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|20|Papaya Juice|TRUE|1.4|1.5|4|53|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|21|Pineapple Juice|TRUE|1.4|1.5|4|78|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|22|Honeydew Juice|TRUE|1.4|1.5|4|95|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|23|Orange Juice|TRUE|1.8|2|4|83|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|24|Apple Juice|TRUE|1.8|2|4|100|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|25|Kiwi Juice|TRUE|1.6|1.8|4|98|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|26|Pear Juice|TRUE|1.6|1.8|4|100|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|27|Carrot Juice|TRUE|1.8|2|4|55|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|28|Guava Juice|TRUE|1.6|1.8|4|55|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|29|Avocado Juice|TRUE|1.8|2|4|200|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|30|Soursop Juice|TRUE|1.8|2|4|150|{}|{"Options":{"No Ice":{"cost":0.5},"Add Milk":{"cost":0.5}}}||
-1|7|31|Vitagen|TRUE|0.7|0.8|4|70|{}|{}||
-1|7|32|Ice Lemon Tea|TRUE|1.2|1.3|4|100|{}|{}||
-1|7|33|Longan|TRUE|1.2|1.3|4|100|{}|{}||
-1|7|34|Luo Han Guo|TRUE|1.2|1.3|4|16|{}|{}||
-1|7|35|Barley|TRUE|1.2|1.3|4|54|{}|{}||
-1|7|36|Grass Jelly|TRUE|1.2|1.3|4|55|{}|{}||
-1|7|37|Chrysanthemum Tea|TRUE|1.2|1.3|4|73|{}|{}||
-1|7|38|Green Bean|TRUE|1.2|1.3|4|138|{}|{}||
-1|7|39|Homemade Soya Bean Drink|TRUE|1.2|1.3|4|183|{}|{}||
-1|7|40|Soya Beancurd|TRUE|1.2|1.3|4|83|{}|{}||
-1|7|41|(Canopy) 500ml Drinking Water|TRUE|1|1.1|4|0|{}|{}||
-1|7|42|Coffee O|TRUE|0.6|0.7|4|85|{}|{}||
-1|7|43|Coffee|TRUE|0.7|0.8|4|116|{}|{}||
-1|7|44|Coffee C|TRUE|0.8|0.9|4|103|{}|{}||
-1|7|45|Coffee O Ice|TRUE|0.9|1|4|85|{}|{"Options":{"Upsize":{"cost":0.4}}}||
-1|7|46|Coffee Ice|TRUE|1|1.1|4|116|{}|{"Options":{"Upsize":{"cost":0.4}}}||
-1|7|47|Coffee C Ice|TRUE|1.1|1.2|4|103|{}|{"Options":{"Upsize":{"cost":0.4}}}||
-1|7|48|Tea O|TRUE|0.7|0.8|4|85|{}|{}||
-1|7|49|Tea|TRUE|0.8|0.9|4|116|{}|{}||
-1|7|50|Tea C|TRUE|0.9|1|4|103|{}|{}||
-1|7|51|Tea O Ice|TRUE|1|1.1|4|85|{}|{"Options":{"Upsize":{"cost":0.4}}}||
-1|7|52|Tea Ice|TRUE|1.1|1.2|4|116|{}|{"Options":{"Upsize":{"cost":0.4}}}||
-1|7|53|Tea C Ice|TRUE|1.2|1.3|4|107|{}|{"Options":{"Upsize":{"cost":0.4}}}||
-1|7|54|Cocoa O|TRUE|0.7|0.8|4|95|{}|{}||
-1|7|55|Cocoa|TRUE|0.8|0.9|4|120|{}|{}||
-1|7|56|Cocoa C|TRUE|0.9|1|4|107|{}|{}||
-1|7|57|Cocoa O Ice|TRUE|1|1.1|4|95|{}|{"Options":{"Upsize":{"cost":0.5}}}||
-1|7|58|Cocoa Ice|TRUE|1.1|1.2|4|120|{}|{"Options":{"Upsize":{"cost":0.5}}}||
-1|7|59|Cocoa C Ice|TRUE|1.2|1.3|4|107|{}|{"Options":{"Upsize":{"cost":0.5}}}||
-1|7|60|Horlick O|TRUE|0.7|0.8|4|95|{}|{}||
-1|7|61|Horlick|TRUE|0.8|0.9|4|120|{}|{}||
-1|7|62|Horlick C|TRUE|0.9|1|4|107|{}|{}||
-1|7|63|Horlick O Ice|TRUE|1|1.1|4|95|{}|{"Options":{"Upsize":{"cost":0.5}}}||
-1|7|64|Horlick Ice|TRUE|1.1|1.2|4|120|{}|{"Options":{"Upsize":{"cost":0.5}}}||
-1|7|65|Horlick C Ice|TRUE|1.2|1.3|4|107|{}|{"Options":{"Upsize":{"cost":0.5}}}||
-1|7|66|Cocoa + Coffee Ice|TRUE|1.1|1.2|4|137|{}|{"Options":{"Upsize":{"cost":0.5}}}||
-1|7|67|Cocoa + Tea Ice|TRUE|1.2|1.3|4|138|{}|{"Options":{"Upsize":{"cost":0.5}}}||
-1|7|68|Cocoa + Horlick Ice|TRUE|1.3|1.4|4|148|{}|{"Options":{"Upsize":{"cost":0.5}}}||
-1|7|69|Cocoa Dinosaur|TRUE|2.5|2.8|4|357|{}|{"Options":{"Upsize":{"cost":0.5}}}||
-1|7|70|Yuan Yang|TRUE|0.8|0.9|4|150|{}|{}||
-1|7|71|Yuan Yang Ice|TRUE|1.4|1.5|4|150|{}|{"Options":{"Upsize":{"cost":0.4}}}||
-1|7|72|Hot Water|TRUE|0.2|0.3|4|0|{}|{}||
-1|7|73|Ice Water|TRUE|0.3|0.4|4|0|{}|{}||
-1|7|74|Chinese Tea|TRUE|0.6|0.7|4|0|{}|{}||
-1|7|75|Tea Halia|TRUE|1.1|1.2|4|74|{}|{}||
-1|7|76|Ginger Water|TRUE|0.6|0.7|4|0|{}|{}||
-1|7|77|Ginger Water Ice|TRUE|1|1.1|4|0|{}|{"Options":{"Upsize":{"cost":0.5}}}||
-1|7|78|Hot Chrysanthemum|TRUE|0.6|0.7|4|10|{}|{}||
-1|7|79|Canned Drinks – 300ml|TRUE|1.4|1.5|4|0|{}|{}||
-1|7|80|Bottled Drinks – 500ml|TRUE|1.5|1.6|4|0|{}|{}||
-1|7|81|Carton Drinks|TRUE|1.4|1.5|4|0|{}|{}||
-1|7|82|Tissue|TRUE|0.3|0.4|9||{}|{}||
-1|7|83|Set A (Toast Bread + Eggs + Coffee/Tea)|TRUE|2.5|2.8|1|536|{"Drink":{"Coffee":{"cost":0.0},"Tea":{"cost":0.0}}}|{}||
-1|7|84|Set B (Apollo Bun + Eggs + Coffee/Tea)|TRUE|2.8|3|1|448|{"Drink":{"Coffee":{"cost":0.0},"Tea":{"cost":0.0}}}|{}||
-1|7|85|Set C (Thick Toast + Eggs + Coffee/Tea)|TRUE|2.8|3|1|455|{"Drink":{"Coffee":{"cost":0.0},"Tea":{"cost":0.0}}}|{}||
-1|7|86|Set D (Canopy Cream Cracker + Eggs + Coffee/Tea)|TRUE|2.8|3|1|475|{"Drink":{"Coffee":{"cost":0.0},"Tea":{"cost":0.0}}}|{}||
-1|7|87|Apollo Bun Bread|TRUE|1|1.1|2|186|{}|{}||
-1|7|88|Half Boiled Omega Egg (2 Pcs)|TRUE|1.2|1.3|2|73|{}|{}||
-1|7|89|Normal Half Boiled Egg (2 Pcs)|TRUE|1|1.1|2|73|{}|{}||
-1|7|90|Sandwich (Normal/Wholemeal)|TRUE|1.6|1.8|1|350|{"Bread":{"Normal":{"cost":0.0},"Wholemeal":{"cost":0.0}}}|{}||
-1|7|91|Toasted Bread (Normal/Wholemeal)|TRUE|1|1.1|2|137|{"Bread":{"Normal":{"cost":0.0},"Wholemeal":{"cost":0.0}}}|{}||
-1|7|92|Thick Toast|TRUE|1.2|1.3|2|139|{}|{}||
-1|7|93|Canopy Cream Cracker|TRUE|0.7|0.8|2|71|{}|{}||
-1|7|94|Siew Mai|TRUE|0.7|0.8|2|30|{}|{}||
-1|7|95|Lian Yong Pau|TRUE|0.8|0.9|2|200|{}|{}||
-1|7|96|Small Pau|TRUE|0.8|0.9|2|200|{}|{}||
-1|7|97|Veg Pau|TRUE|1|0.1|2|250|{}|{}||
-1|7|98|Char Siew Pau|TRUE|0.8|0.9|2|400|{}|{}||
-1|7|99|Curry Pau|TRUE|0.8|0.9|2|250|{}|{}||
-1|7|100|Sweet Corn Pau|TRUE|0.9|1|2|200|{}|{}||
-1|7|101|Red Bean Paste Pau (Tau Sar)|TRUE|0.8|0.9|2|200|{}|{}||
-1|7|102|Yam Pau|TRUE|0.8|0.9|2|200|{}|{}||
-1|7|103|Chicken Pau|TRUE|1.4|1.5|2|250|{}|{}||
-1|7|104|Big (Tai) Pau|TRUE|1.4|1.5|2|400|{}|{}||
-1|7|105|Fan Choy|TRUE|1.6|1.7|2|300|{}|{}||
-1|7|106|Lor Mai Kai|TRUE|1.4|1.5|2|400|{}|{}||
-1|8|1|Plain Waffle|TRUE|1|1.2|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|2|Butter Waffle|TRUE|1.3|1.5|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|3|Blueberry Waffle|TRUE|1.3|1.5|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|4|Strawberry Waffle|TRUE|1.3|1.5|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|5|Pandan Kaya Waffle|TRUE|1.3|1.5|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|6|Chocolate Waffle|TRUE|1.4|1.6|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|7|Nutella Waffle|TRUE|1.8|2|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|8|Butter Cinnamon Waffle|TRUE|1.4|1.6|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|9|Strawberry Sprinkles Waffle|TRUE|1.5|1.7|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|10|Honey Waffle|TRUE|1.5|1.7|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|11|Choc & Nuts Waffle|TRUE|1.6|1.8|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|12|Cream Cheese & Chocolate Chips Waffle|TRUE|2|2.2|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|13|Cookies & Cream Waffle|TRUE|2|2.2|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|14|Milk Cereal Waffle|TRUE|2|2.2|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|15|Ham & Cheese Waffle|TRUE|2.2|2.6|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|16|Chocolate Banana Waffle|TRUE|1.9|2.1|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|17|Nutella Banana Waffle|TRUE|2.3|2.5|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|18|Tuna Mayo Waffle|TRUE|2.2|2.6|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|19|Durian Waffle|TRUE|2|2.2|2||{}|{"Toppings":{"Sprinkles":{"cost":0.3},"Cinnamon":{"cost":0.3},"Butter":{"cost":0.3},"Chocolate Chips":{"cost":0.3},"Cheese":{"cost":0.5},"Ham":{"cost":0.5},"Tuna":{"cost":0.5},"Nutella":{"cost":0.5}}}||
-1|8|20|Butter Salt Corn Cup|TRUE|1.6|1.9|2||{}|{}||
-1|8|21|Chocolate Salt Corn Cup|TRUE|1.9|2.3|2||{}|{}||
-1|8|22|Butter Salt Milk Corn Cup|TRUE|1.9|2.3|2||{}|{}||
-1|8|23|Takoyaki (3)|TRUE|2|2.4|2||{}|{}||
-1|8|24|Takoyaki (4)|TRUE|2.5|3|2||{}|{}||
-1|8|25|Octopus Takoyaki|TRUE|||||{}|{}||
-1|8|26|Ham Takoyaki|TRUE|||||{}|{}||
-1|8|27|Crabstick Takoyaki|TRUE|||||{}|{}||
-1|8|28|Prawn Takoyaki|TRUE|||||{}|{}||
-1|9|1|Lontong|TRUE|3||1||{}|{}||
-1|9|2|Mee Rebus|TRUE|3||1||{}|{}||
-1|9|3|Mee Soto|TRUE|3||1||{}|{}||
-1|9|4|Mee Bakso|TRUE|3||1||{}|{}||
-1|9|5|Mee Siam|TRUE|3||1||{}|{}||
-1|9|6|Chicken Porridge|TRUE|2.5||1||{}|{}||
-1|9|7|Bee Hoon + Egg|TRUE|2.5||1||{}|{}||
-1|9|8|Fried Rice + Egg|TRUE|2.5||1||{}|{}||
-1|9|9|Nasi Ayam Penyet|TRUE|4.5||1||{}|{}||
-1|9|10|Nasi Lemak Banana Leaf|TRUE|2||1||{}|{}||
-1|9|11|Rice + 2 Meat + 2 Veg/Side|TRUE|4.5||1||{}|{}||
-1|9|12|Rice + 1 Meat + 2 Veg/Side|TRUE|3.5||1||{}|{}||
-1|9|13|Rice + 2 Meat + 1 Veg//Side|TRUE|4||1||{}|{}||
-1|9|14|Nasi Padang Fish|TRUE|2.5||3||{}|{}||
-1|9|15|Nasi Padang Sliced Fish|TRUE|2||3||{}|{}||
-1|9|16|Nasi Padang Chicken|TRUE|1.8||3||{}|{}||
-1|9|17|Nasi Padang Beef|TRUE|2.5||3||{}|{}||
-1|9|18|Nasi Padang Mutton|TRUE|2.8||3||{}|{}||
-1|9|19|Nasi Padang Sotong|TRUE|2||3||{}|{}||
-1|9|20|Nasi Padang Prawn|TRUE|2.5||3||{}|{}||
-1|9|21|Nasi Padang Sardine|TRUE|2||3||{}|{}||
-1|9|22|Vegetable|TRUE|0.7||3||{}|{}||
-1|9|23|Egg/Tau Foo|TRUE|0.7||3||{}|{}||
-1|9|24|Fish Cake/Ball|TRUE|0.7||3||{}|{}||
-1|9|25|Sausage/Bagedil|TRUE|0.7||3||{}|{}||
-1|9|26|Anchovies|TRUE|1||2||{}|{}||
-1|9|27|Chicken Parts|TRUE|1||2||{}|{}||
-1|9|28|Sambal Goreng|TRUE|1||2||{}|{}||
-1|9|29|Terung Belado|TRUE|1||2||{}|{}||
-1|9|30|Curry Puff (3)|TRUE|1|1.2|2||{}|{}||
-1|9|31|Sambosa (3)|TRUE|1|1.2|2||{}|{}||
-1|9|32|Popiah (3)|TRUE|1|1.2|2||{}|{}||
-1|9|33|Doughnut (3)|TRUE|1|1.2|2||{}|{}||
-1|9|34|Green Bean (3)|TRUE|1|1.2|2||{}|{}||
-1|9|35|Goreng Pisang (3)|TRUE|1|1.2|2||{}|{}||
-1|9|36|Curry Puff|TRUE|0.4|0.4|2||{}|{}||
-1|9|37|Sambosa|TRUE|0.4|0.4|2||{}|{}||
-1|9|38|Popiah|TRUE|0.4|0.4|2||{}|{}||
-1|9|39|Doughnut|TRUE|0.4|0.4|2||{}|{}||
-1|9|40|Green Bean|TRUE|0.4|0.4|2||{}|{}||
-1|9|41|Goreng Pisang|TRUE|0.4|0.4|2||{}|{}||
-1|9|42|Nyonya Kueh|TRUE|0.4|0.6|2||{}|{}||
+CREATE TABLE ch1ck3n_menu(name VARCHAR NOT NULL, category VARCHAR NOT NULL, in_stock BOOL NOT NULL, in_menu BOOL NOT NULL, base_price NUMERIC NOT NULL, compulsory_options JSON, optional_options JSON, image_url VARCHAR, menu_version INTEGER)
+
+stall_id;name;in_stock;in_menu;base_price;compulsory_options;optional_options;image_url
+3;Ribeye Steak;TRUE;TRUE;7;"{""Tenderness"":{""Rare"":{""cost"":0.0},""Medium-rare"":{""cost"":0.0},""Medium"":{""cost"":0.0},""Medium-well"":{""cost"":0.0},""Well Done"":{""cost"":0.0}}}";{};
+3;Mixed Grilled;TRUE;TRUE;7;{};{};
+3;Grilled Salmon;TRUE;TRUE;7;{};{};
+3;Chicken Chop;TRUE;TRUE;4.8;{};{};
+3;Chicken Teriyaki;TRUE;TRUE;4.8;{};{};
+3;Chicken Cutlet;TRUE;TRUE;4.8;{};{};
+3;Mexican Chicken Chop;TRUE;TRUE;5;{};{};
+3;Fish & Chips;TRUE;TRUE;5;{};{};
+3;Grilled Dory Fish;TRUE;TRUE;5;{};{};
+3;Sausage Combo;TRUE;TRUE;5;{};{};
+3;Spaghetti Chicken Bolognese;TRUE;TRUE;4.5;{};{};
+3;Spaghetti Ham & Mushroom;TRUE;TRUE;4.5;{};{};
+3;Spaghetti Grilled Dory Fish;TRUE;TRUE;5;{};{};
+3;Spaghetti Breaded Fish;TRUE;TRUE;5;{};{};
+3;Spaghetti Sausage;TRUE;TRUE;5;{};{};
+3;Spaghetti Breaded Prawn;TRUE;TRUE;5;{};{};
+3;Spaghetti Chicken Chop;TRUE;TRUE;5;{};{};
+3;Spaghetti Chicken Cutlet;TRUE;TRUE;5;{};{};
+3;Western Fried Rice Chicken Chop w/ Sunshine Egg;TRUE;TRUE;4.5;{};{};
+3;Western Fried Rice Chicken Cutlet w/ Sunshine Egg;TRUE;TRUE;4.5;{};{};
+3;Western Fried Rice Breaded Prawn w/ Sunshine Egg;TRUE;TRUE;4.5;{};{};
+3;Western Fried Rice Grilled Dory Fish w/ Sunshine Egg;TRUE;TRUE;4.5;{};{};
+3;Western Fried Rice Sausage w/ Sunshine Egg;TRUE;TRUE;4.5;{};{};
+3;Western Fried Rice Breaded Fish w/ Sunshine Egg;TRUE;TRUE;4.5;{};{};
+3;Western Fried Rice Chicken Wing w/ Sunshine Egg;TRUE;TRUE;4.5;{};{};
+3;Crispy Chicken Rice w/ Coleslaw & Chicken Cube;TRUE;TRUE;2.5;{};{};
+3;Grilled Chicken Rice;TRUE;TRUE;5.5;{};{};
+3;Aglio Olio Chicken Chop;TRUE;TRUE;5.5;{};{};
+3;Aglio Olio Chicken Cutlet;TRUE;TRUE;5.5;{};{};
+3;Aglio Olio Ham & Mushroom;TRUE;TRUE;4.5;{};{};
+3;Aglio Olio Grilled Doryfish;TRUE;TRUE;5.5;{};{};
+3;Aglio Olio Breaded Fish;TRUE;TRUE;5.5;{};{};
+3;Aglio Olio Sausage;TRUE;TRUE;5.5;{};{};
+3;Tomato Seafood (Marinara Pasta);TRUE;TRUE;6;{};{};
+3;Aglio Olio (Seafood Pasta);TRUE;TRUE;6.5;{};{};
+3;Singapore Pasta (Prawn & Beancurd in Laksa Pasta);TRUE;TRUE;6.5;{};{};
+3;Roma Pasta;TRUE;TRUE;6;{};{};
+3;Bangkok Pasta;TRUE;TRUE;6.5;{};{};
+3;Breaded Prawn;TRUE;TRUE;3.5;{};{};
+3;Crispy Chicken Rice w/ Coleslaw & Chicken Cube;TRUE;TRUE;3;{};{};
+3;Half Spring Chicken w/ French Fries;TRUE;TRUE;4.9;{};{};
+3;Chicken Wing;TRUE;TRUE;1.3;{};{};
+3;Chicken/Fish Burger;TRUE;TRUE;2.5;{};{};
+3;Breakfast Set (Ham},{ 2 Hot Dogs},{ 2 Buns},{ Egg},{ Red Bean & Coleslaw);TRUE;TRUE;5;{};{};
+3;Fried Rice;TRUE;TRUE;1.5;{};{};
+3;Plain Rice;TRUE;TRUE;0.6;{};{};
+3;Mash Potato;TRUE;TRUE;2;{};{};
+3;Coleslaw;TRUE;TRUE;2;{};{};
+3;French Fries;TRUE;TRUE;2;{};{};
+3;Cheese Fries;TRUE;TRUE;3;{};{};
+3;Mushroom Soup;TRUE;TRUE;2.5;{};{};
+3;Egg;TRUE;TRUE;0.6;{};{};
+3;Sausage Combo;TRUE;TRUE;3;{};{};
+3;Onion Rings (10);TRUE;TRUE;3;{};{};
+3;Nuggets (6);TRUE;TRUE;3;{};{};
+3;Spaghetti Breaded Fish;TRUE;TRUE;1.5;{};{};
+5;Hotplate Saba Fish Set;TRUE;TRUE;4.9;{};{};
+5;Hotplate Chicken Set;TRUE;TRUE;4.9;{};{};
+5;Hotplate Beef Set;TRUE;TRUE;4.9;{};{};
+5;Hotplate Saba Fish + Chicken Set;TRUE;TRUE;4.9;{};{};
+5;Bibimbap;TRUE;TRUE;4.9;{};{};
+5;Beef Ramen;TRUE;TRUE;4.5;{};{};
+5;Kimchi Rmaen;TRUE;TRUE;4.5;{};{};
+5;Dumpling Ramen;TRUE;TRUE;4.5;{};{};
+5;Kimchi Soup;TRUE;TRUE;4.9;{};{};
+5;Fish Fillet Ramen;TRUE;TRUE;4.5;{};{};
+5;Fried Rice;TRUE;TRUE;4.5;{};{};
+5;Fry Ebi + Chicken Katsu Bento;TRUE;TRUE;4.9;{};{};
+5;Chicken Katsu + Scallop Bento;TRUE;TRUE;4.9;{};{};
+5;Fish Fillet + Chicken Katsu Bento;TRUE;TRUE;4.9;{};{};
+5;Saba Fish + Chicken Katsu Bento;TRUE;TRUE;4.9;{};{};
+5;Salmon Fish + Chicken Katsu Bento;TRUE;TRUE;4.9;{};{};
+5;Salmon Fish + Prawn Ball Bento;TRUE;TRUE;4.9;{};{};
+5;Fish Fillet + Fry Ebi Bento;TRUE;TRUE;4.9;{};{};
+5;Chicken Katsu Set;TRUE;TRUE;4.5;{};{};
+5;Chicken Katsu Japanese Curry Rice;TRUE;TRUE;4.9;{};{};
+5;Chicken Katsu + Prawn Ball Bento;TRUE;TRUE;4.9;{};{};
+5;Fish Fillet Rice;TRUE;TRUE;2.5;{};{};
+5;Vegetable Ramen;TRUE;TRUE;2.5;{};{};
+7;Watermelon;TRUE;TRUE;0.8;{};{};
+7;Papaya;TRUE;TRUE;0.8;{};{};
+7;Pineapple;TRUE;TRUE;0.8;{};{};
+7;Honeydew;TRUE;TRUE;0.8;{};{};
+7;Rockmelon;TRUE;TRUE;1;{};{};
+7;Orange (Peeled);TRUE;TRUE;0.9;{};{};
+7;Apple (Sliced);TRUE;TRUE;9;{};{};
+7;Apple (Whole);TRUE;TRUE;1;{};{};
+7;Banana;TRUE;TRUE;0.7;{};{};
+7;Banana (Large);TRUE;TRUE;0.9;{};{};
+7;Guava;TRUE;TRUE;1;{};{};
+7;Pear;TRUE;TRUE;0.9;{};{};
+7;Kiwi;TRUE;TRUE;1.2;{};{};
+7;Dragonfruit (White);TRUE;TRUE;1;{};{};
+7;Dragonfruit (Red);TRUE;TRUE;1;{};{};
+7;Agar Agar;TRUE;TRUE;0.9;{};{};
+7;Mixed Fruit Cup;TRUE;TRUE;1.8;{};{};
+7;ABC Fruit Juice;TRUE;TRUE;2;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Watermelon Juice;TRUE;TRUE;1.6;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Papaya Juice;TRUE;TRUE;1.4;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Pineapple Juice;TRUE;TRUE;1.4;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Honeydew Juice;TRUE;TRUE;1.4;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Orange Juice;TRUE;TRUE;1.8;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Apple Juice;TRUE;TRUE;1.8;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Kiwi Juice;TRUE;TRUE;1.6;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Pear Juice;TRUE;TRUE;1.6;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Carrot Juice;TRUE;TRUE;1.8;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Guava Juice;TRUE;TRUE;1.6;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Avocado Juice;TRUE;TRUE;1.8;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Soursop Juice;TRUE;TRUE;1.8;{};"{""Options"":{""No Ice"":{""cost"":0.5},""Add Milk"":{""cost"":0.5}}}";
+7;Vitagen;TRUE;TRUE;0.7;{};{};
+7;Ice Lemon Tea;TRUE;TRUE;1.2;{};{};
+7;Longan;TRUE;TRUE;1.2;{};{};
+7;Luo Han Guo;TRUE;TRUE;1.2;{};{};
+7;Barley;TRUE;TRUE;1.2;{};{};
+7;Grass Jelly;TRUE;TRUE;1.2;{};{};
+7;Chrysanthemum Tea;TRUE;TRUE;1.2;{};{};
+7;Green Bean;TRUE;TRUE;1.2;{};{};
+7;Homemade Soya Bean Drink;TRUE;TRUE;1.2;{};{};
+7;Soya Beancurd;TRUE;TRUE;1.2;{};{};
+7;(Canopy) 500ml Drinking Water;TRUE;TRUE;1;{};{};
+7;Coffee O;TRUE;TRUE;0.6;{};{};
+7;Coffee;TRUE;TRUE;0.7;{};{};
+7;Coffee C;TRUE;TRUE;0.8;{};{};
+7;Coffee O Ice;TRUE;TRUE;0.9;{};"{""Options"":{""Upsize"":{""cost"":0.4}}}";
+7;Coffee Ice;TRUE;TRUE;1;{};"{""Options"":{""Upsize"":{""cost"":0.4}}}";
+7;Coffee C Ice;TRUE;TRUE;1.1;{};"{""Options"":{""Upsize"":{""cost"":0.4}}}";
+7;Tea O;TRUE;TRUE;0.7;{};{};
+7;Tea;TRUE;TRUE;0.8;{};{};
+7;Tea C;TRUE;TRUE;0.9;{};{};
+7;Tea O Ice;TRUE;TRUE;1;{};"{""Options"":{""Upsize"":{""cost"":0.4}}}";
+7;Tea Ice;TRUE;TRUE;1.1;{};"{""Options"":{""Upsize"":{""cost"":0.4}}}";
+7;Tea C Ice;TRUE;TRUE;1.2;{};"{""Options"":{""Upsize"":{""cost"":0.4}}}";
+7;Cocoa O;TRUE;TRUE;0.7;{};{};
+7;Cocoa;TRUE;TRUE;0.8;{};{};
+7;Cocoa C;TRUE;TRUE;0.9;{};{};
+7;Cocoa O Ice;TRUE;TRUE;1;{};"{""Options"":{""Upsize"":{""cost"":0.5}}}";
+7;Cocoa Ice;TRUE;TRUE;1.1;{};"{""Options"":{""Upsize"":{""cost"":0.5}}}";
+7;Cocoa C Ice;TRUE;TRUE;1.2;{};"{""Options"":{""Upsize"":{""cost"":0.5}}}";
+7;Horlick O;TRUE;TRUE;0.7;{};{};
+7;Horlick;TRUE;TRUE;0.8;{};{};
+7;Horlick C;TRUE;TRUE;0.9;{};{};
+7;Horlick O Ice;TRUE;TRUE;1;{};"{""Options"":{""Upsize"":{""cost"":0.5}}}";
+7;Horlick Ice;TRUE;TRUE;1.1;{};"{""Options"":{""Upsize"":{""cost"":0.5}}}";
+7;Horlick C Ice;TRUE;TRUE;1.2;{};"{""Options"":{""Upsize"":{""cost"":0.5}}}";
+7;Cocoa + Coffee Ice;TRUE;TRUE;1.1;{};"{""Options"":{""Upsize"":{""cost"":0.5}}}";
+7;Cocoa + Tea Ice;TRUE;TRUE;1.2;{};"{""Options"":{""Upsize"":{""cost"":0.5}}}";
+7;Cocoa + Horlick Ice;TRUE;TRUE;1.3;{};"{""Options"":{""Upsize"":{""cost"":0.5}}}";
+7;Cocoa Dinosaur;TRUE;TRUE;2.5;{};"{""Options"":{""Upsize"":{""cost"":0.5}}}";
+7;Yuan Yang;TRUE;TRUE;0.8;{};{};
+7;Yuan Yang Ice;TRUE;TRUE;1.4;{};"{""Options"":{""Upsize"":{""cost"":0.4}}}";
+7;Hot Water;TRUE;TRUE;0.2;{};{};
+7;Ice Water;TRUE;TRUE;0.3;{};{};
+7;Chinese Tea;TRUE;TRUE;0.6;{};{};
+7;Tea Halia;TRUE;TRUE;1.1;{};{};
+7;Ginger Water;TRUE;TRUE;0.6;{};{};
+7;Ginger Water Ice;TRUE;TRUE;1;{};"{""Options"":{""Upsize"":{""cost"":0.5}}}";
+7;Hot Chrysanthemum;TRUE;TRUE;0.6;{};{};
+7;Canned Drinks – 300ml;TRUE;TRUE;1.4;{};{};
+7;Bottled Drinks – 500ml;TRUE;TRUE;1.5;{};{};
+7;Carton Drinks;TRUE;TRUE;1.4;{};{};
+7;Tissue;TRUE;TRUE;0.3;{};{};
+7;Set A (Toast Bread + Eggs + Coffee/Tea);TRUE;TRUE;2.5;"{""Drink"":{""Coffee"":{""cost"":0.0},""Tea"":{""cost"":0.0}}}";{};
+7;Set B (Apollo Bun + Eggs + Coffee/Tea);TRUE;TRUE;2.8;"{""Drink"":{""Coffee"":{""cost"":0.0},""Tea"":{""cost"":0.0}}}";{};
+7;Set C (Thick Toast + Eggs + Coffee/Tea);TRUE;TRUE;2.8;"{""Drink"":{""Coffee"":{""cost"":0.0},""Tea"":{""cost"":0.0}}}";{};
+7;Set D (Canopy Cream Cracker + Eggs + Coffee/Tea);TRUE;TRUE;2.8;"{""Drink"":{""Coffee"":{""cost"":0.0},""Tea"":{""cost"":0.0}}}";{};
+7;Apollo Bun Bread;TRUE;TRUE;1;{};{};
+7;Half Boiled Omega Egg (2 Pcs);TRUE;TRUE;1.2;{};{};
+7;Normal Half Boiled Egg (2 Pcs);TRUE;TRUE;1;{};{};
+7;Sandwich (Normal/Wholemeal);TRUE;TRUE;1.6;"{""Bread"":{""Normal"":{""cost"":0.0},""Wholemeal"":{""cost"":0.0}}}";{};
+7;Toasted Bread (Normal/Wholemeal);TRUE;TRUE;1;"{""Bread"":{""Normal"":{""cost"":0.0},""Wholemeal"":{""cost"":0.0}}}";{};
+7;Thick Toast;TRUE;TRUE;1.2;{};{};
+7;Canopy Cream Cracker;TRUE;TRUE;0.7;{};{};
+7;Siew Mai;TRUE;TRUE;0.7;{};{};
+7;Lian Yong Pau;TRUE;TRUE;0.8;{};{};
+7;Small Pau;TRUE;TRUE;0.8;{};{};
+7;Veg Pau;TRUE;TRUE;1;{};{};
+7;Char Siew Pau;TRUE;TRUE;0.8;{};{};
+7;Curry Pau;TRUE;TRUE;0.8;{};{};
+7;Sweet Corn Pau;TRUE;TRUE;0.9;{};{};
+7;Red Bean Paste Pau (Tau Sar);TRUE;TRUE;0.8;{};{};
+7;Yam Pau;TRUE;TRUE;0.8;{};{};
+7;Chicken Pau;TRUE;TRUE;1.4;{};{};
+7;Big (Tai) Pau;TRUE;TRUE;1.4;{};{};
+7;Fan Choy;TRUE;TRUE;1.6;{};{};
+7;Lor Mai Kai;TRUE;TRUE;1.4;{};{};
+8;Plain Waffle;TRUE;TRUE;1;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Butter Waffle;TRUE;TRUE;1.3;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Blueberry Waffle;TRUE;TRUE;1.3;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Strawberry Waffle;TRUE;TRUE;1.3;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Pandan Kaya Waffle;TRUE;TRUE;1.3;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Chocolate Waffle;TRUE;TRUE;1.4;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Nutella Waffle;TRUE;TRUE;1.8;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Butter Cinnamon Waffle;TRUE;TRUE;1.4;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Strawberry Sprinkles Waffle;TRUE;TRUE;1.5;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Honey Waffle;TRUE;TRUE;1.5;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Choc & Nuts Waffle;TRUE;TRUE;1.6;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Cream Cheese & Chocolate Chips Waffle;TRUE;TRUE;2;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Cookies & Cream Waffle;TRUE;TRUE;2;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Milk Cereal Waffle;TRUE;TRUE;2;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Ham & Cheese Waffle;TRUE;TRUE;2.2;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Chocolate Banana Waffle;TRUE;TRUE;1.9;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Nutella Banana Waffle;TRUE;TRUE;2.3;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Tuna Mayo Waffle;TRUE;TRUE;2.2;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Durian Waffle;TRUE;TRUE;2;{};"{""Toppings"":{""Sprinkles"":{""cost"":0.3},""Cinnamon"":{""cost"":0.3},""Butter"":{""cost"":0.3},""Chocolate Chips"":{""cost"":0.3},""Cheese"":{""cost"":0.5},""Ham"":{""cost"":0.5},""Tuna"":{""cost"":0.5},""Nutella"":{""cost"":0.5}}}";
+8;Butter Salt Corn Cup;TRUE;TRUE;1.6;{};{};
+8;Chocolate Salt Corn Cup;TRUE;TRUE;1.9;{};{};
+8;Butter Salt Milk Corn Cup;TRUE;TRUE;1.9;{};{};
+8;Takoyaki (3);TRUE;TRUE;2;{};{};
+8;Takoyaki (4);TRUE;TRUE;2.5;{};{};
+8;Octopus Takoyaki;TRUE;TRUE;;{};{};
+8;Ham Takoyaki;TRUE;TRUE;;{};{};
+8;Crabstick Takoyaki;TRUE;TRUE;;{};{};
+8;Prawn Takoyaki;TRUE;TRUE;;{};{};
+9;Lontong;TRUE;TRUE;3;{};{};
+9;Mee Rebus;TRUE;TRUE;3;{};{};
+9;Mee Soto;TRUE;TRUE;3;{};{};
+9;Mee Bakso;TRUE;TRUE;3;{};{};
+9;Mee Siam;TRUE;TRUE;3;{};{};
+9;Chicken Porridge;TRUE;TRUE;2.5;{};{};
+9;Bee Hoon + Egg;TRUE;TRUE;2.5;{};{};
+9;Fried Rice + Egg;TRUE;TRUE;2.5;{};{};
+9;Nasi Ayam Penyet;TRUE;TRUE;4.5;{};{};
+9;Nasi Lemak Banana Leaf;TRUE;TRUE;2;{};{};
+9;Rice + 2 Meat + 2 Veg/Side;TRUE;TRUE;4.5;{};{};
+9;Rice + 1 Meat + 2 Veg/Side;TRUE;TRUE;3.5;{};{};
+9;Rice + 2 Meat + 1 Veg//Side;TRUE;TRUE;4;{};{};
+9;Nasi Padang Fish;TRUE;TRUE;2.5;{};{};
+9;Nasi Padang Sliced Fish;TRUE;TRUE;2;{};{};
+9;Nasi Padang Chicken;TRUE;TRUE;1.8;{};{};
+9;Nasi Padang Beef;TRUE;TRUE;2.5;{};{};
+9;Nasi Padang Mutton;TRUE;TRUE;2.8;{};{};
+9;Nasi Padang Sotong;TRUE;TRUE;2;{};{};
+9;Nasi Padang Prawn;TRUE;TRUE;2.5;{};{};
+9;Nasi Padang Sardine;TRUE;TRUE;2;{};{};
+9;Vegetable;TRUE;TRUE;0.7;{};{};
+9;Egg/Tau Foo;TRUE;TRUE;0.7;{};{};
+9;Fish Cake/Ball;TRUE;TRUE;0.7;{};{};
+9;Sausage/Bagedil;TRUE;TRUE;0.7;{};{};
+9;Anchovies;TRUE;TRUE;1;{};{};
+9;Chicken Parts;TRUE;TRUE;1;{};{};
+9;Sambal Goreng;TRUE;TRUE;1;{};{};
+9;Terung Belado;TRUE;TRUE;1;{};{};
+9;Curry Puff (3);TRUE;TRUE;1;{};{};
+9;Sambosa (3);TRUE;TRUE;1;{};{};
+9;Popiah (3);TRUE;TRUE;1;{};{};
+9;Doughnut (3);TRUE;TRUE;1;{};{};
+9;Green Bean (3);TRUE;TRUE;1;{};{};
+9;Goreng Pisang (3);TRUE;TRUE;1;{};{};
+9;Curry Puff;TRUE;TRUE;0.4;{};{};
+9;Sambosa;TRUE;TRUE;0.4;{};{};
+9;Popiah;TRUE;TRUE;0.4;{};{};
+9;Doughnut;TRUE;TRUE;0.4;{};{};
+9;Green Bean;TRUE;TRUE;0.4;{};{};
+9;Goreng Pisang;TRUE;TRUE;0.4;{};{};
+9;Nyonya Kueh;TRUE;TRUE;0.4;{};{};

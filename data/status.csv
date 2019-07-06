@@ -1,6 +1,6 @@
-id,name
-0,Unpaid
-1,Paid
-2,Preparing
-3,Prepared
-4,Collected
+id;name
+0;Unpaid
+1;Paid
+2;Preparing
+3;Prepared
+4;Collected

@@ -37,12 +37,12 @@ var io = sockets.startSocketServer(socket_app);
 socket_app.listen(11236);
 
 // <----- ROUTES ----->
-app.get('/orders/:location/:id', db.getStallOrders);
+app.get('/orders/:uid', db.getStallOrders);
 app.get('/customers', db.getCustomers);
 app.get('/checkId/:id', db.checkId);
 app.get('/locations', db.getLocations);
 app.get('/stalls/:location', db.getStalls);
-app.get('/stallMenu/:location/:id', db.getStallMenu);
+app.get('/menu/:uid', db.getStallMenu);
 app.get('/paylah/:cost', db.getPaylahUrl);
 
 var dbPoll = (request, response) =>{
@@ -56,6 +56,8 @@ var dbPoll = (request, response) =>{
 
 app.post('/customer', [db.createCustomer, dbPoll]);
 app.post('/order', [db.submitOrder, dbPoll]);
+app.post('/new_order', [db.post_order, dbPoll]);
+app.post('/menu', [db.upsertMenu]);
 
 app.put('/order', [db.transitionOrder, dbPoll]);
 app.put('/receiptPaid', [db.receiptPaid, dbPoll]);
@@ -65,14 +67,12 @@ app.get('/', (request, response) =>{
 });
 
 app.get('/assets/images/:image_path', (request, response)=>{
-  console.log("dev_view requested")
   let image_url = request.params.image_path;
   console.log(image_url);
   response.sendFile(__dirname + '/assets/images/' + image_url);
 });
 
 app.get('/assets/icons/:icon_path', (request, response)=>{
-  console.log("dev_view requested")
   let icon_url = request.params.icon_path;
   console.log(icon_url);
   response.sendFile(__dirname + '/assets/icons/' + icon_url);
