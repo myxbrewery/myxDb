@@ -37,7 +37,12 @@ var io = sockets.startSocketServer(socket_app);
 socket_app.listen(11236);
 
 // <----- ROUTES ----->
+<<<<<<< HEAD
 app.get('/orders/:uid', db.getStallOrders);
+=======
+app.get('/orders/:location/:id', db.getStallOrders);
+app.get('/orders/:customer_id', db.getCustomerOrders);
+>>>>>>> 2e0622279583b8c8d49930e45386fe08f39c9a87
 app.get('/customers', db.getCustomers);
 app.get('/checkId/:id', db.checkId);
 app.get('/locations', db.getLocations);
