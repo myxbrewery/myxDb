@@ -134,7 +134,9 @@ function populateCards(demographic){
 
 function advanceOrderStatus(order){
   console.log(order)
-  fetch("http://10.12.254.221:11235/order/", {
+  var server_url = "https://www.myxbrewapi.com/order";
+  var dev_url = "http://10.12.254.221:11235/order/";
+  fetch(server_url, {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
