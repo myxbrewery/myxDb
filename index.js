@@ -47,19 +47,22 @@ app.get('/menu/:uid', db.getStallMenu);
 app.get('/paylah/:cost', db.getPaylahUrl);
 
 var dbPoll = (request, response) =>{
+  console.log("DB Polling")
   setTimeout(()=>{
     sockets.stall_update(io);
     sockets.customer_update(io);
   }, 100);
-  console.log(request.user_response);
   response.status(200).send(request.user_response);
 }
+
+app.get('/dbpoll', dbPoll)
 
 app.post('/customer', [db.createCustomer, dbPoll]);
 app.post('/order', [db.post_order, dbPoll]);
 app.post('/menu', [db.upsertMenu]);
 
 app.put('/order', [db.transitionOrder, dbPoll]);
+app.put('/favorite', [db.favoriteStall, dbPoll]);
 app.put('/receiptPaid', [db.receiptPaid, dbPoll]);
 
 app.get('/', (request, response) =>{
@@ -68,7 +71,6 @@ app.get('/', (request, response) =>{
 
 app.get('/assets/images/:image_path', (request, response)=>{
   let image_url = request.params.image_path;
-  console.log(image_url);
   response.sendFile(__dirname + '/assets/images/' + image_url);
 });
 

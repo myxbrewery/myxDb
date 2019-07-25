@@ -102,38 +102,46 @@ async function getAllOrders(){
 
 // Check is username is taken
 const checkId = (request, response) => {
-  let id = request.params.id;
-  pool.query('SELECT * FROM customers WHERE id = $1', [id], (error, results) =>{
-    if(error){
-      response.status(400).send({"message": "Error"});
-      // throw error;
-    }
-    else{
-      if(results.rows.length != 0){
-        // response.statusMessage = "Username already exists, try again";
-        response.status(200).send({"message": "Username is taken"});
-      }
-      else{
-        response.statusMessage = "Username does not exist yet";
-        response.status(200).send({"message": "Username is free"});
-      }
-    }
-  });
+    let id = request.params.id;
+    pool.query('SELECT * FROM customers WHERE id = $1', [id], (error, results) =>{
+        if(error){
+            response.status(400).send({"message": "Error"});
+        }
+        else{
+            if(results.rows.length != 0){
+                // response.statusMessage = "Username already exists, try again";
+                response.status(200).send({"message": "Username is taken",
+                                            "details": results.rows});
+            }
+            else{
+                response.statusMessage = "Username does not exist yet";
+                response.status(200).send({"message": "Username is free"});
+            }
+        }
+    });
 }
 
 // Get all stalls
 const getStalls = (request, response) => {
-    let location = request.params.location;
-    let res = pool.query('SELECT uid FROM stalls')
+    let lat = request.params.lat;
+    let long = request.params.long;
+    let res = pool.query('SELECT uid, lat, long FROM stalls')
+        .then(res=>{
+            response.status(200).send(res.rows)
+        })
         .catch(error=>{
             console.log(error);
             response.status(400).send({"message":"invalid db request"})
         })
-        .then(res=>{
-            console.log(res.rows);
-            response.status(200).send(res.rows)
+}
+
+async function stalls(){
+    var res = await pool.query('SELECT uid FROM stalls')
+        .then((results) => {
+            return results.rows;
         })
-    
+        .catch(err=>console.log(err));
+    return res;
 }
 
 const getLocations = (request, response) => {
@@ -279,7 +287,6 @@ const resetOrder = (request, response, next) => {
             console.log(error);
             throw error;
         }
-        console.log(results);
     });
     request.user_response = {
         "message":"All orders reset;",
@@ -394,8 +401,10 @@ const menu_validate = (menu) => {
 async function user_validate(uid,pw){
     var stall_row = await pool.query("SELECT * FROM stalls WHERE uid = $1", [uid])
         .then(res =>{
+            if(res.length == 0) return false;
             return res.rows[0]
         })
+    if(!stall_row) return false;
     if(pw == stall_row.hashed_pw) return true;
     return false; 
 }
@@ -565,8 +574,6 @@ async function verifyOrder(order_package){
     let menu = full_menus[1]
     for(i in items){
         let item_id = items[i]["item_id"];
-        console.log(menu[item_id])
-        console.log(items[i])
         if(items[i]["base_price"] != menu[item_id]["base_price"]){
             // console.log("Menu base price unequal to Customer base price");
             return {
@@ -1044,7 +1051,37 @@ async function getAllOrderDetails(request, response){
         })
     })    
     response.status(200).json(orders);
-  }
+}
+
+async function favoriteStall(request, response){
+    var payload = request.body;
+    let customer_id = payload.customer_id;
+    let stall_uid = payload.stall_uid;
+    let status = payload.status;
+    let current_favorites = await pool.query('SELECT favorites FROM customers WHERE id = $1', [customer_id])
+                                    .catch(err=>{
+                                        console.log(err)
+                                        return 'invalid';
+                                    });
+    if(current_favorites == 'invalid') {
+        response.status(400).send({'message': 'invalid'})
+        return false
+    };
+    let current_favorite_set = new Set(current_favorites);
+    if (status) current_favorite_set.add(stall_uid);
+    else current_favorite_set.delete(stall_uid);
+    let updated = await pool.query('UPDATE customers SET favorites = $1 WHERE id = $2', [Array.from(current_favorite_set), customer_id])
+                    .then(res=>{
+                        return True
+                    })
+                    .catch(err=>{
+                        return False
+                    })
+    if (updated) response.status(200).json(orders);
+    else response.status(400).json({"message":"Unable to update customers table"});
+}
+
+
 
 module.exports = {
   getLocations,
@@ -1059,9 +1096,11 @@ module.exports = {
   getCustomers,
   submitOrder,
   transitionOrder,
+  favoriteStall,
   receiptPaid,
   resetOrder,
   getAllOrderDetails,
   upsertMenu,
-  post_order
+  post_order,
+  stalls
 }
