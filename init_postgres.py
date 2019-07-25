@@ -19,7 +19,8 @@ cur.execute("CREATE TABLE customers(id INTEGER PRIMARY KEY, \
     age INTEGER, \
     name VARCHAR, \
     image VARCHAR, \
-    diet TEXT[])")
+    diet TEXT[], \
+    favorites TEXT[])")
 cur.execute("CREATE TABLE locations(id INTEGER PRIMARY KEY, \
     name VARCHAR(255) NOT NULL, \
     image_id VARCHAR(255), \
@@ -40,7 +41,7 @@ cur.execute("CREATE TABLE stalls(id SERIAL PRIMARY KEY, \
     hashed_pw VARCHAR, \
     card_settings JSON, \
     latest_menu_version INTEGER, \
-    menu_history INTEGER[])")
+    waiting_time NUMERIC)")
 cur.execute("CREATE TABLE status(id INTEGER PRIMARY KEY, \
     name VARCHAR(255))")
 
@@ -69,8 +70,8 @@ def execute_pg_query(query, args):
 # cur.copy_from(f, 'users', sep=',')
 # conn.commit()
 # Execute these within postgres
-\copy locations(id, name, image_id, lat, long, aggregation) FROM '/home/tze/capstone/myxDb/data/locations.csv' DELIMITER ';' CSV HEADER;
-\copy status(id, name) FROM '/home/ubuntu/myxDb/data/status.csv' DELIMITER ';' CSV HEADER;
-\copy stalls(location, name, open, halal, qr_link, opening_time, closing_time, image_url, icon_url, uid, hashed_pw, card_settings, latest_menu_version, menu_history) FROM '/home/ubuntu/myxDb/data/stalls.csv' DELIMITER ';' CSV HEADER;
+# \copy locations(id, name, image_id, lat, long, aggregation) FROM '/home/tze/capstone/myxDb/data/locations.csv' DELIMITER ';' CSV HEADER;
+# \copy status(id, name) FROM '/home/ubuntu/myxDb/data/status.csv' DELIMITER ';' CSV HEADER;
+# \copy stalls(location, name, open, halal, qr_link, opening_time, closing_time, image_url, icon_url, uid, hashed_pw, card_settings, latest_menu_version, waiting_time) FROM '/home/ubuntu/myxDb/data/stalls.csv' DELIMITER ';' CSV HEADER;
 
 # a = execute_pg_query("SELECT * FROM customers", ())

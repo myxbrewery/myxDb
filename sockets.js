@@ -48,36 +48,26 @@ var fetchDb = () =>{
 }
 
 
-stall_mapping = {
-  '1':"ch1ck3n",
-  '2':"indi@n",
-  '3':"w3stern",
-  '4':"he4lths0up",
-  '5':"korean",
-  '6':"m1xedr1ce",
-  '7':"dr1nks",
-  '8':"cre@myduck",
-  '9':"mus1im",
-}
-
 module.exports = {
   startSocketServer: (app)=>{
     io = socketio.listen(app);
     io.on('connection', (socket)=>{
-      let valid_stalls = new Set([1,2,3,4,5,6,7,8,9])
       socket.on('stall_join', (room)=>{
         socket.join(room);
-        fetchDb().then((result)=>{
-          Object.keys(result.stall_orders).forEach((stall)=>{
-            io.to(stall_mapping[stall]).emit('orders',result.stall_orders[stall]);
-            valid_stalls.delete(parseInt(stall));
-          });
-          valid_stalls.forEach((val)=>{
-            io.to(stall_mapping[val]).emit('orders',[]);
-          });
-        },(err)=>{
-          console.log(err);
-        })
+        db.stalls().then(stalls=>{
+          let stallDict = {};
+          stalls.forEach(row=>stallDict[row.uid]=[]);
+          fetchDb().then((result)=>{
+            Object.keys(result.stall_orders).forEach((stall)=>{
+              stallDict[stall] = result.stall_orders[stall];
+            });
+            Object.keys(stallDict).forEach(stall=>{
+              io.to(stall).emit('orders', stallDict[stall]);
+            })
+          },(err)=>{
+            console.log(err);
+          })
+        });
       });
       socket.on('stall_leave', (room)=>{
         console.log('Stall leaving', room)
@@ -101,19 +91,20 @@ module.exports = {
     return io;
   },
   stall_update: (io) =>{
-    let valid_stalls = new Set([1,2,3,4,5,6,7,8,9])
-    var pull_database = fetchDb();
-    pull_database.then((result)=>{
-      Object.keys(result.stall_orders).forEach((stall)=>{
-        valid_stalls.delete(parseInt(stall));
-        io.to(stall_mapping[stall]).emit('orders',result.stall_orders[stall]);
-      });
-      valid_stalls.forEach((val)=>{
-        io.to(stall_mapping[val]).emit('orders',[]);
-      });
-    },(err)=>{
-      console.log(err);
-    })
+    db.stalls().then(stalls=>{
+      let stallDict = {};
+      stalls.forEach(row=>stallDict[row.uid]=[]);
+      fetchDb().then((result)=>{
+        Object.keys(result.stall_orders).forEach((stall)=>{
+          stallDict[stall] = result.stall_orders[stall];
+        });
+        Object.keys(stallDict).forEach(stall=>{
+          io.to(stall).emit('orders', stallDict[stall]);
+        })
+      },(err)=>{
+        console.log(err);
+      })
+    });
   },
   customer_update: (io) =>{
     var pull_database = fetchDb();
