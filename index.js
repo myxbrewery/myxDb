@@ -85,6 +85,10 @@ app.get('/scripts/dev_view.js', (request, response)=>{
   console.log("dev_view requested")
   response.sendFile(__dirname + '/scripts/dev_view.js');
 });
+app.get('/scripts/dev_hax.js', (request, response)=>{
+  console.log("dev_hax requested")
+  response.sendFile(__dirname + '/scripts/dev_hax.js');
+});
 app.get('/allPendingOrders', db.getAllOrderDetails);
 app.post('/resetOrder', [db.resetOrder, dbPoll]); // DEV
 
