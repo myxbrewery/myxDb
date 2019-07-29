@@ -1,5 +1,9 @@
 const Pool = require('pg').Pool
 const fs = require('fs');
+
+const types = require('pg').types;
+types.setTypeParser(types.builtins.NUMERIC, parseFloat);
+
 var format = require('pg-format');
 
 var credentials = require('./.credentials.json');
