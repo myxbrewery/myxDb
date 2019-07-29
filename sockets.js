@@ -50,9 +50,10 @@ var fetchDb = () =>{
 
 module.exports = {
   startSocketServer: (app)=>{
-    io = socketio.listen(app);
+    io = socketio(app);
     io.on('connection', (socket)=>{
       socket.on('stall_join', (room)=>{
+        console.log("Stall joined");
         socket.join(room);
         db.stalls().then(stalls=>{
           let stallDict = {};
@@ -99,6 +100,8 @@ module.exports = {
           stallDict[stall] = result.stall_orders[stall];
         });
         Object.keys(stallDict).forEach(stall=>{
+//          console.log("Socket Emitting!")
+//          console.log(stallDict[stall]);
           io.to(stall).emit('orders', stallDict[stall]);
         })
       },(err)=>{
