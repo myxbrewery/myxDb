@@ -58,12 +58,13 @@ var dbPoll = (request, response) =>{
 app.get('/dbpoll', dbPoll)
 
 app.post('/customer', [db.createCustomer, dbPoll]);
-app.post('/order', [db.post_order, dbPoll]);
+app.post('/order', [db.postOrder, dbPoll]);
 app.post('/menu', [db.upsertMenu]);
 
-app.put('/order', [db.transitionOrder, dbPoll]);
 app.put('/favorite', [db.favoriteStall, dbPoll]);
-app.put('/receiptPaid', [db.receiptPaid, dbPoll]);
+app.put('/order/:uid/:orderid', [db.transitionOrder, dbPoll]);
+app.put('/receipt/:uid/:receiptid', [db.putReceiptStatus, dbPoll]);
+app.put('/menu/:uid/:itemid', [db.putStock, dbPoll]);
 
 app.get('/', (request, response) =>{
   response.sendFile(__dirname + '/index.html');

@@ -4,3 +4,5 @@ id;name
 2;Preparing
 3;Prepared
 4;Collected
+-1;Receipt Rejected
+-2;Order Rejected

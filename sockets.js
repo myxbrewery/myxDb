@@ -41,8 +41,8 @@ var fetchDb = () =>{
         customer_orders: customer_orders
       });
     }, (err) =>{
-      console.log(err);
-      reject("Problem encountered");
+      // console.log(err);
+      reject("Socket problem encountered");
     });
   });
 }

@@ -40,7 +40,7 @@ async function getLiveOrders(){
         let stall_menu = stall_uid + "_menu";
         nested_results = await pool.query(format("SELECT * FROM %I \
             INNER JOIN %I ON %I.item_id = %I.id \
-            WHERE %I.status_id >= 1 \
+            WHERE %I.status_id >= 0 \
             AND %I.start_datetime >= now()::date\
             ORDER BY %I.start_datetime DESC", 
             stall_orders, stall_menu, stall_orders, stall_menu, stall_orders, stall_orders, stall_orders), 
@@ -476,7 +476,7 @@ async function upsertMenu (request, response){
         var receipt_creation_string = format("CREATE TABLE %I ( \
             id SERIAL PRIMARY KEY, \
             customer_id INTEGER REFERENCES customers(id), \
-            paid BOOLEAN NOT NULL, \
+            accepted BOOLEAN NOT NULL, \
             start_datetime timestamp NOT NULL, \
             delivery_time timestamp NOT NULL, \
             payment_datetime timestamp, \
@@ -742,7 +742,7 @@ async function verifyOrder(order_package){
     }
 }
 
-async function order_insert(receipt_id, uid, customer_id, start_time, delivery_time, order){
+async function order_insert(receipt_id, uid, customer_id, start_time, delivery_time, menu_version, order){
     let menu_query = format('INSERT INTO %I_orders (\
         item_id, customer_id, base_price, total_price, status_id, start_datetime, delivery_time, \
         receipt_id, compulsory_options, optional_options, menu_version, note) \
@@ -751,7 +751,7 @@ async function order_insert(receipt_id, uid, customer_id, start_time, delivery_t
             [order.item_id, customer_id, order.base_price,
             order.total_price, 0, start_time, delivery_time, 
             receipt_id, order.compulsory_options,
-            order.optional_options, order.menu_version, order.note])
+            order.optional_options, menu_version, order.note])
         .catch(err=>{
             console.log("Failed to add to orders")
             throw err;
@@ -767,7 +767,7 @@ async function receipt_insert(order_package, timestamp){
     let uid = order_metadata.uid;
     let delivery_time = order_metadata.delivery_time;
     if (delivery_time === "now") delivery_time = timestamp;
-    let receipt_query = format('INSERT INTO %I_receipts (customer_id, paid, start_datetime, delivery_time, total_payment, special_request) \
+    let receipt_query = format('INSERT INTO %I_receipts (customer_id, accepted, start_datetime, delivery_time, total_payment, special_request) \
                                 VALUES ($1, $2, $3, $4, $5, $6)', uid)
     let add_receipt = await pool.query(receipt_query, 
                     [order_metadata.customer_id, false, timestamp,
@@ -795,7 +795,7 @@ async function receipt_insert(order_package, timestamp){
     return receipt;
 }
 
-async function post_order(request, response, next){
+async function postOrder(request, response, next){
     // Layer 1: Verify options are valid, payment amounts are legitimate
     let verification_check = await verifyOrder(request.body).catch(error=>{
         console.log(error);
@@ -819,10 +819,11 @@ async function post_order(request, response, next){
         }
         let uid = order_package.metadata.uid;
         let delivery_time = order_package.metadata.delivery_time;
+        let menu_version = order_package.metadata.menu_version;
         if (delivery_time === "now") delivery_time = timestamp;
         let customer_id = order_package.metadata.customer_id;
         order_package.orders.forEach(order=>{
-            order_insert(receipt_id, uid, customer_id, timestamp, delivery_time, order)
+            order_insert(receipt_id, uid, customer_id, timestamp, delivery_time, menu_version, order)
                 .then(res=>{
                     console.log(res);
                 })
@@ -838,165 +839,13 @@ async function post_order(request, response, next){
     }
 }
 
-const verifyOrderValue = (order_package) => {
-  let metadata = order_package.metadata;
-  let items = order_package.orders;
-  var total_payment = 0
-  var location_id = metadata.location_id;
-  var stall_id = metadata.stall_id;
-  items.forEach((item) => {
-    let item_id = item.item_id;
-    let menu_item = menu[location_id][stall_id][item_id];
 
-    // Verify user supplies compulsory categories equal to number of compulsory categories required
-    let user_compulsory_options = Object.keys(item["compulsory_options"]);
-    if(Object.keys(menu_item["compulsory_options"]).length != user_compulsory_options.length){;
-      console.log("Menu item " + menu_item.name + " requires n compulsory options; got m")
-      console.log(menu_item["compulsory_options"]);
-      console.log(item["compulsory_options"]);
-    }
-
-    // Add user compulsory categories' cost
-    user_compulsory_options.forEach((option_category)=>{
-      if(option_category in menu_item["compulsory_options"]){
-        let chosen_options = Object.keys(item["compulsory_options"][option_category]);
-        // Must only supply one compulsory option (eg bee hoon or kuay teow)
-        // Might need to branch to 2 for things like Western's 2 free sides
-        if(chosen_options.length != 1){
-          console.log("Chosen option should be length 1; I got " + chosen_options);
-        }
-        chosen_options.forEach((option)=>{
-          if(option in menu_item["compulsory_options"][option_category]){
-            total_payment += menu_item["compulsory_options"][option_category][option]["cost"];
-          }
-          else{
-            console.log("User-provided compulsory option is not in possible compulsory option choice");
-          }
-        });
-      }
-      else{
-        console.log("Compulsory option category " + option_category + " not found for item " + item.name);
-      }
-    });
-
-    // Add user optional categories' cost
-    let user_optional_options = Object.keys(item["optional_options"]);
-    user_optional_options.forEach((option_category)=>{
-      if(option_category in menu_item["optional_options"]){
-        let chosen_options = Object.keys(item["optional_options"][option_category]);
-        chosen_options.forEach((option)=>{
-          if(option in menu_item["optional_options"][option_category]){
-            total_payment += menu_item["optional_options"][option_category][option]["cost"];
-          }
-          else{
-            console.log("User-provided optional option is not in possible optional option choice");
-          }
-        });
-      }
-      else{
-        console.log("Optional option category " + option_category + " not found for item " + item.name);
-      }
-    });
-
-    if(metadata.client_type == "school"){
-      total_payment += parseFloat(menu[location_id][stall_id][item_id].school_price);
-    }
-    else if (metadata.client_type == "public"){
-      total_payment += parseFloat(menu[location_id][stall_id][item_id].public_price);
-    }
-    else {
-      return "Invalid client type"
-    }
-  });
-  total_payment = parseFloat(total_payment.toPrecision(7))
-  console.log(`Server computed total cost: ${total_payment}`)
-  console.log(`Client computed total cost: ${metadata.total_payment}`)
-  if(total_payment != metadata.total_payment){
-    console.log("Payment Mismatch!")
-    return false;
-  }
-  else{
-    console.log("Payment Correct!")
-    return true;
-  }
-}
-
-var semaphore = false;
-
-const submitOrder = (request, response, next) => {
-  // for(var i=1;i<1000;i++){
-  //   let pl_value = parseFloat(i)/10.0;
-  //   let url="$"+pl_value;
-  //   pool.query('INSERT INTO paylah_url(value, url) VALUES ($1, $2)', [pl_value, url], (error, results)=>{});
-  // }
-  // Order price parsing is not done from customer end, for security purposes.
-  // Customer sends a batched order, a list of items with specific settings.
-  // He sees price locally (computed on front-end) but we DO NOT REFER TO THIS VALUE as the proper price. It is primarily for customer's reference only.
-  // We parse the received order, referring to our database to calculate price of each item ordered
-  // We sum up price, then dissect each order and insert into the orders table ourselves
-  // We then return them a response of how much they are to pay, and the relevant QR code.
-  // Semaphore is used for protection against race conditions
-  while(semaphore);
-  var order_package = request.body;
-  if(verifyOrderValue(order_package)){
-    semaphore = true;
-    // INSERT INTO receipts(customer_id, paid, start_date, total_payment) VALUES (1, false, '2018-03-20 01:01:01', 15.30);
-    var timestamp = new Date();
-    timestamp.setHours(timestamp.getHours()+8);
-    timestamp = timestamp.toISOString();
-    pool.query('INSERT INTO receipts (customer_id, paid, start_date, total_payment) VALUES ($1, $2, $3, $4)', [order_package.metadata.customer_id, false, timestamp, order_package.metadata.total_payment])
-      .then((res) =>{
-        console.log("Receipt Added")
-        pool.query('SELECT id FROM receipts WHERE customer_id = $1 ORDER BY id DESC LIMIT 1', [order_package.metadata.customer_id])
-        .then((results)=>{
-          semaphore = false;
-          var receipt_id = results.rows[0].id;
-          pool.query('SELECT * FROM paylah_url WHERE value = $1', [parseFloat((order_package.metadata.total_payment-0.2).toPrecision(7))], (error, results) =>{
-            if(error){
-              request.user_response = {"Error": "Missing parameters"};
-              next();
-            }
-            else if(results.rows.length == 0){
-              request.user_response = {"Error": "Missing Paylah URL: " + order_package.metadata.total_payment};
-              next();
-            }
-            else {
-              console.log("Paylah URL retrieved");
-              request.user_response = {
-                "paylah_url":results.rows[0],
-                "receipt_id":receipt_id
-              };
-              order_package.orders.forEach((order)=>{
-                // TODO: Status_id should start at 0; using 1 as placeholder while working with paylah api
-                pool.query('INSERT INTO orders(stall_id, item_id, customer_id, base_price, total_price, compulsory_options, optional_options, status_id, start_datetime, receipt_id, note) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', [order.stall_id, order.item_id, order_package.metadata.customer_id, order.base_price, order.total_price, order.compulsory_options, order.optional_options, 1, timestamp, receipt_id, order.note], (error, res) => {
-                  if(error){
-                    console.log(error);
-                    request.user_response = {"Error": "Missing parameters"};
-                    next();
-                  }
-                });
-              });
-              next();
-            }
-          });
-        })
-      })
-      .catch((error)=>{
-        console.log(error);
-        response.status(400).send({"Error": error.detail});
-      });
-  }
-  else{
-    response.status(400).send({"Error": "Payment Mismatch?"});
-  }
-}
-
-const transitionOrder = (request, response, next) => {
+async function transitionOrder(request, response, next){
   var order_info = request.body;
   let order_status = order_info.status_id;
-  let order_id = order_info.id;
-  let stall_uid = order_info.uid;
-  pool.query(format('UPDATE %I_orders SET status_id = $1 WHERE %I_orders.id = $2', stall_uid, stall_uid), [order_status, order_id], (error, results) => {
+  let uid = request.params.uid;
+  let order_id = request.params.orderid;
+  pool.query(format('UPDATE %I_orders SET status_id = $1 WHERE %I_orders.id = $2', uid, uid), [order_status, order_id], (error, results) => {
     if(error){
       console.log(error);
       response.status(400).send({"Error": error.detail});
@@ -1010,22 +859,79 @@ const transitionOrder = (request, response, next) => {
   })
 }
 
-const receiptPaid = (request, response, next) => {
-  // const receipt = parseInt(request.params.receipt_id);
-  const order_details = request.body;
-  pool.query('UPDATE orders SET status_id = $1 WHERE orders.receipt_id = $2', [1, order_details.receipt_id], (error, results) => {
-    if(error){
-      console.log(error);
-      response.status(400).send({"Error": error.detail});
+
+async function putReceiptStatus(request, response, next){
+    const receipt_details = request.body;
+    let uid = request.params.uid;
+    let receipt_id = request.params.receiptid;
+    let errored = false;
+    let error_message = "";
+    
+    var client = await pool.connect();
+    try{
+        await client.query('BEGIN')
+        try{
+            var _ = await client.query(format('UPDATE %I_receipts SET accepted = $1 WHERE id = $2', uid), [receipt_details['accepted'], receipt_id])
+            var orders = await client.query(format('SELECT * FROM %I_orders WHERE receipt_id = $1', uid), [receipt_id])
+                                    .then(results=>{return results.rows});
+            // console.log(orders)
+            for(order_idx in orders){
+                let order = orders[order_idx]
+                let order_status = 0;
+                if(receipt_details['accepted']) order_status = 1;
+                else{
+                    if(receipt_details['rejected_orders'].includes(order.id)) order_status = -2;
+                    else order_status = -1;
+                }
+                var success = await client.query(format('UPDATE %I_orders SET status_id = $1 WHERE id = $2', uid), [order_status, order.id])
+                    .catch(error=>{
+                        errored = true;
+                        error_message = error.detail;
+                        // console.log(error.detail)
+                        return false;
+                    })
+                    .then(results=>{
+                        // console.log(results);
+                        return true
+                    });
+                // console.log(success)
+                if(!success) break;
+            }
+            client.query('COMMIT')
+        }
+        catch(e){
+            client.query('ROLLBACK')
+        }
     }
-    else{
-      request.user_response = {
-        "message":"Receipt paid",
-        "receipt": order_details.receipt_id,
-      };
-      next();
+    finally{
+        client.release()
     }
-  })
+    if(errored) response.status(400).send({"Error": error_message})
+    else {
+        request.user_response = {"message": "Successfully changed order and receipt status"}
+        next();
+    };
+}
+
+
+const putStock = (request, response, next) => {
+    const item_details = request.body;
+    let uid = request.params.uid;
+    let item_id = request.params.itemid;
+    if(!('in_stock' in item_details)) response.status(400).send({"Error": "No stock key"})
+    pool.query(format('UPDATE %I_menu SET in_stock = $1 WHERE %I_menu.id = $2', uid, uid), 
+                      [item_details['in_stock'], item_id], (error, results) => {
+        if(error){
+            console.log(error);
+            response.status(400).send({"Error": error.detail});
+        }
+        else{
+            request.user_response = {
+                "status":true
+            };
+            next();
+        }
+    })
 }
 
 const getPaylahUrl = (request, response) => {
@@ -1094,13 +1000,13 @@ module.exports = {
   createCustomer,
   checkId,
   getCustomers,
-  submitOrder,
-  transitionOrder,
+  transitionOrder, // PUT 
   favoriteStall,
-  receiptPaid,
-  resetOrder,
+  putStock,
+  putReceiptStatus, 
+  resetOrder, // UTIL
   getAllOrderDetails,
   upsertMenu,
-  post_order,
-  stalls
+  postOrder,
+  stalls,
 }
