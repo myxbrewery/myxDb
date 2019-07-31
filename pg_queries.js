@@ -328,8 +328,8 @@ const menu_validate = (menu) => {
         }
         menu[category].forEach(item=>{
             let item_name = item["name"];
-            if (item_set.has(item_name)) error_log["Formatting"].push({[item_name]:"appears more than once"});
-            else item_set.add(item_name);
+            // if (item_set.has(item_name)) error_log["Formatting"].push({[item_name]:"appears more than once"});
+            // else item_set.add(item_name);
             let field_type_assoc = {
                 "name":new Set(["string"]),
                 "in_stock":new Set(["string"]),
@@ -464,7 +464,6 @@ async function upsertMenu (request, response){
         response.status(400).json({"message": "Stall does not exist"});
         return false;
     }
-    console.log("HELLO WORLD", version)
     if(version === null || version === undefined){
         console.log("Creating tables", menu_table, order_table, receipt_table);
         var order_table = stall_uid+"_orders";
