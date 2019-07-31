@@ -1,0 +1,580 @@
+{
+    "uid":"gong_cha",
+    "menu":{
+        "Gong Cha Milk Tea":[
+            {
+                "name": "Green Milk Tea",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 3.00,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true}, 
+                            {"name":"Hot", "cost":0.0, "available": true}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                    {
+                        "name":"Toppings",
+                        "options":[
+                            {"name":"Pearl", "cost":0.4, "available": true},
+                            {"name":"White Pearl", "cost":0.7, "available": true},
+                            {"name":"Rainbow Jelly", "cost":0.6, "available": true},
+                            {"name":"Aloe", "cost":0.7, "available": true},
+                            {"name":"Coconut Jelly", "cost":0.5, "available": true},
+                            {"name":"Ai Yu", "cost":0.6, "available": true},
+                            {"name":"Herbal Jelly", "cost":0.7, "available": true},
+                            {"name":"Pudding Jelly", "cost":0.7, "available": true},
+                            {"name":"Red Bean", "cost":0.7, "available": true},
+                            {"name":"3J", "cost":1.4, "available": true},
+                            {"name":"Basil Seeds", "cost":0.4, "available": true},
+                            {"name":"Milk Foam", "cost":0.8, "available": true}
+                        ]
+                    }
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Oolong Milk Tea",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 3.00,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true}, 
+                            {"name":"Hot", "cost":0.0, "available": true}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                    {
+                        "name":"Toppings",
+                        "options":[
+                            {"name":"Pearl", "cost":0.4, "available": true},
+                            {"name":"White Pearl", "cost":0.7, "available": true},
+                            {"name":"Rainbow Jelly", "cost":0.6, "available": true},
+                            {"name":"Aloe", "cost":0.7, "available": true},
+                            {"name":"Coconut Jelly", "cost":0.5, "available": true},
+                            {"name":"Ai Yu", "cost":0.6, "available": true},
+                            {"name":"Herbal Jelly", "cost":0.7, "available": true},
+                            {"name":"Pudding Jelly", "cost":0.7, "available": true},
+                            {"name":"Red Bean", "cost":0.7, "available": true},
+                            {"name":"3J", "cost":1.4, "available": true},
+                            {"name":"Basil Seeds", "cost":0.4, "available": true},
+                            {"name":"Milk Foam", "cost":0.8, "available": true}
+                        ]
+                    }
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Alisan Milk Tea",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 3.00,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true}, 
+                            {"name":"Hot", "cost":0.0, "available": true}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                    {
+                        "name":"Toppings",
+                        "options":[
+                            {"name":"Pearl", "cost":0.4, "available": true},
+                            {"name":"White Pearl", "cost":0.7, "available": true},
+                            {"name":"Rainbow Jelly", "cost":0.6, "available": true},
+                            {"name":"Aloe", "cost":0.7, "available": true},
+                            {"name":"Coconut Jelly", "cost":0.5, "available": true},
+                            {"name":"Ai Yu", "cost":0.6, "available": true},
+                            {"name":"Herbal Jelly", "cost":0.7, "available": true},
+                            {"name":"Pudding Jelly", "cost":0.7, "available": true},
+                            {"name":"Red Bean", "cost":0.7, "available": true},
+                            {"name":"3J", "cost":1.4, "available": true},
+                            {"name":"Basil Seeds", "cost":0.4, "available": true},
+                            {"name":"Milk Foam", "cost":0.8, "available": true}
+                        ]
+                    }
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Earl Grey Milk Tea",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 3.00,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true}, 
+                            {"name":"Hot", "cost":0.0, "available": true}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                    {
+                        "name":"Toppings",
+                        "options":[
+                            {"name":"Pearl", "cost":0.4, "available": true},
+                            {"name":"White Pearl", "cost":0.7, "available": true},
+                            {"name":"Rainbow Jelly", "cost":0.6, "available": true},
+                            {"name":"Aloe", "cost":0.7, "available": true},
+                            {"name":"Coconut Jelly", "cost":0.5, "available": true},
+                            {"name":"Ai Yu", "cost":0.6, "available": true},
+                            {"name":"Herbal Jelly", "cost":0.7, "available": true},
+                            {"name":"Pudding Jelly", "cost":0.7, "available": true},
+                            {"name":"Red Bean", "cost":0.7, "available": true},
+                            {"name":"3J", "cost":1.4, "available": true},
+                            {"name":"Basil Seeds", "cost":0.4, "available": true},
+                            {"name":"Milk Foam", "cost":0.8, "available": true}
+                        ]
+                    }
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Black Milk Tea",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 3.00,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true}, 
+                            {"name":"Hot", "cost":0.0, "available": true}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                    {
+                        "name":"Toppings",
+                        "options":[
+                            {"name":"Pearl", "cost":0.4, "available": true},
+                            {"name":"White Pearl", "cost":0.7, "available": true},
+                            {"name":"Rainbow Jelly", "cost":0.6, "available": true},
+                            {"name":"Aloe", "cost":0.7, "available": true},
+                            {"name":"Coconut Jelly", "cost":0.5, "available": true},
+                            {"name":"Ai Yu", "cost":0.6, "available": true},
+                            {"name":"Herbal Jelly", "cost":0.7, "available": true},
+                            {"name":"Pudding Jelly", "cost":0.7, "available": true},
+                            {"name":"Red Bean", "cost":0.7, "available": true},
+                            {"name":"3J", "cost":1.4, "available": true},
+                            {"name":"Basil Seeds", "cost":0.4, "available": true},
+                            {"name":"Milk Foam", "cost":0.8, "available": true}
+                        ]
+                    }
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Pearl Milk Tea",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 3.40,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true}, 
+                            {"name":"Hot", "cost":0.0, "available": true}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Caramel Milk Tea",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 3.50,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                    {
+                        "name":"Toppings",
+                        "options":[
+                            {"name":"Pearl", "cost":0.4, "available": true},
+                            {"name":"White Pearl", "cost":0.7, "available": true},
+                            {"name":"Rainbow Jelly", "cost":0.6, "available": true},
+                            {"name":"Aloe", "cost":0.7, "available": true},
+                            {"name":"Coconut Jelly", "cost":0.5, "available": true},
+                            {"name":"Ai Yu", "cost":0.6, "available": true},
+                            {"name":"Herbal Jelly", "cost":0.7, "available": true},
+                            {"name":"Pudding Jelly", "cost":0.7, "available": true},
+                            {"name":"Red Bean", "cost":0.7, "available": true},
+                            {"name":"3J", "cost":1.4, "available": true},
+                            {"name":"Basil Seeds", "cost":0.4, "available": true},
+                            {"name":"Milk Foam", "cost":0.8, "available": true}
+                        ]
+                    }
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Milk Tea w Herbal Jelly",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 3.70,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true},
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Earl Grey Milk Tea w 3J",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 4.4,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true}, 
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Taro Drink",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 3.60,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true}, 
+                            {"name":"Hot", "cost":0.0, "available": true}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                    {
+                        "name":"Toppings",
+                        "options":[
+                            {"name":"Pearl", "cost":0.4, "available": true},
+                            {"name":"White Pearl", "cost":0.7, "available": true},
+                            {"name":"Rainbow Jelly", "cost":0.6, "available": true},
+                            {"name":"Aloe", "cost":0.7, "available": true},
+                            {"name":"Coconut Jelly", "cost":0.5, "available": true},
+                            {"name":"Ai Yu", "cost":0.6, "available": true},
+                            {"name":"Herbal Jelly", "cost":0.7, "available": true},
+                            {"name":"Pudding Jelly", "cost":0.7, "available": true},
+                            {"name":"Red Bean", "cost":0.7, "available": true},
+                            {"name":"3J", "cost":1.4, "available": true},
+                            {"name":"Basil Seeds", "cost":0.4, "available": true},
+                            {"name":"Milk Foam", "cost":0.8, "available": true}
+                        ]
+                    }
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Chocolate Drink",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 3.60,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true}, 
+                            {"name":"Hot", "cost":0.0, "available": true}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                    {
+                        "name":"Toppings",
+                        "options":[
+                            {"name":"Pearl", "cost":0.4, "available": true},
+                            {"name":"White Pearl", "cost":0.7, "available": true},
+                            {"name":"Rainbow Jelly", "cost":0.6, "available": true},
+                            {"name":"Aloe", "cost":0.7, "available": true},
+                            {"name":"Coconut Jelly", "cost":0.5, "available": true},
+                            {"name":"Ai Yu", "cost":0.6, "available": true},
+                            {"name":"Herbal Jelly", "cost":0.7, "available": true},
+                            {"name":"Pudding Jelly", "cost":0.7, "available": true},
+                            {"name":"Red Bean", "cost":0.7, "available": true},
+                            {"name":"3J", "cost":1.4, "available": true},
+                            {"name":"Basil Seeds", "cost":0.4, "available": true},
+                            {"name":"Milk Foam", "cost":0.8, "available": true}
+                        ]
+                    }
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Matcha w Red Bean",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 4.5,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                    {
+                        "name":"Toppings",
+                        "options":[
+                            {"name":"Pearl", "cost":0.4, "available": true},
+                            {"name":"White Pearl", "cost":0.7, "available": true},
+                            {"name":"Rainbow Jelly", "cost":0.6, "available": true},
+                            {"name":"Aloe", "cost":0.7, "available": true},
+                            {"name":"Coconut Jelly", "cost":0.5, "available": true},
+                            {"name":"Ai Yu", "cost":0.6, "available": true},
+                            {"name":"Herbal Jelly", "cost":0.7, "available": true},
+                            {"name":"Pudding Jelly", "cost":0.7, "available": true},
+                            {"name":"3J", "cost":1.4, "available": true},
+                            {"name":"Basil Seeds", "cost":0.4, "available": true},
+                            {"name":"Milk Foam", "cost":0.8, "available": true}
+                        ]
+                    }
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Brown Sugar Ginger Milk Tea",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 3.60,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.0, "available": true}, 
+                            {"name":"Hot", "cost":0.0, "available": true}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                    {
+                        "name":"Toppings",
+                        "options":[
+                            {"name":"Pearl", "cost":0.4, "available": true},
+                            {"name":"White Pearl", "cost":0.7, "available": true},
+                            {"name":"Rainbow Jelly", "cost":0.6, "available": true},
+                            {"name":"Aloe", "cost":0.7, "available": true},
+                            {"name":"Coconut Jelly", "cost":0.5, "available": true},
+                            {"name":"Ai Yu", "cost":0.6, "available": true},
+                            {"name":"Herbal Jelly", "cost":0.7, "available": true},
+                            {"name":"Pudding Jelly", "cost":0.7, "available": true},
+                            {"name":"Red Bean", "cost":0.7, "available": true},
+                            {"name":"3J", "cost":1.4, "available": true},
+                            {"name":"Basil Seeds", "cost":0.4, "available": true},
+                            {"name":"Milk Foam", "cost":0.8, "available": true}
+                        ]
+                    }
+                ],
+                "image_url": ""
+            },
+            {
+                "name": "Milk Tea w Red Bean & Pudding Jelly",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 3.60,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": true}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": true},
+                            {"name":"30%", "cost": 0.0, "available": true},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": true},
+                            {"name":"100%", "cost": 0.0, "available": true}
+                        ]
+                    }],
+                "optional_options": [
+                    {
+                        "name":"Toppings",
+                        "options":[
+                            {"name":"Pearl", "cost":0.4, "available": true},
+                            {"name":"White Pearl", "cost":0.7, "available": true},
+                            {"name":"Rainbow Jelly", "cost":0.6, "available": true},
+                            {"name":"Aloe", "cost":0.7, "available": true},
+                            {"name":"Coconut Jelly", "cost":0.5, "available": true},
+                            {"name":"Ai Yu", "cost":0.6, "available": true},
+                            {"name":"Herbal Jelly", "cost":0.7, "available": true},
+                            {"name":"Pudding Jelly", "cost":0.7, "available": true},
+                            {"name":"Red Bean", "cost":0.7, "available": true},
+                            {"name":"3J", "cost":1.4, "available": true},
+                            {"name":"Basil Seeds", "cost":0.4, "available": true},
+                            {"name":"Milk Foam", "cost":0.8, "available": true}
+                        ]
+                    }
+                ],
+                "image_url": ""
+            }
+        ]
+    }
+}
