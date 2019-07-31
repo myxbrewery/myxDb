@@ -195,7 +195,7 @@ async function pgLoadMenu(uid){
     }
 }
 
-async function findLatestMenu(uid){
+async function getLatestMenu(uid, orderByCategory=false){
     /* 
     Handles logic for checking if menu has expired past timestamp. 
     If cached menu has expired past TTL, invoke pg function to renew.
@@ -208,22 +208,23 @@ async function findLatestMenu(uid){
             return [cached_menus[uid]["menu"], cached_menus[uid]["idxed_menu"]];
         }
     }
-    var menu = await pgLoadMenu(uid);
-    let processed_menu = await postprocess_menu(menu);
+    const menu = await pgLoadMenu(uid);
+    const menuByCategory = _orderMenuByCategory(menu)
+    const menuById = _orderMenuById(menu)
+
     cached_menus[uid] = {
-        "menu": processed_menu[0],
-        "idxed_menu": processed_menu[1],
+        "menu": menuByCategory,
+        "idxed_menu": menuById,
         "timestamp": new Date()
     };
-    return processed_menu;
+
+    return orderByCategory ? menuByCategory : menuById;
 }
 
-async function postprocess_menu(menu){
-    /* 
-    Menu is a list of rows returned from PG database. 
-    For the purpose of our functionalities, we want two different formats:
-    One: For consumers, organize by category
-    {
+function _orderMenuByCategory(menu) {
+    /*
+    E.g.
+        {
         "Mains":{
             "id": 1,
             "name": "Chicken Rice"
@@ -234,34 +235,41 @@ async function postprocess_menu(menu){
             "name":...
         }
     }
-    Two: For quick calculation and verification, order by ID (as K/V pairs)
+    */
+    if (!menu) return false;
+
+    return menu.reduce((processedMenu, item) => {
+        const { category } = item;
+
+        if (!(category in processedMenu)) processedMenu[category] = [];
+        processedMenu[category].push(item)
+
+        return processedMenu
+    }, {})
+}
+
+function _orderMenuById(menu){
+    /*
+    E.g.
     {
         1: {"name": "Chicken Rice", ...}
         2: {"name": ...}
     }
-    Returns both as an index
     */
-    if(!menu) return [false, false]
-    var returnable_menu = {}
-    var id_indexed_menu = {}
-    menu.forEach(item=>{
-        if(!(item.category in returnable_menu)){
-            returnable_menu[item.category] = []
-        }
-        returnable_menu[item.category].push(item)
-        id_indexed_menu[item.id] = item;
-    })
-    return [returnable_menu, id_indexed_menu]
-}
+    if (!menu) return false;
 
+    return menu.reduce((processedMenu, item) => {
+        processedMenu[item.id] = item
+
+        return processedMenu
+    }, {})
+}
 
 async function getStallMenu(request, response){
     // GET Request for menu
     // Sample request: {base_address}/menu/ch1ck3n
     const uid = request.params.uid;
-    let full_menus = await findLatestMenu(uid);
-    // 0 index is the customer facing categorized menu
-    let menu = full_menus[0]
+    const menu = await getLatestMenu(uid);
     if (menu === -1 || !menu) response.status(400).json({"message":"No stall found; errored"});
     else if (menu === -2) response.status(400).json({"message":"Failed to retrieve menu"});
     else response.status(200).json(menu);
@@ -577,8 +585,7 @@ async function verifyOrder(order_package){
     let items = order_package.orders;
     var total_payment = 0
     let stall_uid = metadata.uid;
-    let full_menus = await findLatestMenu(stall_uid);
-    let menu = full_menus[1]
+    const menu = await getLatestMenu(stall_uid, true);
     for(i in items){
         let item_id = items[i]["item_id"];
         if(items[i]["base_price"] != menu[item_id]["base_price"]){
@@ -997,23 +1004,24 @@ async function favoriteStall(request, response){
 
 
 module.exports = {
-  getLocations,
-  getStalls,
-  getStallMenu,
-  getPaylahUrl,
-  getLiveOrders,
-  getStallOrders,
-  getCustomerOrders,
-  createCustomer,
   checkId,
-  getCustomers,
-  transitionOrder, // PUT 
+  createCustomer,
   favoriteStall,
-  putStock,
-  putReceiptStatus, 
-  resetOrder, // UTIL
+  findLatestMenu: getLatestMenu,
   getAllOrderDetails,
-  upsertMenu,
+  getCustomerOrders,
+  getCustomers,
+  getLiveOrders,
+  getLocations,
+  getPaylahUrl,
+  getStallMenu,
+  getStallOrders,
+  getStalls,
   postOrder,
+  putReceiptStatus,
+  putStock,
+  resetOrder, // UTIL
   stalls,
+  transitionOrder, // PUT
+  upsertMenu,
 }
