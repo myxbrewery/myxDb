@@ -2,7 +2,10 @@ const Pool = require('pg').Pool
 const fs = require('fs');
 
 const types = require('pg').types;
-types.setTypeParser(types.builtins.NUMERIC, parseFloat);
+types.setTypeParser(1700, function(val){
+  return parseFloat(val)
+})
+// types.builtins.NUMERIC, parseFloat);
 
 var format = require('pg-format');
 
