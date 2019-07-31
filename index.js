@@ -77,7 +77,14 @@ app.get('/', (request, response) =>{
 
 app.get('/assets/images/:image_path', (request, response)=>{
   let image_url = request.params.image_path;
+  console.log(image_url);
   response.sendFile(__dirname + '/assets/images/' + image_url);
+});
+
+app.get('/assets/images/gong_cha/:image_path', (request, response)=>{
+  let image_url = request.params.image_path;
+  console.log(image_url);
+  response.sendFile(__dirname + '/assets/images/gong_cha/' + image_url);
 });
 
 app.get('/assets/icons/:icon_path', (request, response)=>{

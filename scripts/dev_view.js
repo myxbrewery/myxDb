@@ -133,7 +133,6 @@ function populateCards(demographic){
 }
 
 function advanceOrderStatus(order){
-  console.log(order)
   var server_url = "https://www.myxbrewapi.com/order/";
   var dev_url = "http://10.12.254.221:11235/order/";
   let target_url = server_url + order.stall_id + '/' + order.id
