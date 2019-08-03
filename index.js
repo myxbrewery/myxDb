@@ -41,18 +41,7 @@ function handler (req, res) {
 var io = sockets.startSocketServer(socket_app);
 socket_app.listen(11236);
 
-// <----- ROUTES ----->
-app.get('/orders/stall/:uid', db.getStallOrders);
-app.get('/orders/customer/:customer_id', db.getCustomerOrders);
-app.get('/customers', db.getCustomers);
-app.get('/checkId/:id', db.checkId);
-app.get('/locations', db.getLocations);
-app.get('/stalls', db.getStalls);
-app.get('/menu/:uid', db.getStallMenu);
-app.get('/paylah/:cost', db.getPaylahUrl);
-
 var dbPoll = (request, response) =>{
-  console.log("DB Polling")
   setTimeout(()=>{
     sockets.stall_update(io);
     sockets.customer_update(io);
@@ -60,12 +49,31 @@ var dbPoll = (request, response) =>{
   response.status(200).send(request.user_response);
 }
 
+var emitShelf = (request, response, next) =>{
+  sockets.emit_shelf(io, request.shelf_data);
+  request.user_response = {"message": request.shelf_data}
+  next();
+}
+
+// <----- ROUTES ----->
+app.get('/orders/stall/:uid', db.getStallOrders);
+app.get('/orders/customer/:customer_id', db.getCustomerOrders);
+app.get('/customers', db.getCustomers);
+app.get('/checkId/:id', db.checkId);
+app.get('/locations', db.getLocations);
+app.get('/retrieve/:order_id', [db.retrieve, emitShelf, dbPoll]);
+app.get('/stalls/', db.getStalls);
+app.get('/stalls/:lat/:long', db.getStalls);
+app.get('/menu/:uid', db.getStallMenu);
+app.get('/paylah/:cost', db.getPaylahUrl);
+
 app.get('/dbpoll', dbPoll)
 
 app.post('/customer', [db.createCustomer, dbPoll]);
 app.post('/order', [db.postOrder, dbPoll]);
 app.post('/menu', [db.upsertMenu]);
 
+app.put('/depositItem/:shelf/:item_cat', [db.depositItem, emitShelf, dbPoll])
 app.put('/favorite', [db.favoriteStall, dbPoll]);
 app.put('/order/:uid/:orderid', [db.transitionOrder, dbPoll]);
 app.put('/receipt/:uid/:receiptid', [db.putReceiptStatus, dbPoll]);

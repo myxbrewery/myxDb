@@ -1,6 +1,7 @@
 id;name;image_id;lat;long;aggregation
-1;SUTD Canteen;;;;true
-2;Gom Gom;;;;false
-3;Montcalzone;;;;false
+1;SUTD Canteen;;1.341242;103.962990;true
+2;Gom Gom;;1.340767;103.962405;false
+3;Montcalzone;;1.340448;103.962555;false
 4;Crooked Cooks;;;;false
-5;Gong Cha;;;;false
+5;Gong Cha;;1.340665;103.963588;false
+6;Myx;;1.340576;103.963051;false

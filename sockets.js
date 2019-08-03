@@ -2,20 +2,6 @@ const db = require('./pg_queries')
 var socketio = require('socket.io'),
   io, clients = {};
 
-// const parseStallStatuses = (all_orders) =>{
-//   stall_dict = {};
-//   all_orders.forEach((order)=>{
-//     if(!(order.stall_id in stall_dict)){
-//       stall_dict[order.stall_id] = [];
-//     }
-//     if(order.status_id > 1){
-//       stall_dict[order.stall_id].push(order);
-//     }
-//   });
-//   return stall_dict;
-// };
-
-
 const parseCustomerStatuses = (all_orders) =>{
   let customer_dict = {};
   let stalls = Object.keys(all_orders);
@@ -119,4 +105,7 @@ module.exports = {
       console.log(err);
     })
   },
+  emit_shelf: (io, shelf_data) => {
+    io.to('myx').emit('shelf', shelf_data);
+  }
 }

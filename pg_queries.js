@@ -93,12 +93,12 @@ async function getAllOrders(){
         let stall_uid = row.uid;
         let stall_orders = stall_uid + "_orders";
         let stall_menu = stall_uid + "_menu";
-        nested_results = await pool.query(format("SELECT %I.id, customer_id, name, start_datetime as time, receipt_id as receipt, total_price as price, status_id as status, delivery_time FROM %I \
+        nested_results = await pool.query(format("SELECT %I.id, customer_id, name, start_datetime as time, receipt_id as receipt, %I.compulsory_options, %I.optional_options, total_price as price, status_id as status, delivery_time FROM %I \
             INNER JOIN %I ON %I.item_id = %I.id \
             WHERE %I.status_id >= 0 \
             AND %I.start_datetime >= now()::date\
             ORDER BY %I.start_datetime DESC", 
-            stall_orders, stall_orders, stall_menu, stall_orders, stall_menu, stall_orders, stall_orders, stall_orders), 
+            stall_orders, stall_orders, stall_orders, stall_orders, stall_menu, stall_orders, stall_menu, stall_orders, stall_orders, stall_orders), 
             [])
             .then(results=>{return results.rows;})
             .catch(error =>{throw error});
@@ -128,13 +128,55 @@ const checkId = (request, response) => {
     });
 }
 
-// Get all stalls
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = deg2rad(lon2-lon1); 
+    var a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ; 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; // Distance in km
+    return d;
+}
+  
+function deg2rad(deg) {
+    return deg * (Math.PI/180)
+}
+
 const getStalls = (request, response) => {
-    let lat = request.params.lat;
-    let long = request.params.long;
-    let res = pool.query('SELECT uid, lat, long FROM stalls')
+    // As we cannot use dots in URL params, we use the character 'd'
+    // E.g. latitude 1.234 -> "1d234"
+    if(typeof request.params.lat !== "undefined"){
+        var lat = parseFloat(request.params.lat.split('d').join('.'));
+        var long = parseFloat(request.params.long.split('d').join('.'));
+    }
+    else{
+        var lat = undefined;
+        var long = undefined;
+    }
+    let res = pool.query('SELECT * FROM stalls INNER JOIN locations ON stalls.location = locations.id')
         .then(res=>{
-            response.status(200).send(res.rows)
+            let data = res.rows
+            if(typeof lat !== "undefined"){
+                let distances = []
+                data.forEach(stall=>{
+                    if(stall.lat!=null && stall.long != null) distance = getDistanceFromLatLonInKm(lat, long, stall.lat, stall.long);
+                    else distance = 999
+                    distances.push({
+                        'name': stall.uid,
+                        'distance': distance,
+                        'data': stall
+                    })
+                })
+                distances.sort((a, b)=>{return a.distance > b.distance})
+                response.status(200).send(distances.map(elem=>elem.data))
+            }
+            else{
+                response.status(200).send(res.rows)
+            }
         })
         .catch(error=>{
             console.log(error);
@@ -142,14 +184,6 @@ const getStalls = (request, response) => {
         })
 }
 
-async function stalls(){
-    var res = await pool.query('SELECT uid FROM stalls')
-        .then((results) => {
-            return results.rows;
-        })
-        .catch(err=>console.log(err));
-    return res;
-}
 
 const getLocations = (request, response) => {
     // Get all locations. To be refined based on proximity to user
@@ -168,7 +202,6 @@ async function getLatestStallMenuVersion(stallUid){
     var version = await pool.query('SELECT * FROM stalls \
         WHERE uid = $1', [stallUid])
         .then((results) => {
-            // console.log(results.rows);
             if(results.rows.length == 0) return 0;
             return results.rows[0].latest_menu_version;
         })
@@ -204,14 +237,14 @@ async function getLatestMenu(uid, orderByCategory=false){
     if(uid in cached_menus){
         // 5s ttl
         if(new Date() - cached_menus[uid]["timestamp"] < 5*1000){
-            console.log("Menu cached!")
-            return [cached_menus[uid]["menu"], cached_menus[uid]["idxed_menu"]];
+            console.log("Menu cached!");
+            return orderByCategory ? cached_menus[uid]["menu"] : cached_menus[uid]["idxed_menu"];
         }
     }
-    const menu = await pgLoadMenu(uid);
-    const menuByCategory = _orderMenuByCategory(menu)
-    const menuById = _orderMenuById(menu)
 
+    const menu = await pgLoadMenu(uid);
+    const menuByCategory = _orderMenuByCategory(menu);
+    const menuById = _orderMenuById(menu);
     cached_menus[uid] = {
         "menu": menuByCategory,
         "idxed_menu": menuById,
@@ -259,17 +292,25 @@ function _orderMenuById(menu){
     if (!menu) return false;
 
     return menu.reduce((processedMenu, item) => {
-        processedMenu[item.id] = item
-
-        return processedMenu
+        processedMenu[item.id] = item;
+        return processedMenu;
     }, {})
+}
+
+async function stalls(){
+    var res = await pool.query('SELECT uid FROM stalls')
+        .then((results) => {
+            return results.rows;
+        })
+        .catch(err=>console.log(err));
+    return res;
 }
 
 async function getStallMenu(request, response){
     // GET Request for menu
     // Sample request: {base_address}/menu/ch1ck3n
     const uid = request.params.uid;
-    const menu = await getLatestMenu(uid);
+    const menu = await getLatestMenu(uid, true);
     if (menu === -1 || !menu) response.status(400).json({"message":"No stall found; errored"});
     else if (menu === -2) response.status(400).json({"message":"Failed to retrieve menu"});
     else response.status(200).json(menu);
@@ -289,9 +330,11 @@ const getStallOrders = (request, response) => {
 const createCustomer = (request, response, next) => {
     const user_details = request.body;
     pool.query('INSERT INTO customers (id, email, age, name, image, diet) VALUES ($1, $2, $3, $4, $5, $6)', [user_details.id, user_details.email, user_details.age, user_details.name, user_details.image, user_details.diet], (error, results) => {
-        if(error) response.status(400).json({"message":error});
-        request.user_response = { "message":"Customer added successfully" };
-        next();
+        if(error) response.status(400).json({"message":error.detail});
+        else{
+            request.user_response = { "message":"Customer added successfully" };
+            next();
+        }
     });
 }
 
@@ -336,6 +379,7 @@ const menu_validate = (menu) => {
         }
         menu[category].forEach(item=>{
             let item_name = item["name"];
+            // Commenting this constraint as Gong Cha has identical items in the menu
             // if (item_set.has(item_name)) error_log["Formatting"].push({[item_name]:"appears more than once"});
             // else item_set.add(item_name);
             let field_type_assoc = {
@@ -357,8 +401,6 @@ const menu_validate = (menu) => {
                     })
                 }
                 // Ensure all are correct type
-                // console.log(typeof(item[item_field]), field_type_assoc[item_field])
-                // console.log(typeof(item[item_field])field_type_assoc[item_field])
                 if(!(field_type_assoc[item_field].has(typeof(item[item_field])))){
                     let error_message = "Must be type " + field_type_assoc[item_field].join(" or ");
                     error_log["Field Rules"].push({[error_name]:error_message})
@@ -381,7 +423,6 @@ const menu_validate = (menu) => {
             if (item["base_price"] < 0) {
                 error_log["Formatting"].push({[error_name]: "Must be more than 0"})
             };
-            // console.log(item["compulsory_options", "optional_options"]);
             ["compulsory_options", "optional_options"].forEach(option_cat=>{
                 if(item[option_cat].length!=0){
                     let error_name = item + " " + option_cat
@@ -410,6 +451,103 @@ const menu_validate = (menu) => {
         if(error_log[possible_error].length != 0) errored = true
     });
     return [errored, error_log]
+}
+
+
+async function retrieve(request, response){
+    var order_id = request.params.order_id;
+    var order = await pool.query("SELECT * FROM myx_orders INNER JOIN myx_menu ON myx_menu.id = myx_orders.item_id WHERE id = $1", [order_id])
+                    .then(res=>{
+                        if(res.length==0) return false;
+                        return res.rows[0]
+                    });
+    if(!order) {
+        response.status(400).json({"message": "No order id found"});
+        return false;
+    };
+    let item_id_mapping = {
+        "Black Milk Tea": 1,
+        "Earl Grey Milk Tea": 2,
+        "Black Milk Tea With Pearls": 3,
+        "Earl Grey Milk Tea With Pearls": 4,
+    }
+    var shelf = await pool.query("SELECT * FROM shelving WHERE drink = $1 LIMIT 1", [item_id_mapping[order.name]]).then(
+        res=>{
+            if(res.rows.length == 0) {
+                return -1;
+            }
+            else return res.rows[0];
+        });
+    if(shelf === -1) {
+        response.status(400).send({"message": "Nothing in shelf that matches desired order"});
+        return false;
+    }
+    else{
+        request.shelf_data = {
+            'slot': shelf.slot,
+            'direction': -1
+        }
+        request.user_response = {
+            "message": "Success, retrieving your order from slot " + shelf.slot
+        }
+        var update_shelf = await pool.query("UPDATE shelving SET drink = 0 WHERE slot = $1", [shelf.slot])
+            .then(res=>{console.log(res); return true})
+            .catch(err=>{console.log(err); return false});
+        if(update_shelf) {
+            pool.query('UPDATE myx_orders SET status_id = 4 WHERE myx_orders.id = $1', [order_id], (error, results) => {
+                if(error){
+                  console.log(error);
+                  response.status(400).send({"Error": error.detail});
+                }
+                request.user_response = {
+                  "message":"Orders transitioned",
+                  "order": order_id,
+                  "new_status": order_status
+                };
+              })
+            next();
+        }
+        else response.status(400).send({"message": "Failed to update slot drink status"});
+    }
+}
+
+async function depositItem(request, response, next){
+    /*
+    Deposits drink of specified name into first empty slot of database
+    
+    Returns:
+        [type] -- [description]
+    */
+    var item_cat = request.params.item_cat
+    let slot = pool.query('SELECT * FROM shelving WHERE drink = 0 ORDER BY slot ASC LIMIT 1', [])
+        .then(res=>{
+            console.log("Deposited", shelf, item_cat);
+            return res.slot;
+        })
+        .catch(err=>{
+            console.log(err) ;
+            return false;
+        });
+    if(!slot) response.status(400).send({"Error": err});
+    else{
+        let success = pool.query('UPDATE shelving SET drink = $1 WHERE slot = $2', [item_cat, slot])
+            .then(res=>{
+                console.log("Drink updated", res);
+                return true
+            })
+            .catch(err=>{
+                console.log(err);
+                return false;
+            })
+        if(!success) response.status(400).send({"Error": err});
+        else {
+            request.shelf_data = {
+                'slot': shelf.slot,
+                'direction': 1
+            }
+            next();
+        }
+    }
 }
 
 
@@ -473,9 +611,9 @@ async function upsertMenu (request, response){
         return false;
     }
     if(version === null || version === undefined){
-        console.log("Creating tables", menu_table, order_table, receipt_table);
         var order_table = stall_uid+"_orders";
         var receipt_table = stall_uid+"_receipts";
+        console.log("Creating tables", menu_table, order_table, receipt_table);
         var menu_creation_string = format("CREATE TABLE %I( \
             id SERIAL PRIMARY KEY, \
             name VARCHAR NOT NULL, \
@@ -515,7 +653,6 @@ async function upsertMenu (request, response){
         for (table_string in table_strings){
             var errored = await pool.query(table_strings[table_string], [])
             .then(results=>{
-                console.log("Table created");
                 return false;
             })
             .catch(error=>{
@@ -523,7 +660,6 @@ async function upsertMenu (request, response){
                 return true;
             });            
             if(errored) break;
-            else console.log(errored);
         }
         version = 1;
     }
@@ -584,7 +720,14 @@ async function verifyOrder(order_package){
     let items = order_package.orders;
     var total_payment = 0
     let stall_uid = metadata.uid;
-    const menu = await getLatestMenu(stall_uid, true);
+    let menu = await getLatestMenu(stall_uid, false);
+    if(metadata.menu_version != menu[Object.keys(menu)[0]].menu_version) {
+        return {
+            status:false,
+            error:"User menu version not same as latest DB",
+            payment:0
+        }
+    };
     for(i in items){
         let item_id = items[i]["item_id"];
         if(items[i]["base_price"] != menu[item_id]["base_price"]){
@@ -596,20 +739,8 @@ async function verifyOrder(order_package){
             }
         }
         total_payment += parseFloat(items[i]["base_price"]) * 100
-        if(metadata.menu_version != menu[item_id].menu_version) {
-            console.log("Menu version mismatch")
-            return {
-                status:false,
-                error:"User menu version not same as latest DB",
-                payment:0
-            }
-        };
         // Payment consolidation for compulsory options
         if(items[i]["compulsory_options"].length != menu[item_id]["compulsory_options"].length) {
-            // console.log("Different number of compulsory options supplied from actual")
-            // console.log(items[i]["compulsory_options"])
-            // console.log("VERSUS")
-            // console.log(menu[item_id]["compulsory_options"])
             return {
                 status:false,
                 error:"Different number of compulsory options supplied from actual",
@@ -642,7 +773,6 @@ async function verifyOrder(order_package){
             let category_exists = false;
             let category_choice_exists = false;
             menu[item_id]["compulsory_options"].forEach(category=>{
-                console.log(category["name"], "VERSUS", user_option_category["name"])
                 // "Choice of Noodles" == "Choice of Noodles"
                 if(category["name"] === user_option_category["name"]){
                     category_exists = true;
@@ -791,7 +921,6 @@ async function receipt_insert(order_package, timestamp){
                             return misc_res;
                         })
                         .catch(err=>{
-                            console.log(err);
                             return false;
                         });
     if(!add_receipt) return false;
@@ -801,7 +930,6 @@ async function receipt_insert(order_package, timestamp){
                         return receipt_id;
                     })
                     .catch((err=>{
-                        console.log(err);
                         return false;
                     }))
     receipt_semaphore = false;
@@ -813,10 +941,9 @@ async function postOrder(request, response, next){
     let verification_check = await verifyOrder(request.body).catch(error=>{
         console.log(error);
         response.status(400).send({"message": "Verification check failed for order"});
-        return;
+        next()
     });
-    console.log(verification_check);
-    // == true just for readability
+    // === true is for readability Yustynn dont judge me
     if(verification_check.status === true){
         let order_package = request.body;
         var timestamp = new Date();
@@ -825,9 +952,7 @@ async function postOrder(request, response, next){
         let receipt_id = await receipt_insert(order_package, timestamp);
         receipt_semaphore = false;
         if(!receipt_id){
-            // request.user_response = {"Error": "Failed to add/retrieve receipt"};
             response.status(400).send({"message": "Failed to add/retrieve receipt"});
-            // next();
             return;
         }
         let uid = order_package.metadata.uid;
@@ -844,6 +969,7 @@ async function postOrder(request, response, next){
                     request.user_response = {"Error": err};
                 })
         })
+        request.user_response = {"Success": "Orders uploaded"};
         next();
     }
     else{
@@ -931,20 +1057,36 @@ const putStock = (request, response, next) => {
     const item_details = request.body;
     let uid = request.params.uid;
     let item_id = request.params.itemid;
-    if(!('in_stock' in item_details)) response.status(400).send({"Error": "No stock key"})
-    pool.query(format('UPDATE %I_menu SET in_stock = $1 WHERE %I_menu.id = $2', uid, uid), 
-                      [item_details['in_stock'], item_id], (error, results) => {
-        if(error){
-            console.log(error);
-            response.status(400).send({"Error": error.detail});
+    // console.log('putStock called', uid, item_id)
+    // console.log(uid == undefined, item_id == undefined)
+    if(uid == "undefined" || item_id == "undefined"){
+        response.status(400).send({"Error": "Undefined item or stall id"});
+    }
+    else{
+        if(!('in_stock' in item_details)) {
+            response.status(400).send({"Error": "No stock key"});
         }
         else{
-            request.user_response = {
-                "status":true
-            };
-            next();
+            try{
+                pool.query(format('UPDATE %I_menu SET in_stock = $1 WHERE %I_menu.id = $2', uid, uid), 
+                                  [item_details['in_stock'], item_id], (error, results) => {
+                    if(error){
+                        console.log(error);
+                        response.status(400).send({"Error": error.detail});
+                    }
+                    else{
+                        request.user_response = {
+                            "status":true
+                        };
+                        next();
+                    }
+                })
+            }
+            catch{
+                response.status(400).send({"Error": "error thrown"});
+            }
         }
-    })
+    }
 }
 
 const getPaylahUrl = (request, response) => {
@@ -960,12 +1102,13 @@ const getPaylahUrl = (request, response) => {
 }
 
 async function getAllOrderDetails(request, response){
+    // Returns all orders in a dictionary organized by stall
     let res = await getAllOrders();
     orders = []
     let stalls = Object.keys(res);
-    stalls.forEach(elem=>{
-        res[stalls].forEach(order=>{
-            order['stall_id'] = elem
+    stalls.forEach(stall=>{
+        res[stall].forEach(order=>{
+            order['stall_id'] = stall
             orders.push(order)
         })
     })    
@@ -973,6 +1116,7 @@ async function getAllOrderDetails(request, response){
 }
 
 async function favoriteStall(request, response){
+    // PUT request for updating of favorite stalls
     var payload = request.body;
     let customer_id = payload.customer_id;
     let stall_uid = payload.stall_uid;
@@ -990,16 +1134,15 @@ async function favoriteStall(request, response){
     if (status) current_favorite_set.add(stall_uid);
     else current_favorite_set.delete(stall_uid);
     let updated = await pool.query('UPDATE customers SET favorites = $1 WHERE id = $2', [Array.from(current_favorite_set), customer_id])
-                    .then(res=>{
-                        return True
-                    })
-                    .catch(err=>{
-                        return False
-                    })
+        .then(res=>{
+            return True
+        })
+        .catch(err=>{
+            return False
+        })
     if (updated) response.status(200).json(orders);
     else response.status(400).json({"message":"Unable to update customers table"});
 }
-
 
 
 module.exports = {
@@ -1016,11 +1159,13 @@ module.exports = {
   getStallMenu,
   getStallOrders,
   getStalls,
+  stalls,
   postOrder,
   putReceiptStatus,
   putStock,
   resetOrder, // UTIL
-  stalls,
   transitionOrder, // PUT
   upsertMenu,
+  retrieve,
+  depositItem
 }

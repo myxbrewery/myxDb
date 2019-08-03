@@ -13,7 +13,6 @@ except:
 
 cur = conn.cursor()
 # cur.execute("CREATE EXTENSION IF NOT EXISTS citext")
-# What if Google and FB have clashing ids?
 cur.execute("CREATE TABLE customers(id INTEGER PRIMARY KEY, \
     email VARCHAR(255), \
     age INTEGER, \
@@ -42,6 +41,9 @@ cur.execute("CREATE TABLE stalls(id SERIAL PRIMARY KEY, \
     card_settings JSON, \
     latest_menu_version INTEGER, \
     waiting_time NUMERIC)")
+cur.execute('CREATE TABLE shelving(slot INTEGER, drink INTEGER)')
+for i in range(1, 17):
+    cur.execute('INSERT INTO shelving(slot, drink) VALUES (%s, 0)', (i,))
 cur.execute("CREATE TABLE status(id INTEGER PRIMARY KEY, \
     name VARCHAR(255))")
 
@@ -71,7 +73,7 @@ def execute_pg_query(query, args):
 # conn.commit()
 # Execute these within postgres
 # \copy locations(id, name, image_id, lat, long, aggregation) FROM '/home/tze/capstone/myxDb/data/locations.csv' DELIMITER ';' CSV HEADER;
-# \copy status(id, name) FROM '/home/ubuntu/myxDb/data/status.csv' DELIMITER ';' CSV HEADER;
-# \copy stalls(location, name, open, halal, qr_link, opening_time, closing_time, image_url, icon_url, uid, hashed_pw, card_settings, latest_menu_version, waiting_time) FROM '/home/ubuntu/myxDb/data/stalls.csv' DELIMITER ';' CSV HEADER;
+# \copy status(id, name) FROM '/home/tze/capstone/myxDb/data/status.csv' DELIMITER ';' CSV HEADER;
+# \copy stalls(location, name, open, halal, qr_link, opening_time, closing_time, image_url, icon_url, uid, hashed_pw, card_settings, latest_menu_version, waiting_time) FROM '/home/tze/capstone/myxDb/data/stalls.csv' DELIMITER ';' CSV HEADER;
 
 # a = execute_pg_query("SELECT * FROM customers", ())
