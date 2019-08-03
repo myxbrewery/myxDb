@@ -50,6 +50,8 @@ var dbPoll = (request, response) =>{
 }
 
 var emitShelf = (request, response, next) =>{
+  console.log("Emitting shelf data")
+  console.log(request.shelf_data)
   sockets.emit_shelf(io, request.shelf_data);
   request.user_response = {"message": request.shelf_data}
   next();
@@ -73,7 +75,7 @@ app.post('/customer', [db.createCustomer, dbPoll]);
 app.post('/order', [db.postOrder, dbPoll]);
 app.post('/menu', [db.upsertMenu]);
 
-app.put('/depositItem/:shelf/:item_cat', [db.depositItem, emitShelf, dbPoll])
+app.put('/depositItem/:item_cat', [db.depositItem, emitShelf, dbPoll])
 app.put('/favorite', [db.favoriteStall, dbPoll]);
 app.put('/order/:uid/:orderid', [db.transitionOrder, dbPoll]);
 app.put('/receipt/:uid/:receiptid', [db.putReceiptStatus, dbPoll]);
@@ -87,6 +89,12 @@ app.get('/assets/images/:image_path', (request, response)=>{
   let image_url = request.params.image_path;
   console.log(image_url);
   response.sendFile(__dirname + '/assets/images/' + image_url);
+});
+
+app.get('/assets/images/stalls/:image_path', (request, response)=>{
+  let image_url = request.params.image_path;
+  console.log(image_url);
+  response.sendFile(__dirname + '/assets/images/stalls/' + image_url);
 });
 
 app.get('/assets/images/gong_cha/:image_path', (request, response)=>{

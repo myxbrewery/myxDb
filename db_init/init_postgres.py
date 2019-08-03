@@ -22,7 +22,7 @@ cur.execute("CREATE TABLE customers(id INTEGER PRIMARY KEY, \
     favorites TEXT[])")
 cur.execute("CREATE TABLE locations(id INTEGER PRIMARY KEY, \
     name VARCHAR(255) NOT NULL, \
-    image_id VARCHAR(255), \
+    image_url VARCHAR(255), \
     lat NUMERIC, \
     long NUMERIC, \
     aggregation BOOL)")
@@ -40,7 +40,10 @@ cur.execute("CREATE TABLE stalls(id SERIAL PRIMARY KEY, \
     hashed_pw VARCHAR, \
     card_settings JSON, \
     latest_menu_version INTEGER, \
-    waiting_time NUMERIC)")
+    waiting_time NUMERIC, \
+    description TEXT, \
+    price INTEGER, \
+    tags TEXT[])")
 cur.execute('CREATE TABLE shelving(slot INTEGER, drink INTEGER)')
 for i in range(1, 17):
     cur.execute('INSERT INTO shelving(slot, drink) VALUES (%s, 0)', (i,))
@@ -63,6 +66,15 @@ def execute_pg_query(query, args):
         print(e)
         return False
 
+dev_dest = '/home/tze/capstone'
+prod_dest = '/home/ubuntu'
+dest = dev_dest
+print(f"""
+\copy locations(id, name, image_url, lat, long, aggregation) FROM '%s/myxDb/data/locations.csv' DELIMITER ';' CSV HEADER;
+\copy status(id, name) FROM '%s/myxDb/data/status.csv' DELIMITER ';' CSV HEADER;
+\copy stalls(location, name, open, halal, qr_link, opening_time, closing_time, image_url, icon_url, uid, hashed_pw, card_settings, latest_menu_version, waiting_time, description, price, tags) FROM '%s/myxDb/data/stalls.csv' DELIMITER ';' CSV HEADER;
+""" %(dest, dest, dest))
+
 # csv_table_mapping = {
 #     "category.csv": "category"
 # }
@@ -72,8 +84,5 @@ def execute_pg_query(query, args):
 # cur.copy_from(f, 'users', sep=',')
 # conn.commit()
 # Execute these within postgres
-# \copy locations(id, name, image_id, lat, long, aggregation) FROM '/home/tze/capstone/myxDb/data/locations.csv' DELIMITER ';' CSV HEADER;
-# \copy status(id, name) FROM '/home/tze/capstone/myxDb/data/status.csv' DELIMITER ';' CSV HEADER;
-# \copy stalls(location, name, open, halal, qr_link, opening_time, closing_time, image_url, icon_url, uid, hashed_pw, card_settings, latest_menu_version, waiting_time) FROM '/home/tze/capstone/myxDb/data/stalls.csv' DELIMITER ';' CSV HEADER;
 
 # a = execute_pg_query("SELECT * FROM customers", ())

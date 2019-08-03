@@ -1,4 +1,4 @@
-id;name;image_id;lat;long;aggregation
+id;name;image_url;lat;long;aggregation
 1;SUTD Canteen;;1.341242;103.962990;true
 2;Gom Gom;;1.340767;103.962405;false
 3;Montcalzone;;1.340448;103.962555;false

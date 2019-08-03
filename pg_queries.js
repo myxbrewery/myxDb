@@ -161,18 +161,16 @@ const getStalls = (request, response) => {
         .then(res=>{
             let data = res.rows
             if(typeof lat !== "undefined"){
-                let distances = []
+                let response_data = []
                 data.forEach(stall=>{
                     if(stall.lat!=null && stall.long != null) distance = getDistanceFromLatLonInKm(lat, long, stall.lat, stall.long);
                     else distance = 999
-                    distances.push({
-                        'name': stall.uid,
-                        'distance': distance,
-                        'data': stall
-                    })
+                    let tmp_stall_data = stall;
+                    tmp_stall_data.distance = distance;
+                    response_data.push(tmp_stall_data);
                 })
-                distances.sort((a, b)=>{return a.distance > b.distance})
-                response.status(200).send(distances.map(elem=>elem.data))
+                response_data.sort((a, b)=>{return a.distance > b.distance})
+                response.status(200).send(response_data)
             }
             else{
                 response.status(200).send(res.rows)
@@ -454,12 +452,15 @@ const menu_validate = (menu) => {
 }
 
 
-async function retrieve(request, response){
+async function retrieve(request, response, next){
     var order_id = request.params.order_id;
-    var order = await pool.query("SELECT * FROM myx_orders INNER JOIN myx_menu ON myx_menu.id = myx_orders.item_id WHERE id = $1", [order_id])
+    var order = await pool.query("SELECT * FROM myx_orders INNER JOIN myx_menu ON myx_menu.id = myx_orders.item_id WHERE myx_orders.id = $1 AND myx_orders.status_id < 4 LIMIT 1", [order_id])
                     .then(res=>{
                         if(res.length==0) return false;
                         return res.rows[0]
+                    })
+                    .catch(err=>{
+                        console.log("Retrieve failed", err)
                     });
     if(!order) {
         response.status(400).json({"message": "No order id found"});
@@ -467,10 +468,12 @@ async function retrieve(request, response){
     };
     let item_id_mapping = {
         "Black Milk Tea": 1,
-        "Earl Grey Milk Tea": 2,
-        "Black Milk Tea With Pearls": 3,
-        "Earl Grey Milk Tea With Pearls": 4,
+        "Earl Grey Milk Tea": 4,
+        "Black Milk Tea with Pearls": 3,
+        "Earl Grey Milk Tea with Pearls": 2,
     }
+    console.log(order.name)
+    console.log([item_id_mapping[order.name]])
     var shelf = await pool.query("SELECT * FROM shelving WHERE drink = $1 LIMIT 1", [item_id_mapping[order.name]]).then(
         res=>{
             if(res.rows.length == 0) {
@@ -502,7 +505,7 @@ async function retrieve(request, response){
                 request.user_response = {
                   "message":"Orders transitioned",
                   "order": order_id,
-                  "new_status": order_status
+                  "new_status": 4
                 };
               })
             next();
@@ -519,30 +522,32 @@ async function depositItem(request, response, next){
         [type] -- [description]
     */
     var item_cat = request.params.item_cat
-    let slot = pool.query('SELECT * FROM shelving WHERE drink = 0 ORDER BY slot ASC LIMIT 1', [])
+    let slot = await pool.query('SELECT * FROM shelving WHERE drink = 0 ORDER BY slot ASC LIMIT 1', [])
         .then(res=>{
-            console.log("Deposited", shelf, item_cat);
-            return res.slot;
+            console.log("Empty slot" + item_cat + " found");
+            console.log(res.rows)
+            return res.rows[0].slot;
         })
         .catch(err=>{
-            console.log(err) ;
+            console.log("Deposit error", err);
             return false;
         });
-    if(!slot) response.status(400).send({"Error": err});
+    if(!slot) response.status(400).send({"Error": "No slot"});
     else{
+        console.log(item_cat, slot);
         let success = pool.query('UPDATE shelving SET drink = $1 WHERE slot = $2', [item_cat, slot])
             .then(res=>{
-                console.log("Drink updated", res);
+                console.log("Drink updated");
                 return true
             })
             .catch(err=>{
-                console.log(err);
+                console.log("Shelving update error", err);
                 return false;
             })
         if(!success) response.status(400).send({"Error": err});
         else {
             request.shelf_data = {
-                'slot': shelf.slot,
+                'slot': slot,
                 'direction': 1
             }
             next();
