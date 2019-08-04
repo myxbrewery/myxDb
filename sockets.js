@@ -1,4 +1,6 @@
-const db = require('./pg_queries')
+// const db = require('./pg_queries')
+const pg_gets = require('./db_scripts/pg_gets')
+
 var socketio = require('socket.io'),
   io, clients = {};
 
@@ -17,9 +19,10 @@ const parseCustomerStatuses = (all_orders) =>{
 };
 
 
+const order_utils = require('./db_scripts/order_utils')
 var fetchDb = () =>{
   return new Promise((resolve, reject) =>{
-    db.getLiveOrders().then((res)=>{
+    order_utils.getLiveOrders().then((res)=>{
       stall_orders = res;
       customer_orders = parseCustomerStatuses(res);
       resolve({
@@ -41,7 +44,7 @@ module.exports = {
       socket.on('stall_join', (room)=>{
         console.log("Stall joined");
         socket.join(room);
-        db.stalls().then(stalls=>{
+        pg_gets.stalls().then(stalls=>{
           let stallDict = {};
           stalls.forEach(row=>stallDict[row.uid]=[]);
           fetchDb().then((result)=>{
@@ -52,7 +55,7 @@ module.exports = {
               io.to(stall).emit('orders', stallDict[stall]);
             })
           },(err)=>{
-            console.log(err);
+            console.log("stalls()",err);
           })
         });
       });
@@ -67,7 +70,7 @@ module.exports = {
             io.to(customer).emit('orders',result.customer_orders[customer]);
           });
         },(err)=>{
-          console.log(err);
+          console.log("customerjoin", err);
         })
       });
       socket.on('customer_leave', (room)=>{
@@ -78,7 +81,7 @@ module.exports = {
     return io;
   },
   stall_update: (io) =>{
-    db.stalls().then(stalls=>{
+    pg_gets.stalls().then(stalls=>{
       let stallDict = {};
       stalls.forEach(row=>stallDict[row.uid]=[]);
       fetchDb().then((result)=>{
@@ -91,7 +94,7 @@ module.exports = {
           io.to(stall).emit('orders', stallDict[stall]);
         })
       },(err)=>{
-        console.log(err);
+        console.log("stallupdate", err);
       })
     });
   },
@@ -102,7 +105,7 @@ module.exports = {
         io.to(customer).emit('orders',result.customer_orders[customer]);
       });
     },(err)=>{
-      console.log(err);
+      console.log("customerupdate", err);
     })
   },
   emit_shelf: (io, shelf_data) => {

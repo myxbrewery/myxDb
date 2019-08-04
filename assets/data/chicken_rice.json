@@ -1,215 +1,240 @@
 {
     "uid":"ch1ck3n",
+    "hashed_pw": "placeholder",
     "menu":{
         "Mains":[
             {
+                "id": 1,
                 "name": "Plain Noodles/Kuay Teow Soup",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 1.5,
                 "compulsory_options": [{"name":"Choice of Noodles",  "options":[{"name":"Noodle","cost":0.0},{"name":"Kuay Teow","cost":0.0}]}],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 2,
                 "name": "Plain Noodles/Kuay Teow Dry",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 1.5,
                 "compulsory_options": [{"name":"Choice of Noodles",  "options":[{"name":"Noodle","cost":0.0},{"name":"Kuay Teow","cost":0.0}]}],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 3,
                 "name": "Boiled/Roasted Chicken",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 3,
                 "compulsory_options": [{"name":"Type of Chicken","options":[{"name":"Boiled","cost":0.0},{"name":"Roasted","cost":0.0}]}],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 4,
                 "name": "Boiled/Roasted Drumlet",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 3.8,
                 "compulsory_options": [{"name":"Type of Chicken","options":[{"name":"Boiled","cost":0.0},{"name":"Roasted","cost":0.0}]}],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 5,
                 "name": "Char Siew Wanton Soup",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 3.8,
                 "compulsory_options": [{"name":"Choice of Noodles",  "options":[{"name":"Noodle","cost":0.0},{"name":"Kuay Teow","cost":0.0}]}],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": "https://i1.wp.com/angsarap.net/wp-content/uploads/2012/10/wonton-and-char-siu-pork-noodle-soup.jpg"
             },
             {
+                "id": 6,
                 "name": "Char Siew Wanton Dry",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 4,
                 "compulsory_options": [{"name":"Choice of Noodles",  "options":[{"name":"Noodle","cost":0.0},{"name":"Kuay Teow","cost":0.0}]}],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": "https://3.bp.blogspot.com/-8wbV23ri8jQ/VzrE6PWimFI/AAAAAAADJwg/x1KJALoK03Qiv58j3BG1RgdLy0GUWBeOgCLcB/s1600/DSC_0091jk.JPG"
             },
             {
+                "id": 7,
                 "name": "Boiled/Roasted Chicken Soup",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 4,
                 "compulsory_options": [{"name":"Choice of Noodles",  "options":[{"name":"Noodle","cost":0.0},{"name":"Kuay Teow","cost":0.0}]}],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": "https://omnivorescookbook.com/wp-content/uploads/2016/03/1603_Cantonese-Wonton-Noodle-Soup_004.jpg"
             },
             {
+                "id": 8,
                 "name": "Boiled/Roasted Chicken Dry",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 4,
                 "compulsory_options": [{"name":"Choice of Noodles",  "options":[{"name":"Noodle","cost":0.0},{"name":"Kuay Teow","cost":0.0}]}],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": "http://lh4.ggpht.com/7hw2ajsBycXskMFf0Q9zjpO-z6bfFxQfiKtTTBR2FNllj8SonE2Q2wo98wMdtDFPyYdAColN3wrRVBz__CD8-qff=s800"
             },
             {
+                "id": 9,
                 "name": "Roasted Duck Soup/Dry",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 4.5,
                 "compulsory_options": [{"name":"Options","options":[{"name":"Soup","cost":0.0},{"name":"Dry","cost":0.0}]}],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 10,
                 "name": "Roasted Pork Soup/Dry",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 4,
                 "compulsory_options": [{"name":"Options","options":[{"name":"Soup","cost":0.0},{"name":"Dry","cost":0.0}]}],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 11,
                 "name": "Char Siew",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 3,
                 "compulsory_options": [{"name":"Size", "options":[{"name":"Small","cost":0.0},{"name":"Medium","cost":0.5}]}],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 12,
                 "name": "Roast Pork",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 3,
                 "compulsory_options": [{"name":"Size", "options":[{"name":"Small","cost":0.0},{"name":"Medium","cost":0.5}]}],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 13,
                 "name": "Boiled Chicken Rice",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 3.5,
                 "compulsory_options": [],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": "https://mtc1-dydfxmh.netdna-ssl.com/wp-content/uploads/2016/08/22168498135_84560366eb_k-1300x866.jpg"
             },
             {
+                "id": 14,
                 "name": "Roasted Chicken Rice",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 3.5,
                 "compulsory_options": [],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNsiwCrGaI3Awng2PICuZnqTYR3nMG8QcCPI5KTy-kLp3pceQz1w"
             },
             {
+                "id": 15,
                 "name": "Char Siew Rice",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 3.5,
                 "compulsory_options": [],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": "https://farm5.staticflickr.com/4704/38967855565_39737316a5_h.jpg"
             },
             {
+                "id": 16,
                 "name": "Roasted Pork Rice",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 3.5,
                 "compulsory_options": [],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": "https://kopitiam.gofoodpng.biz/wp-content/uploads/2017/08/Roast-Pork-Rice.jpg"
             },
             {
+                "id": 17,
                 "name": "Roasted Duck Rice",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 4,
                 "compulsory_options": [],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 18,
                 "name": "Assorted Mushroom Spinach Noodle Dry",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 4,
                 "compulsory_options": [],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 19,
                 "name": "Macaroni Soup with Shredded Chicken",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 3.8,
                 "compulsory_options": [],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 20,
                 "name": "Wanton Soup",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 3,
                 "compulsory_options": [],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 21,
                 "name": "Deep Fried Wanton",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 3,
                 "compulsory_options": [],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 22,
                 "name": "Bean Sprout with Sesame Sauce",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 1.5,
                 "compulsory_options": [],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 23,
                 "name": "Chye Sim with Sesame",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 1.5,
                 "compulsory_options": [],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 24,
                 "name": "Braised Egg",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -219,15 +244,17 @@
                 "image_url": ""
             },
             {
+                "id": 25,
                 "name": "Char Siew Noodle",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
                 "base_price": 2.5,
                 "compulsory_options": [],
-                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.6}]}],
+                "optional_options": [{"name":"Add Ons","options":[{"name":"rice","cost":0.5},{"name":"chicken","cost":0.5},{"name":"egg","cost":0.4}]}],
                 "image_url": ""
             },
             {
+                "id": 26,
                 "name": "Wanton Soup with Rice",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -236,6 +263,6 @@
                 "optional_options": [],
                 "image_url": ""
             }
-            ]
+        ]
     }
 }

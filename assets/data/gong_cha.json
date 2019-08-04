@@ -3,6 +3,7 @@
     "menu":{
         "Gong Cha Milk Tea":[
             {
+                "id": 1,
                 "name": "Black Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -48,6 +49,7 @@
                 "image_url": ""
             },
             {
+                "id": 2,
                 "name": "Green Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -93,6 +95,7 @@
                 "image_url": ""
             },
             {
+                "id": 3,
                 "name": "Oolong Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -138,6 +141,7 @@
                 "image_url": ""
             },
             {
+                "id": 4,
                 "name": "Alisan Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -183,6 +187,7 @@
                 "image_url": ""
             },
             {
+                "id": 5,
                 "name": "Earl Grey Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -228,6 +233,7 @@
                 "image_url": ""
             },
             {
+                "id": 6,
                 "name": "Pearl Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -256,6 +262,7 @@
                 "image_url": ""
             },
             {
+                "id": 7,
                 "name": "Caramel Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -300,6 +307,7 @@
                 "image_url": ""
             },
             {
+                "id": 8,
                 "name": "Milk Tea w Herbal Jelly",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -326,6 +334,7 @@
                 "image_url": ""
             },
             {
+                "id": 9,
                 "name": "Earl Grey Milk Tea w 3J",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -353,6 +362,7 @@
                 "image_url": ""
             },
             {
+                "id": 10,
                 "name": "Taro Drink",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -398,6 +408,7 @@
                 "image_url": ""
             },
             {
+                "id": 11,
                 "name": "Chocolate Drink",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -443,6 +454,7 @@
                 "image_url": ""
             },
             {
+                "id": 12,
                 "name": "Matcha w Red Bean",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -486,6 +498,7 @@
                 "image_url": ""
             },
             {
+                "id": 13,
                 "name": "Brown Sugar Ginger Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -531,6 +544,7 @@
                 "image_url": ""
             },
             {
+                "id": 14,
                 "name": "Milk Tea w Red Bean & Pudding Jelly",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -577,6 +591,7 @@
         ],
         "Gong Cha Milk Tea (Fresh Milk-Low Fat)":[
             {
+                "id": 15,
                 "name": "Black Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -621,6 +636,7 @@
                 "image_url": ""
             },
             {
+                "id": 16,
                 "name": "Green Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -665,6 +681,7 @@
                 "image_url": ""
             },
             {
+                "id": 17,
                 "name": "Oolong Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -709,6 +726,7 @@
                 "image_url": ""
             },
             {
+                "id": 18,
                 "name": "Alisan Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -753,6 +771,7 @@
                 "image_url": ""
             },
             {
+                "id": 19,
                 "name": "Pearl Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -780,6 +799,7 @@
                 "image_url": ""
             },
             {
+                "id": 20,
                 "name": "White Pearl Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -824,6 +844,7 @@
                 "image_url": ""
             },
             {
+                "id": 21,
                 "name": "Milk Tea w Herbal Jelly",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -853,6 +874,7 @@
         ],
         "Gong Cha Signature Milk Foam":[
             {
+                "id": 22,
                 "name": "Milk Foam Black Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -897,6 +919,7 @@
                 "image_url": ""
             },
             {
+                "id": 23,
                 "name": "Milk Foam Green Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -941,6 +964,7 @@
                 "image_url": ""
             },
             {
+                "id": 24,
                 "name": "Milk Foam Alisan Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -985,6 +1009,7 @@
                 "image_url": ""
             },
             {
+                "id": 25,
                 "name": "Milk Foam (Oolong) Tea",
                 "in_stock": "TRUE", 
                 "in_menu": "TRUE",
@@ -1029,6 +1054,7 @@
                 "image_url": ""
             },
             {
+                "id": 26,
                 "name": "Milk Foam (Strawberry) Black Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1073,6 +1099,7 @@
                 "image_url": ""
             },
             {
+                "id": 27,
                 "name": "Milk Foam (Strawberry) Green Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1117,6 +1144,7 @@
                 "image_url": ""
             },
             {
+                "id": 28,
                 "name": "Milk Foam (Strawberry) Alisan Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1161,6 +1189,7 @@
                 "image_url": ""
             },
             {
+                "id": 29,
                 "name": "Milk Foam (Taro) Black Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1205,6 +1234,7 @@
                 "image_url": ""
             },
             {
+                "id": 30,
                 "name": "Milk Foam (Taro) Green Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1249,6 +1279,7 @@
                 "image_url": ""
             },
             {
+                "id": 31,
                 "name": "Milk Foam (Taro) Alisan Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1293,6 +1324,7 @@
                 "image_url": ""
             },
             {
+                "id": 32,
                 "name": "Milk Foam Winter Melon Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1337,6 +1369,7 @@
                 "image_url": ""
             },
             {
+                "id": 33,
                 "name": "Milk Foam Black Forest",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1383,6 +1416,7 @@
         ],
         "Gong Cha Brown Sugar":[
             {
+                "id": 34,
                 "name": "Milk Foam Brown Sugar Oolong",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1427,6 +1461,7 @@
                 "image_url": ""
             },
             {
+                "id": 35,
                 "name": "Brown Sugar Black Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1471,6 +1506,7 @@
                 "image_url": ""
             },
             {
+                "id": 36,
                 "name": "Brown Sugar Earl Grey Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1515,6 +1551,7 @@
                 "image_url": ""
             },
             {
+                "id": 37,
                 "name": "Brown Sugar Fresh Milk Tea with Pearl",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1558,6 +1595,7 @@
                 "image_url": ""
             },
             {
+                "id": 38,
                 "name": "Brown Sugar Black Milk Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1604,6 +1642,7 @@
         ],
         "Creative Fruit Tea Mix":[
             {
+                "id": 39,
                 "name": "QQ Passion Fruit Green Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1648,6 +1687,7 @@
                 "image_url": ""
             },
             {
+                "id": 40,
                 "name": "Plum Green Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1692,6 +1732,7 @@
                 "image_url": ""
             },
             {
+                "id": 41,
                 "name": "Mango Green Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1736,6 +1777,7 @@
                 "image_url": ""
             },
             {
+                "id": 42,
                 "name": "Honey Lemon Green Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1779,6 +1821,7 @@
                 "image_url": ""
             },
             {
+                "id": 43,
                 "name": "Peach Black Tea w Rainbow Jelly",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1823,6 +1866,7 @@
                 "image_url": ""
             },
             {
+                "id": 44,
                 "name": "Lychee Oolong w Aloe Vera",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1869,6 +1913,7 @@
         ],
         "Brewed Tea":[
             {
+                "id": 45,
                 "name": "Green Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1897,6 +1942,7 @@
                 "image_url": ""
             },
             {
+                "id": 46,
                 "name": "Black Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1925,6 +1971,7 @@
                 "image_url": ""
             },
             {
+                "id": 47,
                 "name": "Oolong Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1953,6 +2000,7 @@
                 "image_url": ""
             },
             {
+                "id": 48,
                 "name": "Alisan Tea",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -1981,6 +2029,7 @@
                 "image_url": ""
             },
             {
+                "id": 49,
                 "name": "Winter Melon Drink",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -2010,6 +2059,7 @@
         ],
         "Refreshing Choice":[
             {
+                "id": 50,
                 "name": "Longan Honey Drink",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -2054,6 +2104,7 @@
                 "image_url": ""
             },
             {
+                "id": 51,
                 "name": "Roselle",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -2098,6 +2149,7 @@
                 "image_url": ""
             },
             {
+                "id": 52,
                 "name": "Lemon Juice w White Pearl & Aiyu Jelly",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -2140,6 +2192,7 @@
                 "image_url": ""
             },
             {
+                "id": 53,
                 "name": "Lemon Honey w Aloe Vera",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -2183,6 +2236,7 @@
                 "image_url": ""
             },
             {
+                "id": 54,
                 "name": "Lemon Winter Melon Drink w Basil Seeds",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -2229,6 +2283,7 @@
         ],
         "Deluxe Latte Series":[
             {
+                "id": 55,
                 "name": "Strawberry Taro Latte",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -2273,6 +2328,7 @@
                 "image_url": ""
             },
             {
+                "id": 56,
                 "name": "Mango Matcha Latte",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",
@@ -2317,6 +2373,7 @@
                 "image_url": ""
             },
             {
+                "id": 57,
                 "name": "Mango Tea Latte with sago",
                 "in_stock": "TRUE",
                 "in_menu": "TRUE",

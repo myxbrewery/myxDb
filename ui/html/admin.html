@@ -35,7 +35,7 @@
   </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script src="/scripts/dev_hax.js"></script>
+<script src="/ui/js/dev_hax.js"></script>
 <script>
   stall_mapping = {
 	  '1':"ch1ck3n",
@@ -48,12 +48,12 @@
 	  '8':"cre@myduck",
 	  '9':"mus1im"
 	}
-	var stallRoom = 0;
-  var customerRoom = 0;
+	let stallRoom = 0;
+  let customerRoom = 0;
   
-  let server_url = 'https://www.myxbrewapi.com/'
-  let dev_url = 'http://10.12.254.221:11236/' 
-  var socket = io(dev_url, {transports: ['websocket'], secure:true});
+  const server_url = 'https://www.myxbrewapi.com/'
+  const dev_url = 'http://10.12.254.221:11236/' 
+  const socket = io(dev_url, {transports: ['websocket'], secure:true});
   socket.emit('stall_join', stall_mapping[stallRoom]);
   socket.emit('customer_join', customerRoom);
   socket.emit('join', 1);
@@ -62,14 +62,14 @@
     console.log(message);
   })
   function modSocketStall(){
-    var newStallRoom = document.getElementById("stall").value;
+    const newStallRoom = document.getElementById("stall").value;
     console.log(`Stall Changing Room from to ${stall_mapping[stallRoom]} to ${stall_mapping[newStallRoom]}`);
     socket.emit('stall_leave', stall_mapping[stallRoom]);
     stallRoom = newStallRoom;
     socket.emit('stall_join', stall_mapping[stallRoom]);
   }
   function modSocketCustomer(){
-    var newCustomerRoom = document.getElementById("customer").value;
+    const newCustomerRoom = document.getElementById("customer").value;
     console.log(`Customer Changing Room from to ${customerRoom} to ${newCustomerRoom}`);
     socket.emit('customer_leave', customerRoom);
     customerRoom = newCustomerRoom;

@@ -1,0 +1,124 @@
+{
+    "uid":"myx",
+    "hashed_pw": "placeholder",
+    "menu":{
+        "Gong Cha Milk Tea":[
+            {
+                "id": 1,
+                "name": "Black Milk Tea",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 2.0,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": false}, 
+                            {"name":"Hot", "cost":0.0, "available": false}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": false},
+                            {"name":"30%", "cost": 0.0, "available": false},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": false},
+                            {"name":"100%", "cost": 0.0, "available": false}
+                        ]
+                    }],
+                "optional_options": [
+                ],
+                "image_url": ""
+            },
+            {
+                "id": 2,
+                "name": "Earl Grey Milk Tea",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 2.00,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": false}, 
+                            {"name":"Hot", "cost":0.0, "available": false}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": false},
+                            {"name":"30%", "cost": 0.0, "available": false},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": false},
+                            {"name":"100%", "cost": 0.0, "available": false}
+                        ]
+                    }],
+                "optional_options": [
+                ],
+                "image_url": ""
+            },
+            {
+                "id": 3,
+                "name": "Black Milk Tea with Pearls",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 2.20,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": false}, 
+                            {"name":"Hot", "cost":0.0, "available": false}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": false},
+                            {"name":"30%", "cost": 0.0, "available": false},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": false},
+                            {"name":"100%", "cost": 0.0, "available": false}
+                        ]
+                    }],
+                "optional_options": [
+                ],
+                "image_url": ""
+            },
+            {
+                "id": 4,
+                "name": "Earl Grey Milk Tea with Pearls",
+                "in_stock": "TRUE",
+                "in_menu": "TRUE",
+                "base_price": 2.20,
+                "compulsory_options": [
+                    {
+                        "name":"Options",
+                        "options":[
+                            {"name":"Medium", "cost":0.0, "available": true},
+                            {"name":"Large", "cost":1.1, "available": false}, 
+                            {"name":"Hot", "cost":0.0, "available": false}
+                            ]
+                    },
+                    {
+                        "name":"Sugar",
+                        "options":[
+                            {"name":"0%", "cost": 0.0, "available": false},
+                            {"name":"30%", "cost": 0.0, "available": false},
+                            {"name":"50%", "cost": 0.0, "available": true},
+                            {"name":"70%", "cost": 0.0, "available": false},
+                            {"name":"100%", "cost": 0.0, "available": false}
+                        ]
+                    }],
+                "optional_options": [
+                ],
+                "image_url": ""
+            }
+        ]
+    }
+}
