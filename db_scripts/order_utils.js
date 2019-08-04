@@ -101,7 +101,7 @@ async function verifyOrder(order_package){
                 payment:0
             }
         };
-        let compulsory_choices = Object.keys(menu[item_id]["compulsory_options"])
+        let compulsory_choices = menu[item_id]["compulsory_options"]
         let available_compulsory_option_categories = []
         for (j in compulsory_choices) available_compulsory_option_categories.push(compulsory_choices[j]["name"]);
         let user_compulsory_options = items[i]["compulsory_options"]
@@ -127,7 +127,6 @@ async function verifyOrder(order_package){
             let category_exists = false;
             let category_choice_exists = false;
             menu[item_id]["compulsory_options"].forEach(category=>{
-                // "Choice of Noodles" == "Choice of Noodles"
                 if(category["name"] === user_option_category["name"]){
                     category_exists = true;
                     for(k in category["options"]){
@@ -149,6 +148,9 @@ async function verifyOrder(order_package){
                         }
                     }
                 }
+              else{
+                console.log(category["name"], user_option_category["name"]);
+              }
             })
             if(!category_exists) {
                 console.log("User-supplied category does not exist")
@@ -168,7 +170,7 @@ async function verifyOrder(order_package){
             };
         })
         // Payment consolidation for optional options
-        let optional_choices = Object.keys(menu[item_id]["optional_options"])
+        let optional_choices = menu[item_id]["optional_options"]
         let available_optional_option_categories = []
         for (j in optional_choices) available_optional_option_categories.push(optional_choices[j]["name"]);
         let user_optional_options = items[i]["optional_options"];
@@ -185,12 +187,10 @@ async function verifyOrder(order_package){
             let optional_category_exists = false;
             let optional_category_choice_exists = false;
             menu[item_id]["optional_options"].forEach(category=>{
-                // "Choice of Noodles" == "Choice of Noodles"
                 if(category["name"] === user_option_category["name"]){
                     optional_category_exists = true;
                     for(k in category["options"]){
                         let category_option = category["options"][k];
-                        // "Noodle" == "Noodle"
                         if(category_option["name"] === user_option_category["options"][0]["name"]){
                             optional_category_choice_exists = true;
                             if(category_option["cost"] === user_option_category["options"][0]["cost"]){
@@ -207,6 +207,9 @@ async function verifyOrder(order_package){
                         }
                     }
                 }
+              else{
+                console.log(category["name"], user_option_category["name"]);
+              }
             })
             if(!optional_category_exists) {
                 console.log("User-supplied optional category does not exist")
@@ -226,6 +229,7 @@ async function verifyOrder(order_package){
             };
         })
     }
+    console.log(metadata.total_payment, total_payment/100)
     if(metadata.total_payment != total_payment/100) {
         return {
             status: false,
