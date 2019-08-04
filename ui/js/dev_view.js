@@ -53,6 +53,7 @@ function generateCardIfNotExists(elem_id, colour, type){
 function populateCards(demographic){
   if(demographic === "Customer"){
     demo_dict = customer_dict;
+    console.log(demo_dict)
     var order_elements = ["time", "stall_id", "receipt", "name", "price", "status"]
   }
   else {
@@ -64,7 +65,7 @@ function populateCards(demographic){
     demo_orders = Object.keys(demo_dict[demo])
     demo_orders.forEach((order)=>{
       if(parseInt(demo_dict[demo][order]['status']) != 4){
-        let order_row = document.getElementById(demographic+"_row_"+order);
+        let order_row = document.getElementById(demographic+"_"+demo+"_row_"+order);
         if(order_row){
           order_elements.forEach((elem)=>{
             tblElem = document.getElementById("data_"+demo+"_"+order+"_"+elem);
@@ -94,7 +95,7 @@ function populateCards(demographic){
         }
         else{
           order_row = document.createElement("tr");
-          order_row.id = demographic+"_row_"+order
+          order_row.id = demographic+"_"+demo+"_row_"+order
           order_elements.forEach((elem)=>{
             tblElem = document.createElement("td");
             if(elem=="time"){
@@ -159,7 +160,7 @@ function dataUpdate(all_orders){
   let stall_colors = ["indigo", "blue", "light-blue", "cyan"]
   let style_options = ["lighten"];
   let depth_options = [3,4,5];
-  // console.log(all_orders);
+  
   all_orders.forEach((order)=>{
     if(!(order.customer_id in customer_dict)){
       customer_dict[order.customer_id] = {};
@@ -169,7 +170,7 @@ function dataUpdate(all_orders){
       stall_dict[order.stall_id] = {};
       stall_color_dict[order.stall_id] = randElem(stall_colors) + " " + randElem(style_options) + "-" + randElem(depth_options);
     }
-    customer_dict[order.customer_id][order.id] = order;
+    customer_dict[order.customer_id][order.stall_id+'_'+order.id] = order;
     stall_dict[order.stall_id][order.id] = order;
     if(order.status == 4){
       if(!(order.customer_id in completed_customer_orders)){
@@ -178,7 +179,7 @@ function dataUpdate(all_orders){
       if(!(order.stall_id in completed_stall_orders)){
         completed_stall_orders[order.stall_id] = {}
       }
-      completed_customer_orders[order.customer_id][order.id] = order;
+      completed_customer_orders[order.customer_id][order.stall_id+'_'+order.id] = order;
       completed_stall_orders[order.stall_id][order.id] = order;
     }
   })

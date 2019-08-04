@@ -16,10 +16,13 @@ async function getAllOrders(){
         let stall_uid = row.uid;
         let stall_orders = stall_uid + "_orders";
         let stall_menu = stall_uid + "_menu";
-        nested_results = await pool.query(format("SELECT %I.id, customer_id, name, start_datetime as time, receipt_id as receipt, %I.compulsory_options, %I.optional_options, total_price as price, status_id as status, delivery_time FROM %I \
+        nested_results = await pool.query(format("SELECT \
+            category, %I.compulsory_options, %I.optional_options, \
+            customer_id, delivery_time, \
+            end_datetime, %I.id as order_id, item_id, menu_version, name, \
+            receipt_id, start_datetime, status_id, total_price, \
+            FROM %I \
             INNER JOIN %I ON %I.item_id = %I.id \
-            WHERE %I.status_id >= 0 \
-            AND %I.start_datetime >= now()::date\
             ORDER BY %I.start_datetime DESC", 
             stall_orders, stall_orders, stall_orders, stall_orders, stall_menu, stall_orders, stall_menu, stall_orders, stall_orders, stall_orders), 
             [])
@@ -44,12 +47,17 @@ async function getLiveOrders(){
         let stall_uid = row.uid;
         let stall_orders = stall_uid + "_orders";
         let stall_menu = stall_uid + "_menu";
-        nested_results = await pool.query(format("SELECT * FROM %I \
+        nested_results = await pool.query(format("SELECT \
+            category, %I.compulsory_options, %I.optional_options, \
+            customer_id, delivery_time, \
+            end_datetime, %I.id as order_id, item_id, menu_version, name, \
+            receipt_id, start_datetime, status_id, total_price, \
+            FROM %I \
             INNER JOIN %I ON %I.item_id = %I.id \
             WHERE %I.status_id >= 0 \
             AND %I.start_datetime >= now()::date\
             ORDER BY %I.start_datetime DESC", 
-            stall_orders, stall_menu, stall_orders, stall_menu, stall_orders, stall_orders, stall_orders), 
+            stall_orders, stall_orders, stall_orders, stall_orders, stall_menu, stall_orders, stall_menu, stall_orders, stall_orders, stall_orders), 
             [])
             .then(results=>{return results.rows;})
             .catch(error =>{throw error});
