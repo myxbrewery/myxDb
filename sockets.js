@@ -30,7 +30,7 @@ var fetchDb = () =>{
         customer_orders: customer_orders
       });
     }, (err) =>{
-      // console.log(err);
+      console.log(err);
       reject("Socket problem encountered");
     });
   });

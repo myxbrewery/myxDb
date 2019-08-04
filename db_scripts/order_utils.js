@@ -19,12 +19,12 @@ async function getAllOrders(){
         nested_results = await pool.query(format("SELECT \
             category, %I.compulsory_options, %I.optional_options, \
             customer_id, delivery_time, \
-            end_datetime, %I.id as order_id, item_id, menu_version, name, \
-            receipt_id, start_datetime, status_id, total_price, \
+            end_datetime, %I.id as order_id, item_id, %I.menu_version, name, \
+            receipt_id, start_datetime, status_id, total_price \
             FROM %I \
             INNER JOIN %I ON %I.item_id = %I.id \
             ORDER BY %I.start_datetime DESC", 
-            stall_orders, stall_orders, stall_orders, stall_orders, stall_menu, stall_orders, stall_menu, stall_orders, stall_orders, stall_orders), 
+            stall_orders, stall_orders, stall_orders, stall_orders, stall_orders, stall_menu, stall_orders, stall_menu, stall_orders, stall_orders, stall_orders), 
             [])
             .then(results=>{return results.rows;})
             .catch(error =>{throw error});
@@ -47,17 +47,17 @@ async function getLiveOrders(){
         let stall_uid = row.uid;
         let stall_orders = stall_uid + "_orders";
         let stall_menu = stall_uid + "_menu";
-        nested_results = await pool.query(format("SELECT \
+        nested_results = await pool.query(format(`SELECT \
             category, %I.compulsory_options, %I.optional_options, \
             customer_id, delivery_time, \
-            end_datetime, %I.id as order_id, item_id, menu_version, name, \
-            receipt_id, start_datetime, status_id, total_price, \
+            end_datetime, %I.id as order_id, item_id, %I.menu_version, name, \
+            receipt_id, start_datetime, status_id, total_price \
             FROM %I \
             INNER JOIN %I ON %I.item_id = %I.id \
             WHERE %I.status_id >= 0 \
             AND %I.start_datetime >= now()::date\
-            ORDER BY %I.start_datetime DESC", 
-            stall_orders, stall_orders, stall_orders, stall_orders, stall_menu, stall_orders, stall_menu, stall_orders, stall_orders, stall_orders), 
+            ORDER BY %I.start_datetime DESC`,
+            stall_orders, stall_orders, stall_orders, stall_orders, stall_orders, stall_menu, stall_orders, stall_menu, stall_orders, stall_orders, stall_orders), 
             [])
             .then(results=>{return results.rows;})
             .catch(error =>{throw error});
