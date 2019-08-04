@@ -148,9 +148,6 @@ async function verifyOrder(order_package){
                         }
                     }
                 }
-              else{
-                console.log(category["name"], user_option_category["name"]);
-              }
             })
             if(!category_exists) {
                 console.log("User-supplied category does not exist")
@@ -189,27 +186,29 @@ async function verifyOrder(order_package){
             menu[item_id]["optional_options"].forEach(category=>{
                 if(category["name"] === user_option_category["name"]){
                     optional_category_exists = true;
-                    for(k in category["options"]){
-                        let category_option = category["options"][k];
-                        if(category_option["name"] === user_option_category["options"][0]["name"]){
-                            optional_category_choice_exists = true;
-                            if(category_option["cost"] === user_option_category["options"][0]["cost"]){
-                                total_payment += parseFloat(category_option["cost"]) * 100
-                            }
-                            else {
-                                console.log("User supplied option cost is not equal to menu cost")
-                                return {
-                                    status:false,
-                                    error:"User supplied option cost is not equal to menu cost",
-                                    payment: 0
-                                }
-                            };
-                        }
+                    if(user_option_category["options"].length!=0){
+                      for(k in category["options"]){
+                          let category_option = category["options"][k];
+                          if(category_option["name"] === user_option_category["options"][0]["name"]){
+                              optional_category_choice_exists = true;
+                              if(category_option["cost"] === user_option_category["options"][0]["cost"]){
+                                  total_payment += parseFloat(category_option["cost"]) * 100
+                              }
+                              else {
+                                  console.log("User supplied option cost is not equal to menu cost")
+                                  return {
+                                      status:false,
+                                      error:"User supplied option cost is not equal to menu cost",
+                                      payment: 0
+                                  }
+                              };
+                          }
+                      }
+                    }
+                    else{
+                      optional_category_choice_exists = true;
                     }
                 }
-              else{
-                console.log(category["name"], user_option_category["name"]);
-              }
             })
             if(!optional_category_exists) {
                 console.log("User-supplied optional category does not exist")
@@ -229,7 +228,6 @@ async function verifyOrder(order_package){
             };
         })
     }
-    console.log(metadata.total_payment, total_payment/100)
     if(metadata.total_payment != total_payment/100) {
         return {
             status: false,

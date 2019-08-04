@@ -21,8 +21,8 @@ function generateCardIfNotExists(elem_id, colour, type){
     title.className = "card-title center-align";
     title.style="padding-top:1rem";
     title.innerHTML = type + " " + elem_id;
-    let interface = document.createElement("table");
-    interface.className="table-responsive centered highlight";
+    let user_interface = document.createElement("table");
+    user_interface.className="table-responsive centered highlight";
     let mainbody = document.createElement("tbody");
     mainbody.id = type + "_table_" + elem_id;
     if(type==="Customer"){
@@ -44,8 +44,8 @@ function generateCardIfNotExists(elem_id, colour, type){
     elemDiv.appendChild(parentElem);
     parentElem.appendChild(parentCard);
     parentCard.appendChild(title);
-    parentCard.appendChild(interface);
-    interface.appendChild(mainbody);
+    parentCard.appendChild(user_interface);
+    user_interface.appendChild(mainbody);
     mainbody.appendChild(header_row);
   }
 }
@@ -60,74 +60,76 @@ function populateCards(demographic){
     var order_elements = ["time", "customer_id", "receipt", "name", "price", "status"]
   }
   demos = Object.keys(demo_dict);
-  demos.forEach((demo)=>{
-    demo_orders = Object.keys(demo_dict[demo])
-    demo_orders.forEach((order)=>{
-      if(parseInt(demo_dict[demo][order]['status']) != 4){
-        let order_row = document.getElementById(demographic+"_row_"+order);
-        if(order_row){
-          order_elements.forEach((elem)=>{
-            tblElem = document.getElementById("data_"+demo+"_"+order+"_"+elem);
-            if(elem=="time"){
-              time_object = new Date(demo_dict[demo][order][elem]);
-              tblElem.innerHTML = time_object.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
-            }
-            else if(elem == "status"){
-              tblElemBtn = document.getElementById("data_"+demo+"_"+order+"_"+elem+"_btn");
-              tblElemBtn.innerHTML = demo_dict[demo][order][elem];
-              if(demographic=="Customer"){
-                tblElemBtn.onclick = (()=>{
-                  advanceOrderStatus(customer_dict[demo][order]);
-                });
+  demos.forEach(demo=>{
+    stalls = Object.keys(demo_dict[demo]);
+    stalls.forEach(stall=>{
+      demo_orders = Object.keys(demo_dict[demo][stall])
+      demo_orders.forEach((order)=>{
+        if(parseInt(demo_dict[demo][stall][order]['status']) != 4){
+          let order_row = document.getElementById(demographic+"_row_"+stall+'_'+order);
+          if(order_row){
+            order_elements.forEach((elem)=>{
+              tblElem = document.getElementById("data_"+demo+"_"+stall+'_'+order+"_"+elem);
+              if(elem=="time"){
+                time_object = new Date(demo_dict[demo][stall][order][elem]);
+                tblElem.innerHTML = time_object.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+              }
+              else if(elem == "status"){
+                tblElemBtn = document.getElementById("data_"+demo+"_"+stall+'_'+order+"_"+elem+"_btn");
+                tblElemBtn.innerHTML = demo_dict[demo][stall][order][elem];
+                if(demographic=="Customer"){
+                  tblElemBtn.onclick = (()=>{
+                    advanceOrderStatus(customer_dict[demo][stall][order]);
+                  });
+                }
+                else{
+                  tblElemBtn.onclick = (()=>{
+                    advanceOrderStatus(stall_dict[demo][stall][order]);
+                  });
+                }
               }
               else{
-                tblElemBtn.onclick = (()=>{
-                  advanceOrderStatus(stall_dict[demo][order]);
-                });
+                tblElem.innerHTML = demo_dict[demo][stall][order][elem];
               }
-            }
-            else{
-              tblElem.innerHTML = demo_dict[demo][order][elem];
-            }
-          });
-
-        }
-        else{
-          order_row = document.createElement("tr");
-          order_row.id = demographic+"_row_"+order
-          order_elements.forEach((elem)=>{
-            tblElem = document.createElement("td");
-            if(elem=="time"){
-              time_object = new Date(demo_dict[demo][order][elem]);
-              tblElem.innerHTML = time_object.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
-            }
-            else if (elem == "status"){
-              tblElemBtn = document.createElement("a");
-              tblElemBtn.className = "btn-small waves-effect red"
-              tblElemBtn.id = "data_"+demo+"_"+order+"_"+elem+"_btn";
-              tblElemBtn.innerHTML = demo_dict[demo][order][elem];
-              if(demographic=="Customer"){
-                tblElemBtn.onclick = (()=>{
-                  advanceOrderStatus(customer_dict[demo][order]);
-                });
+            });
+          }
+          else{
+            order_row = document.createElement("tr");
+            order_row.id = demographic+"_row_"+stall+'_'+order
+            order_elements.forEach((elem)=>{
+              tblElem = document.createElement("td");
+              if(elem=="time"){
+                time_object = new Date(demo_dict[demo][stall][order][elem]);
+                tblElem.innerHTML = time_object.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+              }
+              else if (elem == "status"){
+                tblElemBtn = document.createElement("a");
+                tblElemBtn.className = "btn-small waves-effect red"
+                tblElemBtn.id = "data_"+demo+"_"+stall+'_'+order+"_"+elem+"_btn";
+                tblElemBtn.innerHTML = demo_dict[demo][stall][order][elem];
+                if(demographic=="Customer"){
+                  tblElemBtn.onclick = (()=>{
+                    advanceOrderStatus(customer_dict[demo][stall][order]);
+                  });
+                }
+                else{
+                  tblElemBtn.onclick = (()=>{
+                    advanceOrderStatus(stall_dict[demo][stall][order]);
+                  });
+                }
+                tblElem.appendChild(tblElemBtn);
               }
               else{
-                tblElemBtn.onclick = (()=>{
-                  advanceOrderStatus(stall_dict[demo][order]);
-                });
+                tblElem.innerHTML = demo_dict[demo][stall][order][elem];
               }
-              tblElem.appendChild(tblElemBtn);
-            }
-            else{
-              tblElem.innerHTML = demo_dict[demo][order][elem];
-            }
-            tblElem.id = "data_"+demo+"_"+order+"_"+elem;
-            order_row.appendChild(tblElem);
-          })
-          demo_card_table = document.getElementById(demographic+"_table_"+demo);
-          demo_card_table.appendChild(order_row);
+              tblElem.id = "data_"+demo+"_"+stall+"_"+order+"_"+elem;
+              order_row.appendChild(tblElem);
+            })
+            demo_card_table = document.getElementById(demographic+"_table_"+demo);
+            demo_card_table.appendChild(order_row);
+          }
         }
-      }
+      });
     });
   });
 }
@@ -135,7 +137,7 @@ function populateCards(demographic){
 function advanceOrderStatus(order){
   var server_url = "https://www.myxbrewapi.com/order/";
   var dev_url = "http://10.12.254.221:11235/order/";
-  let target_url = dev_url + order.stall_id + '/' + order.id
+  let target_url = server_url + order.stall_id + '/' + order.id
   fetch(target_url, {
     method: 'PUT',
     headers: {
@@ -159,7 +161,6 @@ function dataUpdate(all_orders){
   let stall_colors = ["indigo", "blue", "light-blue", "cyan"]
   let style_options = ["lighten"];
   let depth_options = [3,4,5];
-  // console.log(all_orders);
   all_orders.forEach((order)=>{
     if(!(order.customer_id in customer_dict)){
       customer_dict[order.customer_id] = {};
@@ -167,19 +168,25 @@ function dataUpdate(all_orders){
     }
     if(!(order.stall_id in stall_dict)){
       stall_dict[order.stall_id] = {};
+      stall_dict[order.stall_id][order.stall_id] = {};
       stall_color_dict[order.stall_id] = randElem(stall_colors) + " " + randElem(style_options) + "-" + randElem(depth_options);
     }
-    customer_dict[order.customer_id][order.id] = order;
-    stall_dict[order.stall_id][order.id] = order;
+    if(!(order.stall_id in customer_dict[order.customer_id])) customer_dict[order.customer_id][order.stall_id] = {};
+    if(!(order.stall_id in stall_dict[order.stall_id])) stall_dict[order.stall_id][order.stall_id] = {};
+
+    customer_dict[order.customer_id][order.stall_id][order.id] = order;
+    stall_dict[order.stall_id][order.stall_id][order.id] = order;
     if(order.status == 4){
       if(!(order.customer_id in completed_customer_orders)){
         completed_customer_orders[order.customer_id] = {}
       }
       if(!(order.stall_id in completed_stall_orders)){
         completed_stall_orders[order.stall_id] = {}
+        completed_stall_orders[order.stall_id][order.stall_id] = {}
       }
-      completed_customer_orders[order.customer_id][order.id] = order;
-      completed_stall_orders[order.stall_id][order.id] = order;
+      if(!(order.stall_id in completed_customer_orders[order.customer_id])) completed_customer_orders[order.customer_id][order.stall_id] = {}
+      completed_customer_orders[order.customer_id][order.stall_id][order.id] = order;
+      completed_stall_orders[order.stall_id][order.stall_id][order.id] = order;
     }
   })
 
@@ -228,8 +235,8 @@ function main(data){
 function cleanCards(){
   for(var stall in stall_dict){
     pending_orders = 0
-    for(var order in stall_dict[stall]){
-      if(parseInt(stall_dict[stall][order]['status']) < 4) pending_orders +=1;
+    for(var order in stall_dict[stall][stall]){
+      if(parseInt(stall_dict[stall][stall][order]['status']) < 4) pending_orders +=1;
     }
     if(pending_orders == 0){
       var card = document.getElementById("Stall" + "_" + stall);
@@ -237,27 +244,29 @@ function cleanCards(){
     }
   }
   for(var stall in completed_stall_orders){
-    for(var order in completed_stall_orders[stall]){
+    for(var order in completed_stall_orders[stall][stall]){
       tblRow = document.getElementById("Stall_row_"+order);
       if(tblRow){
         tblRow.parentNode.removeChild(tblRow);
       }
     }
   }
-  // console.log(completed_customer_orders)
   for(var customer in completed_customer_orders){
-    for(var order in completed_customer_orders[customer]){
-      tblRow = document.getElementById("Customer_row_"+order);
-      if(tblRow){
-        tblRow.parentNode.removeChild(tblRow);
+    for(var stall in completed_customer_orders[customer]){
+      for(var order in completed_customer_orders[customer][stall]){
+        tblRow = document.getElementById("Customer_row_"+stall+"_"+order);
+        if(tblRow){
+          tblRow.parentNode.removeChild(tblRow);
+        }
       }
     }
   }
   for(var customer in customer_dict){
     var pending_orders = 0
-    for(var order in customer_dict[customer]){
-      // console.log(customer_dict[customer][order]['status'])
-      if(parseInt(customer_dict[customer][order]['status']) < 4) pending_orders +=1;
+    for(var stall in customer_dict[customer]){
+      for(var order in customer_dict[customer][stall]){
+        if(parseInt(customer_dict[customer][stall][order]['status']) < 4) pending_orders +=1;
+      }
     }
     if(pending_orders == 0){
       var card = document.getElementById("Customer" + "_" + customer);

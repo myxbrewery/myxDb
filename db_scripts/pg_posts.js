@@ -45,7 +45,10 @@ async function postOrder(request, response, next){
                     request.user_response = {"Error": err};
                 })
         })
-        request.user_response = {"Success": "Orders uploaded"};
+        request.user_response = {
+          "Success": "Orders uploaded",
+          "receipt_id": receipt_id
+        };
         next();
     }
     else{

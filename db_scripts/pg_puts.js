@@ -6,6 +6,7 @@ async function transitionOrder(request, response, next){
     let order_status = order_info.status_id;
     let uid = request.params.uid;
     let order_id = request.params.orderid;
+    console.log(order_info, uid, order_id)
     pool.query(format('UPDATE %I_orders SET status_id = $1 WHERE %I_orders.id = $2', uid, uid), [order_status, order_id], (error, results) => {
         if(error){
             console.log(error);
