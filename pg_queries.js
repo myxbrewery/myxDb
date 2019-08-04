@@ -157,7 +157,7 @@ const getStalls = (request, response) => {
         var lat = undefined;
         var long = undefined;
     }
-    let res = pool.query('SELECT * FROM stalls INNER JOIN locations ON stalls.location = locations.id')
+    let res = pool.query('SELECT stalls.id, stalls.name, stalls.halal, stalls.opening_time, stalls.closing_time, stalls.image_url, icon_url, uid, card_settings, latest_menu_version, waiting_time, description, price, tags, lat, long FROM stalls INNER JOIN locations ON stalls.location = locations.id')
         .then(res=>{
             let data = res.rows
             if(typeof lat !== "undefined"){

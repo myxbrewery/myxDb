@@ -68,7 +68,7 @@ def execute_pg_query(query, args):
 
 dev_dest = '/home/tze/capstone'
 prod_dest = '/home/ubuntu'
-dest = dev_dest
+dest = prod_dest
 print(f"""
 \copy locations(id, name, image_url, lat, long, aggregation) FROM '%s/myxDb/data/locations.csv' DELIMITER ';' CSV HEADER;
 \copy status(id, name) FROM '%s/myxDb/data/status.csv' DELIMITER ';' CSV HEADER;
