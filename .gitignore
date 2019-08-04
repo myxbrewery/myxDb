@@ -1,5 +1,6 @@
-credentials.json
-paylah.json
+.credentials.json
+.paylah.json
+.vscode/
 package-lock.json
 node_modules/
 assets/images/*
