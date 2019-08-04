@@ -1,6 +1,9 @@
+**/.DS_Store
 .credentials.json
+.firebase-config.json
+.idea
 .paylah.json
 .vscode/
-package-lock.json
-node_modules/
 assets/images/*
+node_modules/
+package-lock.json
