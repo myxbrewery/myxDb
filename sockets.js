@@ -70,12 +70,16 @@ module.exports = {
             io.to(customer).emit('orders',result.customer_orders[customer]);
           });
         },(err)=>{
-          console.log("customerjoin", err);
+          console.log("customer_join", err);
         })
       });
       socket.on('customer_leave', (room)=>{
         console.log('Customer leaving', room)
         socket.leave(room);
+      });
+      socket.on('join', (room)=>{
+        console.log('Joining room', room)
+        socket.join(room);
       });
     });
     return io;

@@ -245,6 +245,11 @@ function cleanCards(){
   }
 }
 
+socket.on('orders', (message)=>{
+  console.log(message);
+  main(message);
+})
+
 // setInterval(()=>{
 //   fetch('/allPendingOrders')
 //     .then((res) => {
