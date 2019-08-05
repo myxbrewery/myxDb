@@ -251,7 +251,7 @@ setInterval(()=>{
       return res.json();
     })
     .then(res=>main(res));
-}, 1000)
+}, 500)
 
 // setInterval(populateCards("Customer"), 1000);
 // setInterval(populateCards("Stall"), 1000);

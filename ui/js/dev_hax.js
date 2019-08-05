@@ -1,10 +1,11 @@
+const base_url = "https://www.myxbrewapi.com";
 function resetOrder(){
-  fetch("/resetOrder",{
+  fetch(base_url + "/resetOrder",{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({})
+    body: JSON.stringify({'stall_uid':stallRoom})
   })
   .then((res)=>{return res.json()})
   .then((res)=>{console.log(res)});
