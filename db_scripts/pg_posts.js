@@ -28,7 +28,7 @@ async function postOrder(request, response, next){
     if(verification_check.status === true){
         let order_package = request.body;
         var timestamp = new Date();
-        timestamp.setHours(timestamp.getHours()+8);
+        timestamp.setHours(timestamp.getHours());
         timestamp = timestamp.toISOString();
         let receipt_id = await order_utils.receiptInsert(order_package, timestamp);
         receipt_semaphore = false;
