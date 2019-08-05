@@ -43,7 +43,7 @@
   const server_url = 'https://www.myxbrewapi.com/'
   const dev_url = 'http://10.12.254.221:11236/' 
   const socket = io(server_url, {transports: ['websocket'], secure:true});
-  socket.emit('stall_join', stall_mapping[stallRoom]);
+  socket.emit('stall_join', stallRoom);
   socket.emit('customer_join', customerRoom);
   socket.emit('join', 1);
   socket.on('orders', (message)=>{
