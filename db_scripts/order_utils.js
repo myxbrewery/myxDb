@@ -100,7 +100,7 @@ async function verifyOrder(order_package){
                 payment:0
             }
         }
-        total_payment += parseFloat(items[i]["base_price"]) * 100
+        total_payment += Math.round(items[i]["base_price"] * 100)
         // Payment consolidation for compulsory options
         if(items[i]["compulsory_options"].length != menu[item_id]["compulsory_options"].length) {
             return {
@@ -143,7 +143,7 @@ async function verifyOrder(order_package){
                         if(category_option["name"] === user_option_category["options"][0]["name"]){
                             category_choice_exists = true;
                             if(category_option["cost"] === user_option_category["options"][0]["cost"]){
-                                total_payment += parseFloat(category_option["cost"]) * 100
+                                total_payment += Math.round(category_option["cost"] * 100)
                             }
                             else {
                                 console.log("User supplied option cost is not equal to menu cost")
@@ -197,19 +197,21 @@ async function verifyOrder(order_package){
                     if(user_option_category["options"].length!=0){
                       for(k in category["options"]){
                           let category_option = category["options"][k];
-                          if(category_option["name"] === user_option_category["options"][0]["name"]){
-                              optional_category_choice_exists = true;
-                              if(category_option["cost"] === user_option_category["options"][0]["cost"]){
-                                  total_payment += parseFloat(category_option["cost"]) * 100
-                              }
-                              else {
-                                  console.log("User supplied option cost is not equal to menu cost")
-                                  return {
-                                      status:false,
-                                      error:"User supplied option cost is not equal to menu cost",
-                                      payment: 0
-                                  }
-                              };
+                          for(m in user_option_category["options"]){
+                            if(category_option["name"] === user_option_category["options"][m]["name"]){
+                                optional_category_choice_exists = true;
+                                if(category_option["cost"] === user_option_category["options"][m]["cost"]){
+                                    total_payment += Math.round(parseFloat(category_option["cost"]) * 100)
+                                }
+                                else {
+                                    console.log("User supplied option cost is not equal to menu cost")
+                                    return {
+                                        status:false,
+                                        error:"User supplied option cost is not equal to menu cost",
+                                        payment: 0
+                                    }
+                                };
+                            }
                           }
                       }
                     }
@@ -239,7 +241,7 @@ async function verifyOrder(order_package){
     if(metadata.total_payment != total_payment/100) {
         return {
             status: false,
-            error: "Unequal total payment from customer and database calculated",
+            error: `Unequal total payment from customer and database calculated: ${metadata.total_payment}, ${total_payment/100}`,
             payment: 0
         }
     }

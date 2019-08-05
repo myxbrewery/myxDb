@@ -16,6 +16,8 @@ const postCustomer = (request, response, next) => {
 const order_utils = require('./order_utils')
 
 async function postOrder(request, response, next){
+  var start = new Date()
+  var hrstart = process.hrtime()
     // Layer 1: Verify options are valid, payment amounts are legitimate
     let verification_check = await order_utils.verifyOrder(request.body).catch(error=>{
         console.log(error);
@@ -55,6 +57,10 @@ async function postOrder(request, response, next){
         request.user_response = {"Error": verification_check.error};
         next();
     }
+  var end = new Date() - start
+  hrend = process.hrtime(hrstart)
+  console.info('Execution time: %dms', end)
+  console.info('Execution time (hr): %ds %dms', hrend[0], hrend[1] / 1000000)
 }
 
 async function upsertMenu (request, response){
