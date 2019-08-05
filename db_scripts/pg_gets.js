@@ -25,7 +25,7 @@ async function getAllOrderDetails(request, response){
             order['stall_id'] = stall
             orders.push(order)
         })
-    })    
+    })
     response.status(200).json(orders);
 }
 

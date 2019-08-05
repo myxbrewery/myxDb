@@ -20,8 +20,6 @@ const parseCustomerStatuses = (all_orders) =>{
   return customer_dict;
 };
 
-
-const order_utils = require('./db_scripts/order_utils')
 var fetchDb = () =>{
   return new Promise((resolve, reject) =>{
     order_utils.getLiveOrders().then((res)=>{

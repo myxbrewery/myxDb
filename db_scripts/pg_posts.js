@@ -14,7 +14,6 @@ const postCustomer = (request, response, next) => {
 }
 
 const order_utils = require('./order_utils')
-
 var currently_processing = 0;
 async function postOrder(request, response, next){
   function sleep(ms){

@@ -245,13 +245,10 @@ function cleanCards(){
   }
 }
 
-setInterval(()=>{
-  fetch('/allPendingOrders')
-    .then((res) => {
-      return res.json();
-    })
-    .then(res=>main(res));
-}, 1000)
-
-// setInterval(populateCards("Customer"), 1000);
-// setInterval(populateCards("Stall"), 1000);
+// setInterval(()=>{
+//   fetch('/allPendingOrders')
+//     .then((res) => {
+//       return res.json();
+//     })
+//     .then(res=>main(res));
+// }, 1000)
