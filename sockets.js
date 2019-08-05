@@ -43,7 +43,7 @@ module.exports = {
     io = socketio(app);
     io.on('connection', (socket)=>{
       socket.on('stall_join', (room)=>{
-        console.log("Stall joined");
+        console.log("Stall joined", room);
         socket.join(room);
         pg_gets.stalls().then(stalls=>{
           let stallDict = {};
