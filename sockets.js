@@ -1,5 +1,6 @@
 // const db = require('./pg_queries')
 const pg_gets = require('./db_scripts/pg_gets')
+const order_utils = require('./db_scripts/order_utils')
 
 var socketio = require('socket.io'),
   io, clients = {};
@@ -48,7 +49,7 @@ module.exports = {
         pg_gets.stalls().then(stalls=>{
           let stallDict = {};
           stalls.forEach(row=>stallDict[row.uid]=[]);
-          fetchDb().then((result)=>{
+          fetchDb().then(result=>{
             Object.keys(result.stall_orders).forEach((stall)=>{
               stallDict[stall] = result.stall_orders[stall];
             });
@@ -66,7 +67,7 @@ module.exports = {
       });
       socket.on('customer_join', (room)=>{
         socket.join(room);
-        fetchDb().then((result)=>{
+        fetchDb().then(result=>{
           Object.keys(result.customer_orders).forEach((customer)=>{
             io.to(customer).emit('orders',result.customer_orders[customer]);
           });
@@ -85,7 +86,7 @@ module.exports = {
     pg_gets.stalls().then(stalls=>{
       let stallDict = {};
       stalls.forEach(row=>stallDict[row.uid]=[]);
-      fetchDb().then((result)=>{
+      fetchDb().then(result=>{
         Object.keys(result.stall_orders).forEach((stall)=>{
           stallDict[stall] = result.stall_orders[stall];
         });
@@ -101,13 +102,25 @@ module.exports = {
   },
   customer_update: (io) =>{
     var pull_database = fetchDb();
-    pull_database.then((result)=>{
+    pull_database.then(result=>{
       Object.keys(result.customer_orders).forEach((customer)=>{
         io.to(customer).emit('orders',result.customer_orders[customer]);
       });
     },(err)=>{
       console.log("customerupdate", err);
     })
+  },
+  all_update: (io) => {
+    let res = await order_utils.getAllOrders();
+    orders = [];
+    let stalls = Object.keys(res);
+    stalls.forEach(stall=>{
+      res[stall].forEach(order=>{
+          order['stall_id'] = stall
+          orders.push(order);
+      })
+    });
+    io.to('all').emit('orders', orders);
   },
   emit_shelf: (io, shelf_data) => {
     io.to('myx').emit('shelf', shelf_data);

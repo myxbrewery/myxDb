@@ -4,10 +4,10 @@ const menu_utils = require('./menu_utils')
 
 const postCustomer = (request, response, next) => {
     const user_details = request.body;
-    pool.query('INSERT INTO customers (id, email, age, name, image, diet) VALUES ($1, $2, $3, $4, $5, $6)', [user_details.id, user_details.email, user_details.age, user_details.name, user_details.image, user_details.diet], (error, results) => {
+    pool.query('INSERT INTO customers (id, email, age, name, image, diet) VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT UPDATE', [user_details.id, user_details.email, user_details.age, user_details.name, user_details.image, user_details.diet], (error, results) => {
         if(error) response.status(400).json({"message":error.detail});
         else{
-            request.user_response = { "message":"Customer added successfully" };
+            request.user_response = { "message":"Customer updated/added successfully" };
             next();
         }
     });
