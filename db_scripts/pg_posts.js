@@ -15,7 +15,17 @@ const postCustomer = (request, response, next) => {
 
 const order_utils = require('./order_utils')
 
+var currently_processing = 0;
 async function postOrder(request, response, next){
+  function sleep(ms){
+    return new Promise(resolve=>{
+        setTimeout(resolve,ms)
+    })
+  }
+  while(currently_processing > 10){
+    await sleep(1000);
+  }
+  currently_processing += 1
   var start = new Date()
   var hrstart = process.hrtime()
     // Layer 1: Verify options are valid, payment amounts are legitimate
@@ -60,7 +70,7 @@ async function postOrder(request, response, next){
   var end = new Date() - start
   hrend = process.hrtime(hrstart)
   console.info('Execution time: %dms', end)
-  console.info('Execution time (hr): %ds %dms', hrend[0], hrend[1] / 1000000)
+  currently_processing -= 1;
 }
 
 async function upsertMenu (request, response){
