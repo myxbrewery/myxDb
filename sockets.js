@@ -9,6 +9,7 @@ const parseCustomerStatuses = (all_orders) =>{
   let stalls = Object.keys(all_orders);
   stalls.forEach(stall=>{
     all_orders[stall].forEach(order=>{
+      order.stall_id = stall
       if(!(order.customer_id in customer_dict)){
         customer_dict[order.customer_id] = []
       }
