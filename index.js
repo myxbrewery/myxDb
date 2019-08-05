@@ -50,6 +50,7 @@ var dbPoll = (request, response) =>{
   setTimeout(()=>{
     sockets.stall_update(io);
     sockets.customer_update(io);
+    sockets.update_all(io);
   }, 100);
   response.status(200).send(request.user_response);
 }

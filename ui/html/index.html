@@ -31,7 +31,7 @@
 <script>
   const server_url = 'https://www.myxbrewapi.com/'
   const socket = io(server_url, {transports: ['websocket'], secure:true});
-  socket.join('all')
+  socket.emit('join', 'all')
   socket.on('orders', (message)=>{
     console.log(message);
     main(message);

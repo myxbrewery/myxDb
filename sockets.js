@@ -112,7 +112,7 @@ module.exports = {
       console.log("customerupdate", err);
     })
   },
-  all_update: (io) => {
+  update_all: (io) => {
     order_utils.getAllOrders()
       .then(res=>{
         orders = [];
