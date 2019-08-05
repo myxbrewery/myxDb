@@ -80,6 +80,18 @@ module.exports = {
       socket.on('join', (room)=>{
         console.log('Joining room', room)
         socket.join(room);
+        order_utils.getAllOrders()
+          .then(res=>{
+            orders = [];
+            let stalls = Object.keys(res);
+            stalls.forEach(stall=>{
+              res[stall].forEach(order=>{
+                order['stall_id'] = stall
+                orders.push(order);
+            })
+          })
+        });
+        io.to('all').emit('orders', orders);
       });
     });
     return io;
