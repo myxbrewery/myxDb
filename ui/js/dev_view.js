@@ -54,11 +54,11 @@ function populateCards(demographic){
   if(demographic === "Customer"){
     demo_dict = customer_dict;
     console.log(demo_dict)
-    var order_elements = ["time", "stall_id", "receipt", "name", "price", "status"]
+    var order_elements = ["start_datetime", "stall_id", "receipt_id", "name", "total_price", "status_id"]
   }
   else {
     demo_dict = stall_dict;
-    var order_elements = ["time", "customer_id", "receipt", "name", "price", "status"]
+    var order_elements = ["start_datetime", "customer_id", "receipt_id", "name", "total_price", "status_id"]
   }
   demos = Object.keys(demo_dict);
   demos.forEach(demo=>{
@@ -66,16 +66,16 @@ function populateCards(demographic){
     stalls.forEach(stall=>{
       demo_orders = Object.keys(demo_dict[demo][stall])
       demo_orders.forEach((order)=>{
-        if(parseInt(demo_dict[demo][stall][order]['status']) != 4){
+        if(parseInt(demo_dict[demo][stall][order]['status_id']) != 4){
           let order_row = document.getElementById(demographic+"_row_"+stall+'_'+order);
           if(order_row){
             order_elements.forEach((elem)=>{
               tblElem = document.getElementById("data_"+demo+"_"+stall+'_'+order+"_"+elem);
-              if(elem=="time"){
+              if(elem=="start_datetime"){
                 time_object = new Date(demo_dict[demo][stall][order][elem]);
                 tblElem.innerHTML = time_object.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
               }
-              else if(elem == "status"){
+              else if(elem == "status_id"){
                 tblElemBtn = document.getElementById("data_"+demo+"_"+stall+'_'+order+"_"+elem+"_btn");
                 tblElemBtn.innerHTML = demo_dict[demo][stall][order][elem];
                 if(demographic=="Customer"){
@@ -99,11 +99,11 @@ function populateCards(demographic){
             order_row.id = demographic+"_row_"+stall+'_'+order
             order_elements.forEach((elem)=>{
               tblElem = document.createElement("td");
-              if(elem=="time"){
+              if(elem=="start_datetime"){
                 time_object = new Date(demo_dict[demo][stall][order][elem]);
                 tblElem.innerHTML = time_object.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
               }
-              else if (elem == "status"){
+              else if (elem == "status_id"){
                 tblElemBtn = document.createElement("a");
                 tblElemBtn.className = "btn-small waves-effect red"
                 tblElemBtn.id = "data_"+demo+"_"+stall+'_'+order+"_"+elem+"_btn";
@@ -138,7 +138,7 @@ function populateCards(demographic){
 function advanceOrderStatus(order){
   var server_url = "https://www.myxbrewapi.com/order/";
   var dev_url = "http://10.12.254.221:11235/order/";
-  let target_url = server_url + order.stall_id + '/' + order.id
+  let target_url = server_url + order.stall_id + '/' + order.order_id
   fetch(target_url, {
     method: 'PUT',
     headers: {
@@ -146,8 +146,8 @@ function advanceOrderStatus(order){
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      'status_id': order.status + 1,
-      'id': order.id,
+      'status_id': order.status_id + 1,
+      'id': order.order_id,
       'uid': order.stall_id
     })
   });
@@ -174,10 +174,9 @@ function dataUpdate(all_orders){
     }
     if(!(order.stall_id in customer_dict[order.customer_id])) customer_dict[order.customer_id][order.stall_id] = {};
     if(!(order.stall_id in stall_dict[order.stall_id])) stall_dict[order.stall_id][order.stall_id] = {};
-
-    customer_dict[order.customer_id][order.stall_id][order.id] = order;
-    stall_dict[order.stall_id][order.stall_id][order.id] = order;
-    if(order.status == 4){
+    customer_dict[order.customer_id][order.stall_id][order.order_id] = order;
+    stall_dict[order.stall_id][order.stall_id][order.order_id] = order;
+    if(order.status_id == 4){
       if(!(order.customer_id in completed_customer_orders)){
         completed_customer_orders[order.customer_id] = {}
       }
@@ -186,8 +185,8 @@ function dataUpdate(all_orders){
         completed_stall_orders[order.stall_id][order.stall_id] = {}
       }
       if(!(order.stall_id in completed_customer_orders[order.customer_id])) completed_customer_orders[order.customer_id][order.stall_id] = {}
-      completed_customer_orders[order.customer_id][order.stall_id][order.id] = order;
-      completed_stall_orders[order.stall_id][order.stall_id][order.id] = order;
+      completed_customer_orders[order.customer_id][order.stall_id][order.order_id] = order;
+      completed_stall_orders[order.stall_id][order.stall_id][order.order_id] = order;
     }
   })
 
@@ -237,7 +236,7 @@ function cleanCards(){
   for(var stall in stall_dict){
     pending_orders = 0
     for(var order in stall_dict[stall][stall]){
-      if(parseInt(stall_dict[stall][stall][order]['status']) < 4) pending_orders +=1;
+      if(parseInt(stall_dict[stall][stall][order]['status_id']) < 4) pending_orders +=1;
     }
     if(pending_orders == 0){
       var card = document.getElementById("Stall" + "_" + stall);
@@ -266,7 +265,7 @@ function cleanCards(){
     var pending_orders = 0
     for(var stall in customer_dict[customer]){
       for(var order in customer_dict[customer][stall]){
-        if(parseInt(customer_dict[customer][stall][order]['status']) < 4) pending_orders +=1;
+        if(parseInt(customer_dict[customer][stall][order]['status_id']) < 4) pending_orders +=1;
       }
     }
     if(pending_orders == 0){
