@@ -150,16 +150,17 @@ async function getCustomerOrders(request, response){
     console.log("Requesting Customer Orders for customer", customer_id);
     let all_orders = await order_utils.getAllOrders();
     let stalls = Object.keys(all_orders)
-    res = {}
+    res = []
     stalls.forEach(stall=>{
-        let stall_orders = all_orders[stall]
-        stall_orders.forEach(stall_order=>{
-            if(stall_order.customer_id == customer_id){
-                if(!(stall in res)) res[stall] = []
-                res[stall].push(stall_order)
+        let orders = all_orders[stall];
+        orders.forEach(order=>{
+            if(order.customer_id == customer_id){
+                let tmp_order = order;
+                tmp_order.stall_uid = stall;
+                res.push(tmp_order);
             }
-        })
-    })
+        });
+    });
     response.status(200).send(res)
 }
 

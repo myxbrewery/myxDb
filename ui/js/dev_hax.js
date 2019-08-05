@@ -15,8 +15,28 @@ function randElem(js_arr){
   return js_arr[Math.floor(Math.random() * js_arr.length)];
 }
 
-function randomOrder(){
-  fetch("/locations")
+Array.prototype.random = function () {
+  return this[Math.floor((Math.random()*this.length))];
+}
+randint = () =>{
+  return parseInt(Math.random()*5);
+}
+
+async function randomOrder(){
+  let stalls = await(fetch(base_url+"/stalls"))
+    .then(res=>res.json());
+  let random_stall = stalls.random();
+  let stall_menu = await(fetch(base_url+"/menu/"+random_stall.uid))
+    .then(res=>res.json());
+  let categories = Object.keys(stall_menu)
+  var order_package = {}
+  for(var i =1; i < randint(); i++){
+    category_choice = categories.random();
+    let category =  
+  }
+  console.log(stall_menu)
+
+  fetch(base_url+"/stalls")
     .then((res)=>{return res.json()})
     .then((res)=>{
       // let rand_location = randElem(res).id;
