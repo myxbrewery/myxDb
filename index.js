@@ -53,7 +53,7 @@ var dbPoll = (request, response) =>{
   }, 100);
   setTimeout(()=>{
     sockets.update_all(io);
-  }, 400);
+  }, 200);
   response.status(200).send(request.user_response);
 }
 
