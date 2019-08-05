@@ -109,13 +109,15 @@ module.exports = {
     })
   },
   all_update: (io) => {
-    let res = await order_utils.getAllOrders();
-    orders = [];
-    let stalls = Object.keys(res);
-    stalls.forEach(stall=>{
-      res[stall].forEach(order=>{
-          order['stall_id'] = stall
-          orders.push(order);
+    order_utils.getAllOrders()
+      .then(res=>{
+        orders = [];
+        let stalls = Object.keys(res);
+        stalls.forEach(stall=>{
+          res[stall].forEach(order=>{
+            order['stall_id'] = stall
+            orders.push(order);
+        })
       })
     });
     io.to('all').emit('orders', orders);
