@@ -189,36 +189,6 @@ function dataUpdate(all_orders){
       completed_stall_orders[order.stall_id][order.stall_id][order.order_id] = order;
     }
   })
-
-  // for(var customer in customer_dict){
-  //   if(!(customer in completed_customer_orders)){
-  //     completed_customer_orders[customer] = {}
-  //   }
-  //   for(var order in customer_dict[customer]){
-  //     if(parseInt(customer_dict[customer][order]['status']) == 4){
-  //       completed_customer_orders[customer][order] = customer_dict[customer][order]
-  //       delete customer_dict[customer][order];
-  //     }
-  //   }
-  //   if(Object.keys(customer_dict[customer]).length == 0){
-  //     delete customer_dict[customer];
-  //   }
-  // }
-  //
-  // for(var stall in stall_dict){
-  //   if(!(stall in completed_stall_orders)){
-  //     completed_stall_orders[stall] = {}
-  //   }
-  //   for(var order in stall_dict[stall]){
-  //     if(parseInt(stall_dict[stall][order]['status']) == 4){
-  //       completed_stall_orders[stall][order] = stall_dict[stall][order]
-  //       delete stall_dict[stall][order];
-  //     }
-  //   }
-  //   if(Object.keys(stall_dict[stall]).length == 0){
-  //     delete stall_dict[stall];
-  //   }
-  // }
 }
 
 function main(data){
@@ -281,7 +251,7 @@ setInterval(()=>{
       return res.json();
     })
     .then(res=>main(res));
-}, 500)
+}, 1000)
 
 // setInterval(populateCards("Customer"), 1000);
 // setInterval(populateCards("Stall"), 1000);

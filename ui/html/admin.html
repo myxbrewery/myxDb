@@ -37,24 +37,13 @@
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="/ui/js/dev_hax.js"></script>
 <script>
-  stall_mapping = {
-	  '1':"ch1ck3n",
-	  '2':"indi@n",
-	  '3':"w3stern",
-	  '4':"he4lths0up",
-	  '5':"korean",
-	  '6':"m1xedr1ce",
-	  '7':"dr1nks",
-	  '8':"cre@myduck",
-	  '9':"mus1im"
-	}
-	let stallRoom = 0;
-  let customerRoom = 0;
+	let stallRoom = '';
+  let customerRoom = '';
   
   const server_url = 'https://www.myxbrewapi.com/'
   const dev_url = 'http://10.12.254.221:11236/' 
   const socket = io(dev_url, {transports: ['websocket'], secure:true});
-  socket.emit('stall_join', stall_mapping[stallRoom]);
+  socket.emit('stall_join', stallRoom);
   socket.emit('customer_join', customerRoom);
   socket.emit('join', 1);
   socket.on('orders', (message)=>{
@@ -63,10 +52,10 @@
   })
   function modSocketStall(){
     const newStallRoom = document.getElementById("stall").value;
-    console.log(`Stall Changing Room from to ${stall_mapping[stallRoom]} to ${stall_mapping[newStallRoom]}`);
-    socket.emit('stall_leave', stall_mapping[stallRoom]);
+    console.log(`Stall Changing Room from to ${stallRoom} to ${newStallRoom}`);
+    socket.emit('stall_leave', stallRoom);
     stallRoom = newStallRoom;
-    socket.emit('stall_join', stall_mapping[stallRoom]);
+    socket.emit('stall_join', stallRoom);
   }
   function modSocketCustomer(){
     const newCustomerRoom = document.getElementById("customer").value;
