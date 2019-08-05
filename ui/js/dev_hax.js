@@ -28,113 +28,80 @@ async function randomOrder(){
   let random_stall = stalls.random();
   let stall_menu = await(fetch(base_url+"/menu/"+random_stall.uid))
     .then(res=>res.json());
-  let categories = Object.keys(stall_menu)
-  var order_package = {}
-  for(var i =1; i < randint(); i++){
-    category_choice = categories.random();
-    let category =  
-  }
   console.log(stall_menu)
-
-  fetch(base_url+"/stalls")
-    .then((res)=>{return res.json()})
-    .then((res)=>{
-      // let rand_location = randElem(res).id;
-      rand_location = 1;
-      fetch("/stalls/" + rand_location)
-        .then((resp)=>{return resp.json()})
-        .then((resp)=>{
-          rand_stall = randElem(resp).id;
-          while(rand_stall == 6 || rand_stall == 2 || rand_stall == 4) {
-            rand_stall = randElem(resp).id;
-          }
-          fetch("/stallMenu/" + rand_location + "/" + rand_stall)
-            .then((respo)=>{return respo.json()})
-            .then((respo)=>{
-              // Between 1 to 5 items ordered
-              num_to_order = Math.floor(Math.random()*5)+1;
-              customer_id = randElem([100, 101, 102, 103, 104, 105]);
-              order_payload = {
-                "metadata":{
-                  "location_id": rand_location,
-                  "stall_id": rand_stall,
-                  "client_type": "school",
-                  "customer_id": customer_id
-                },
-                "orders":[]
-              }
-
-              let total_payment = 0;
-              for(let i=0;i<num_to_order;i++){
-                randItem = randElem(respo);
-                order = {
-                  "stall_id": rand_stall,
-                  "item_id": randItem.item_id,
-                  "name": randItem.name
-                }
-                base_cost = parseFloat(parseFloat(randItem["school_price"]).toPrecision(7));
-                add_cost = 0;
-                compulsory_options = Object.keys(randItem["compulsory_options"]);
-                // Choose one compulsory option for each compulsory category if exists
-                var compulsory_option = {}
-                if(compulsory_options.length!=0){
-                  compulsory_options.forEach((category)=>{
-                    compulsory_option[category] = {}
-                    let possible_category_choices = Object.keys(randItem["compulsory_options"][category]);
-                    let category_item_choice = randElem(possible_category_choices);
-                    compulsory_option[category][category_item_choice]  = randItem["compulsory_options"][category][category_item_choice];
-                    add_cost += parseFloat(parseFloat(randItem["compulsory_options"][category][category_item_choice]["cost"]).toPrecision(7));
-                  })
-                }
-
-                // choose up to n optional options
-                var optional_option = {};
-                optional_options = Object.keys(randItem["optional_options"]);
-                if(optional_options.length!=0){
-                  for(var j=0;j<Math.floor(Math.random()*optional_options.length+1);j++){
-                    let chosen_category = randElem(optional_options);
-                    if(!(chosen_category in optional_option)){
-                      // Chosen category has several options; pick n
-                      optional_option[chosen_category] = {}
-                      let category_options = Object.keys(randItem["optional_options"][chosen_category])
-                      let used_options = {};
-                      var chosen_num_of_options = Math.floor(Math.random()*2)
-                      for(var k=0;k<chosen_num_of_options+1;k++){
-                        let random_elem_idx = Math.floor(Math.random()*category_options.length);
-                        if(!(random_elem_idx in used_options)){
-                          used_options[random_elem_idx] = true;
-                          optional_option[chosen_category][category_options[random_elem_idx]] = randItem["optional_options"][chosen_category][category_options[random_elem_idx]]
-                          add_cost += parseFloat(parseFloat(randItem["optional_options"][chosen_category][category_options[random_elem_idx]]["cost"]).toPrecision(7));
-                        }
-                      }
-                    }
-                  }
-                }
-                order["base_price"] = base_cost;
-                total_price = parseFloat(parseFloat(base_cost + add_cost).toPrecision(7));
-                order["total_price"] = total_price;
-                order["compulsory_options"] = compulsory_option;
-                order["optional_options"] = optional_option;
-                order["note"] = "Hi"
-
-                order_payload["orders"].push(order);
-                total_payment += total_price;
-              }
-              order_payload["metadata"]["total_payment"] = parseFloat(parseFloat(total_payment).toPrecision(7));
-
-              console.log(order_payload);
-
-              fetch("/order/", {
-                method: 'POST',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(order_payload)
-              });
-            });
+  let categories = Object.keys(stall_menu)
+  var order_package = {
+    metadata: {
+      client_type: "school",
+      customer_id: 104,
+      total_payment: 0,
+      uid: random_stall.uid,
+      menu_version: stall_menu[Object.keys(stall_menu)[0]][0].menu_version,
+      delivery_time: new Date()
+    },
+    orders: []
+  }
+  for(var i=0; i < randint()+1; i++){
+    category_choice = categories.random();
+    let items = stall_menu[category_choice]
+    item = items.random()
+    var item_total_price = Math.round(item.base_price*100);
+    var item_package = {
+      item_id: item.id,
+      base_price: item.base_price,
+      compulsory_options: [],
+      optional_options: [],
+      note: ""
+    }
+    if(item.compulsory_options.length > 0){
+      item.compulsory_options.forEach(option_category=>{
+        compulsory_choice = option_category.options.random()
+        item_package.compulsory_options.push({
+          name: option_category.name,
+          options: [{
+            name: compulsory_choice.name,
+            cost: compulsory_choice.cost
+          }]
         });
-      });
+        item_total_price += Math.round(compulsory_choice.cost*100);
+      })
+    }
+    if(item.optional_options.length > 0){
+      item.optional_options.forEach(option_category=>{
+        option_category_package = {
+          name: option_category.name,
+          options: []
+        }
+        option_category.options.forEach(optional_choice=>{
+          if(Math.random() > 0.8){
+            option_category_package.options.push({
+              name: optional_choice.name,
+              cost: optional_choice.cost
+            });
+            item_total_price += Math.round(optional_choice.cost*100);
+          }
+        })
+        item_package.optional_options.push(option_category_package)
+      })
+    }
+    item_package.total_price = Math.round(item_total_price)/100;
+    order_package.orders.push(item_package)
+    order_package.metadata.total_payment += Math.round(item_package.total_price*100)
+  }
+  order_package.metadata.total_payment = Math.round(order_package.metadata.total_payment) / 100
+  console.log("ORDERING");
+  console.log(order_package);
+  var res = await fetch(base_url+"/order/", {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(order_package)
+  })
+    .then(res=>res.json())
+  ;
+  console.log(res);
 }
 
 document.getElementById("resetOrder").onclick = ()=>resetOrder();
