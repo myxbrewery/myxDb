@@ -54,7 +54,7 @@ async function getLiveOrders(){
             receipt_id, start_datetime, status_id, total_price \
             FROM %I \
             INNER JOIN %I ON %I.item_id = %I.id \
-            WHERE %I.status_id >= 0 \
+            WHERE %I.status_id >= -2 \
             AND %I.start_datetime >= now()::date\
             ORDER BY %I.start_datetime DESC`,
             stall_orders, stall_orders, stall_orders, stall_orders, stall_orders, stall_menu, stall_orders, stall_menu, stall_orders, stall_orders, stall_orders), 
