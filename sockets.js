@@ -89,9 +89,9 @@ module.exports = {
                 order['stall_id'] = stall
                 orders.push(order);
             })
+            io.to('all').emit('orders', orders);
           })
         });
-        io.to('all').emit('orders', orders);
       });
     });
     return io;
@@ -135,8 +135,8 @@ module.exports = {
             orders.push(order);
         })
       })
-    });
     io.to('all').emit('orders', orders);
+    });
   },
   emit_shelf: (io, shelf_data) => {
     io.to('myx').emit('shelf', shelf_data);

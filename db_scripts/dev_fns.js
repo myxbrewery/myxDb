@@ -3,6 +3,7 @@ const format = require('./pool').format
 
 const resetOrder = (request, response, next) => {
     let stall_uid = request.body.stall_uid
+    if (stall_uid == "") stall_uid = "myx";
     pool.query(format('UPDATE %I_orders SET status_id=1', stall_uid), [], (error, results) => {
         if(error){
             console.log("resetOrder", error);
