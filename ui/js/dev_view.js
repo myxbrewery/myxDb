@@ -66,7 +66,7 @@ function populateCards(demographic){
     stalls.forEach(stall=>{
       demo_orders = Object.keys(demo_dict[demo][stall])
       demo_orders.forEach((order)=>{
-        if(parseInt(demo_dict[demo][stall][order]['status_id']) != 4){
+        if(parseInt(demo_dict[demo][stall][order]['status_id']) != 5){
           let order_row = document.getElementById(demographic+"_row_"+stall+'_'+order);
           if(order_row){
             order_elements.forEach((elem)=>{
@@ -176,7 +176,7 @@ function dataUpdate(all_orders){
     if(!(order.stall_id in stall_dict[order.stall_id])) stall_dict[order.stall_id][order.stall_id] = {};
     customer_dict[order.customer_id][order.stall_id][order.order_id] = order;
     stall_dict[order.stall_id][order.stall_id][order.order_id] = order;
-    if(order.status_id == 4){
+    if(order.status_id == 5){
       if(!(order.customer_id in completed_customer_orders)){
         completed_customer_orders[order.customer_id] = {}
       }
@@ -206,7 +206,7 @@ function cleanCards(){
   for(var stall in stall_dict){
     pending_orders = 0
     for(var order in stall_dict[stall][stall]){
-      if(parseInt(stall_dict[stall][stall][order]['status_id']) < 4) pending_orders +=1;
+      if(parseInt(stall_dict[stall][stall][order]['status_id']) < 5) pending_orders +=1;
     }
     if(pending_orders == 0){
       var card = document.getElementById("Stall" + "_" + stall);
@@ -235,7 +235,7 @@ function cleanCards(){
     var pending_orders = 0
     for(var stall in customer_dict[customer]){
       for(var order in customer_dict[customer][stall]){
-        if(parseInt(customer_dict[customer][stall][order]['status_id']) < 4) pending_orders +=1;
+        if(parseInt(customer_dict[customer][stall][order]['status_id']) < 5) pending_orders +=1;
       }
     }
     if(pending_orders == 0){
