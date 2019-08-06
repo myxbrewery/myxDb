@@ -3,7 +3,7 @@ const format = require('./pool').format
 
 async function retrieve(request, response, next){
     var order_id = request.params.order_id;
-    var order = await pool.query("SELECT * FROM myx_orders INNER JOIN myx_menu ON myx_menu.id = myx_orders.item_id WHERE myx_orders.id = $1 AND myx_orders.status_id < 4 LIMIT 1", [order_id])
+    var order = await pool.query("SELECT * FROM myx_orders INNER JOIN myx_menu ON myx_menu.id = myx_orders.item_id WHERE myx_orders.id = $1 AND myx_orders.status_id < 5 LIMIT 1", [order_id])
                     .then(res=>{
                         if(res.length==0) return false;
                         return res.rows[0]
@@ -41,12 +41,12 @@ async function retrieve(request, response, next){
             "message": "Success, retrieving your order from slot " + shelf.slot
         }
         var update_shelf = await pool.query("UPDATE shelving SET drink = 0 WHERE slot = $1", [shelf.slot])
-            .then(res=>{console.log(res); return true})
+            .then(res=>{console.log("update shelf", res); return true})
             .catch(err=>{console.log("update_shelf",err); return false});
         if(update_shelf) {
             pool.query('UPDATE myx_orders SET status_id = 4 WHERE myx_orders.id = $1', [order_id], (error, results) => {
                 if(error){
-                  console.log(error);
+                  console.log("update myx order error", error);
                   response.status(400).send({"Error": error.detail});
                 }
                 request.user_response = {

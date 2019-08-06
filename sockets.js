@@ -30,7 +30,7 @@ var fetchDb = () =>{
         customer_orders: customer_orders
       });
     }, (err) =>{
-      console.log(err);
+      console.log("Fetchdb", err);
       reject("Socket problem encountered");
     });
   });
@@ -105,8 +105,6 @@ module.exports = {
           stallDict[stall] = result.stall_orders[stall];
         });
         Object.keys(stallDict).forEach(stall=>{
-//          console.log("Socket Emitting!")
-//          console.log(stallDict[stall]);
           io.to(stall).emit('orders', stallDict[stall]);
         })
       },(err)=>{
@@ -139,6 +137,7 @@ module.exports = {
     });
   },
   emit_shelf: (io, shelf_data) => {
+    console.log("Emitting shelf data to myx")
     io.to('myx').emit('shelf', shelf_data);
   }
 }
