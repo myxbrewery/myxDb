@@ -17,9 +17,9 @@ async function retrieve(request, response, next){
     };
     let item_id_mapping = {
         "Black Milk Tea": 1,
-        "Earl Grey Milk Tea": 4,
+        "Earl Grey Milk Tea": 2,
         "Black Milk Tea with Pearls": 3,
-        "Earl Grey Milk Tea with Pearls": 2,
+        "Earl Grey Milk Tea with Pearls": 4,
     }
     var shelf = await pool.query("SELECT * FROM shelving WHERE drink = $1 LIMIT 1", [item_id_mapping[order.name]]).then(
         res=>{
@@ -42,9 +42,9 @@ async function retrieve(request, response, next){
         }
         var update_shelf = await pool.query("UPDATE shelving SET drink = 0 WHERE slot = $1", [shelf.slot])
             .then(res=>{console.log("update shelf", res); return true})
-            .catch(err=>{console.log("update_shelf",err); return false});
+            //.catch(err=>{console.log("update_shelf",err); return false});
         if(update_shelf) {
-            pool.query('UPDATE myx_orders SET status_id = 4 WHERE myx_orders.id = $1', [order_id], (error, results) => {
+            pool.query('UPDATE myx_orders SET status_id = 5 WHERE myx_orders.id = $1', [order_id], (error, results) => {
                 if(error){
                   console.log("update myx order error", error);
                   response.status(400).send({"Error": error.detail});
@@ -52,7 +52,7 @@ async function retrieve(request, response, next){
                 request.user_response = {
                   "message":"Orders transitioned",
                   "order": order_id,
-                  "new_status": 4
+                  "new_status": 5
                 };
               })
             next();

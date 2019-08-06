@@ -9,7 +9,7 @@ async function transitionOrder(request, response, next){
     console.log(order_info, uid, order_id)
     pool.query(format('UPDATE %I_orders SET status_id = $1 WHERE %I_orders.id = $2', uid, uid), [order_status, order_id], (error, results) => {
         if(error){
-            console.log(error);
+            console.log("transitionOrder", error);
             response.status(400).send({"Error": error.detail});
         }
         request.user_response = {
@@ -48,6 +48,7 @@ async function putReceiptStatus(request, response, next){
                     .catch(error=>{
                         errored = true;
                         error_message = error.detail;
+                      console.log("Errored at updat eorders status id")
                         // console.log(error.detail)
                         return false;
                     })
@@ -93,7 +94,7 @@ const putStock = (request, response, next) => {
                 pool.query(format('UPDATE %I_menu SET in_stock = $1 WHERE %I_menu.id = $2', uid, uid), 
                                 [item_details['in_stock'], item_id], (error, results) => {
                     if(error){
-                        console.log(error);
+                        console.log("Menu instock", error);
                         response.status(400).send({"Error": error.detail});
                     }
                     else{
